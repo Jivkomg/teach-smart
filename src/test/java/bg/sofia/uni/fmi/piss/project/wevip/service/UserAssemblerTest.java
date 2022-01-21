@@ -1,7 +1,8 @@
 package bg.sofia.uni.fmi.piss.project.wevip.service;
 
-import bg.sofia.uni.fmi.piss.project.wevip.dto.WevipUserDto;
-import bg.sofia.uni.fmi.piss.project.wevip.model.WevipUser;
+import bg.sofia.uni.fmi.piss.project.wevip.dto.TeachSmartUserDto;
+import bg.sofia.uni.fmi.piss.project.wevip.model.TeachSmartUser;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,13 +23,13 @@ public class UserAssemblerTest {
     @Test
     public void toUser_PasswordEncoded(){
         String encodedPass = "encoded-pass";
-        WevipUserDto dto = new WevipUserDto();
-        dto.setName("username");
+        TeachSmartUserDto dto = new TeachSmartUserDto();
+        dto.setUsername("username");
         dto.setEmail("email");
         dto.setPassword("password");
         Mockito.when(encoder.encode(dto.getPassword())).thenReturn(encodedPass);
 
-        WevipUser user = assembler.toUser(dto);
+        TeachSmartUser user = assembler.toUser(dto);
         Assert.assertEquals(encodedPass,user.getPassword());
     }
 }

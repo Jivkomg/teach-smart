@@ -5,43 +5,29 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "events")
-public class Event {
+public class Event extends BaseEntity{
 
-    @Id
-    @Column(name = "id", nullable = false)
-    private Long id;
-
-    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "type", nullable = false)
     private String type;
 
-    @Column(name = "start_time")
     private LocalDateTime startTime;
 
-    @Column(name = "duration_hours")
     private int durationHours;
 
-    @Column(name = "ticket_price")
     private double ticketPrice;
 
-    @Column(name = "tickets_sold")
     private long ticketsSold;
 
-    @Column(name = "sale_end")
     private LocalDateTime saleEnd;
 
-    @Column(name = "description")
     private String description;
 
-    @Column(name = "poster_location")
     private String posterLocation;
 
-    public Event(Long id, String name, String type, LocalDateTime startTime,
+    public Event(String name, String type, LocalDateTime startTime,
                  int durationHours, double ticketPrice, long ticketsSold,
                  LocalDateTime saleEnd, String description, String posterLocation) {
-        this.id = id;
         this.name = name;
         this.type = type;
         this.startTime = startTime;
@@ -56,14 +42,7 @@ public class Event {
     public Event() {
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+    @Column(name = "name", nullable = false)
     public String getName() {
         return name;
     }
@@ -72,6 +51,7 @@ public class Event {
         this.name = name;
     }
 
+    @Column(name = "type", nullable = false)
     public String getType() {
         return type;
     }
@@ -80,6 +60,7 @@ public class Event {
         this.type = type;
     }
 
+    @Column(name = "start_time")
     public LocalDateTime getStartTime() {
         return startTime;
     }
@@ -88,6 +69,7 @@ public class Event {
         this.startTime = startTime;
     }
 
+    @Column(name = "duration_hours")
     public int getDurationHours() {
         return durationHours;
     }
@@ -96,6 +78,7 @@ public class Event {
         this.durationHours = durationHours;
     }
 
+    @Column(name = "ticket_price")
     public double getTicketPrice() {
         return ticketPrice;
     }
@@ -104,6 +87,7 @@ public class Event {
         this.ticketPrice = ticketPrice;
     }
 
+    @Column(name = "tickets_sold")
     public long getTicketsSold() {
         return ticketsSold;
     }
@@ -112,6 +96,7 @@ public class Event {
         this.ticketsSold = ticketsSold;
     }
 
+    @Column(name = "sale_end")
     public LocalDateTime getSaleEnd() {
         return saleEnd;
     }
@@ -120,6 +105,7 @@ public class Event {
         this.saleEnd = saleEnd;
     }
 
+    @Column(name = "description")
     public String getDescription() {
         return description;
     }
@@ -128,6 +114,7 @@ public class Event {
         this.description = description;
     }
 
+    @Column(name = "poster_location")
     public String getPosterLocation() {
         return posterLocation;
     }

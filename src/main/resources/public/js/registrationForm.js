@@ -21,7 +21,7 @@ $(document).ready(function () {
 
         // PREPARE FORM DATA
         var formData = {
-          name: name,
+          username: name,
           email: email,
           password: pass
         };

@@ -6,10 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface EventRepository extends JpaRepository<Event, Long> {
+public interface EventRepository extends JpaRepository<Event, String> {
 
     @Query(value = "SELECT * FROM events ORDER BY tickets_sold DESC LIMIT 30", nativeQuery = true)
     List<Event> findTop30SoldOut();
-
-    Event findById(long id);
 }

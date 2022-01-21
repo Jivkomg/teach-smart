@@ -58,7 +58,7 @@ public class FileService {
 	public boolean checkFileForNudity(String absolutePathToFile) {
 
 		try {	
-			Socket socket = new Socket("localhost", 5678);		
+			Socket socket = new Socket("localhost", 8082);
 			OutputStream oos = socket.getOutputStream();
 			PrintWriter writer = new PrintWriter(oos, true);
 			writer.println(absolutePathToFile);

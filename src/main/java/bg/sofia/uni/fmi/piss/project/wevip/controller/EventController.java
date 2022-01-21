@@ -27,22 +27,22 @@ public class EventController {
     }
 
     @PostMapping("/{eventId}")
-    public ResponseEntity getEventById(@PathVariable long eventId) {
+    public ResponseEntity getEventById(@PathVariable String eventId) {
         return eventService.getEventById(eventId);
     }
 
     @PostMapping("/organizers/{eventId}")
-    public ResponseEntity getEventOrganizersById(@PathVariable long eventId) {
+    public ResponseEntity getEventOrganizersById(@PathVariable String eventId) {
         return eventService.getEventOrganizersById(eventId);
     }
 
     @PostMapping("/performers/{eventId}")
-    public ResponseEntity getEventPerformersById(@PathVariable long eventId) {
+    public ResponseEntity getEventPerformersById(@PathVariable String eventId) {
         return eventService.getEventPerformersById(eventId);
     }
 
     @PostMapping("/poster/{eventId}")
-    public ResponseEntity getPoster(@PathVariable long eventId) {
+    public ResponseEntity getPoster(@PathVariable String eventId) {
         return eventService.getPoster(eventId);
     }
 }

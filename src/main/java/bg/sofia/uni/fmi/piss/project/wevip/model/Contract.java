@@ -7,60 +7,48 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "contracts")
-public class Contract {
+public class Contract extends BaseEntity{
 
-    @Id
-    @Column(name = "id", nullable = false)
-    private long id;
+    private String performerId;
 
-    @Column(name = "performer_id", nullable = false)
-    private long performerId;
+    private String eventId;
 
-    @Column(name = "event_id", nullable = false)
-    private long eventId;
+    private String organizerId;
 
-    @Column(name = "organizer_id", nullable = false)
-    private long organizerId;
 
-    public Contract(long id, long performerId, long eventId, long organizerId) {
-        this.id = id;
+    public Contract() {
+    }
+
+    public Contract(String performerId, String eventId, String organizerId) {
         this.performerId = performerId;
         this.eventId = eventId;
         this.organizerId = organizerId;
     }
 
-    public Contract() {
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public long getPerformerId() {
+    @Column(name = "performer_id", nullable = false)
+    public String getPerformerId() {
         return performerId;
     }
 
-    public void setPerformerId(long performerId) {
+    public void setPerformerId(String performerId) {
         this.performerId = performerId;
     }
 
-    public long getEventId() {
+    @Column(name = "event_id", nullable = false)
+    public String getEventId() {
         return eventId;
     }
 
-    public void setEventId(long eventId) {
+    public void setEventId(String eventId) {
         this.eventId = eventId;
     }
 
-    public long getOrganizerId() {
+    @Column(name = "organizer_id", nullable = false)
+    public String getOrganizerId() {
         return organizerId;
     }
 
-    public void setOrganizerId(long organizerId) {
+    public void setOrganizerId(String organizerId) {
         this.organizerId = organizerId;
     }
 }

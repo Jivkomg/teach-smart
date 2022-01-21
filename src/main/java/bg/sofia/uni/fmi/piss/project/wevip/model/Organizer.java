@@ -7,35 +7,21 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "organizers")
-public class Organizer {
+public class Organizer extends BaseEntity {
 
-    @Id
-    @Column(name = "id", nullable = false)
-    private Long id;
-
-    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "description")
     private String description;
-
-    public Organizer(Long id, String name, String description) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-    }
 
     public Organizer() {
     }
 
-    public Long getId() {
-        return id;
+    public Organizer(String name, String description) {
+        this.name = name;
+        this.description = description;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+    @Column(name = "name", nullable = false)
     public String getName() {
         return name;
     }
@@ -44,6 +30,7 @@ public class Organizer {
         this.name = name;
     }
 
+    @Column(name = "description")
     public String getDescription() {
         return description;
     }

@@ -1,8 +1,8 @@
 package bg.sofia.uni.fmi.piss.project.wevip.service;
 
-import bg.sofia.uni.fmi.piss.project.wevip.dto.WevipUserDto;
-import bg.sofia.uni.fmi.piss.project.wevip.model.WevipUser;
-import bg.sofia.uni.fmi.piss.project.wevip.repository.WevipUserRepository;
+import bg.sofia.uni.fmi.piss.project.wevip.dto.TeachSmartUserDto;
+import bg.sofia.uni.fmi.piss.project.wevip.model.TeachSmartUser;
+import bg.sofia.uni.fmi.piss.project.wevip.repository.TeachSmartUserRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceImplTest {
     @Mock
-    private WevipUserRepository userRepository;
+    private TeachSmartUserRepository userRepository;
 
     @Mock
     private UserAssembler userAssembler;
@@ -25,24 +25,24 @@ public class UserServiceImplTest {
     @InjectMocks
     private UserServiceImpl userService;
 
-    private WevipUserDto dto;
+    private TeachSmartUserDto dto;
 
-    private WevipUser user;
+    private TeachSmartUser user;
 
     @Before
     public void setUp(){
-        dto = new WevipUserDto();
-        dto.setName("username");
+        dto = new TeachSmartUserDto();
+        dto.setUsername("username");
 
-        user = new WevipUser();
+        user = new TeachSmartUser();
         user.setUsername("username");
     }
 
     @Test
     public void register_AlreadyExistingUser(){
         Mockito.when(userRepository.findByUsername(dto.getUsername())).
-                thenReturn(new WevipUser());
-        ResponseEntity<WevipUserDto> result = userService.register(dto);
+                thenReturn(new TeachSmartUser());
+        ResponseEntity<TeachSmartUserDto> result = userService.register(dto);
         assertEquals(HttpStatus.CONFLICT, result.getStatusCode());
         assertNull(result.getBody());
     }
@@ -54,7 +54,7 @@ public class UserServiceImplTest {
         Mockito.when(userAssembler.toUser(dto)).thenReturn(user);
         Mockito.when(userAssembler.toUserDto(user)).thenReturn(dto);
 
-        ResponseEntity<WevipUserDto> result = userService.register(dto);
+        ResponseEntity<TeachSmartUserDto> result = userService.register(dto);
         assertEquals(HttpStatus.CREATED, result.getStatusCode());
         assertEquals(dto,result.getBody());
     }
@@ -70,14 +70,14 @@ public class UserServiceImplTest {
     public void login_UserFound(){
         Mockito.when(userRepository.findByUsername(dto.getUsername())).
                 thenReturn(user);
-        ResponseEntity<WevipUserDto> result = userService.login(dto);
+        ResponseEntity<TeachSmartUserDto> result = userService.login(dto);
         assertEquals(HttpStatus.OK,result.getStatusCode());
         assertNull(result.getBody());
     }
 
     @Test
     public void getAuthUser_UserNotFound(){
-        ResponseEntity<WevipUserDto> result = userService.getAuthUser("username");
+        ResponseEntity<TeachSmartUserDto> result = userService.getAuthUser("username");
         assertEquals(HttpStatus.NOT_FOUND,result.getStatusCode());
     }
 
@@ -87,7 +87,7 @@ public class UserServiceImplTest {
                 thenReturn(user);
         Mockito.when(userAssembler.toUserDto(user)).thenReturn(dto);
 
-        ResponseEntity<WevipUserDto> result = userService.getAuthUser(user.getUsername());
+        ResponseEntity<TeachSmartUserDto> result = userService.getAuthUser(user.getUsername());
         assertEquals(HttpStatus.OK,result.getStatusCode());
         assertEquals(dto,result.getBody());
     }

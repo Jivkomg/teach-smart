@@ -7,18 +7,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class EventAssembler {
 
-    Event toEvent(EventDto eventDto) {
-        return new Event(eventDto.getEventId(),
-                eventDto.getName(),
-                eventDto.getType(),
-                eventDto.getStartTime(),
-                eventDto.getDurationHours(),
-                eventDto.getTicketPrice(),
-                eventDto.getTicketsSold(),
-                eventDto.getSaleEnd(),
-                eventDto.getDescription(),
-                eventDto.getPosterLocation());
-    }
 
     EventDto toEventDto(Event event) {
         EventDto eventDto = new EventDto();

@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class EventDto {
 
-    private Long eventId;
+    private String eventId;
 
     private String name;
 
@@ -24,11 +24,11 @@ public class EventDto {
 
     private String posterLocation;
 
-    public Long getEventId() {
+    public String getEventId() {
         return eventId;
     }
 
-    public void setEventId(Long eventId) {
+    public void setEventId(String eventId) {
         this.eventId = eventId;
     }
 
