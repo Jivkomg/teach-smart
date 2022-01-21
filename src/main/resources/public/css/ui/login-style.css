@@ -1,0 +1,255 @@
+:root{
+	 --grey-color: #cfd8dc;
+	 --dark-blue: #0d47a1;
+    --red-light: #ff7043;
+    --grey-1: #eceff1;
+		--dark-grey: #607d8b;
+		--red-3: #b71c1c;
+}
+
+#wrapper{
+    margin-top: 50px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+	position:relative;
+	width:300px;
+	top:0;
+	text-align:center;
+}
+
+.extended{
+	min-height:130vh;
+	
+}
+#login-section{
+	position: relative;
+	display: flex;
+	align-items: center;
+    display: flex;
+    flex-direction: column;
+	min-height:100vh;
+	height:auto;
+	overflow:hidden;
+}
+#register-section{
+	position: relative;
+	display: flex;
+	align-items: center;
+    display: flex;
+    flex-direction: column;
+	min-height: 80vh;
+	height:auto;
+	overflow:hidden;
+}
+.btn{
+	border: none;
+	background-color: var(--red-light);
+	color:white;
+	padding: 12px 100px;
+	font-size: 24px;
+	width: 100%;
+	cursor: pointer;
+	text-align: center;
+}
+
+.popup .btn:hover{
+
+	background-color: var(--red-dark);
+  transition: all 0.3s ease-in-out 0.1s;
+}
+
+.fa-times-thin:before{
+	content: '\00d7';
+}
+
+/* #buttons{
+	top:100px;
+	width: 100%;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	height:150px;
+} */
+
+#rememberme{
+	display:block;
+	position: absolute;
+	left:0;
+	margin-top: 50px;
+
+}
+#login{
+width:100%;
+}
+
+#forgotpass, #signup{
+	color:black;
+	margin-top:10px;
+}
+
+#signup{
+	margin-top:10px;
+}
+
+#forgotpass:hover, #signup:hover{
+
+	transform: scale(1.1);
+	color:var(--dark-blue);
+}
+
+#login:hover{
+	background-color: var(--red-dark);
+  transition: all 0.3s ease-in-out 0.1s;
+}
+h1{
+	font-size: 32px;
+	color: var(--dark-blue);
+}
+
+.popup{
+	background-color: var(--grey-1);
+	width:400px;
+	display:block;
+	text-align: center;
+	box-shadow: 0 0 10px var(--dark-grey);
+	position: absolute;
+	top:0;
+	margin-top: 100px;
+	left: 50%;
+	margin-left: -10vw;
+	padding-bottom: 10px;
+	visibility: hidden;
+}
+.popup p{
+	text-align: left;
+}
+.popup header{
+	background-color: var(--red-light);
+	color: white;
+	text-align: center;
+	position: relative;
+	border-bottom: 3px solid var(--red-dark);
+	height:60px;
+	display:flex;
+	justify-content: center;
+	align-items: center;
+}
+.popup header i{
+	position: absolute;
+	right:0;
+	margin: 5px;
+	top:0px;
+	cursor: pointer;
+
+}
+.popup h1{
+	color: white;
+	display: inline-block;
+	margin:0px auto;
+
+
+}
+.popup p, .form-group{
+	margin:20px;
+}
+
+.popup .resend{
+	color: var(--red-light);
+}
+.popup .form-group{
+	width:50%;
+
+}
+
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;} 
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
+
+#login-section{
+	position: relative;
+}
+
+.popup-content{
+	display: inline-block;
+	margin: 0px auto;
+	position: relative;
+	text-align: center;
+}
+.ok-popup{
+	width: 50%;
+	text-align: center;
+	padding:12px 50px;
+}
+
+.fullscreen-container {
+  display: none;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(90, 90, 90, 0.5);
+  z-index: 9999;
+}
+.popup header i:hover{
+	color: var(--dark-grey);
+}
+.popup header a{
+	text-decoration: none;
+	color:white;
+}
+
+.error{
+	display: none;
+	color: var(--red-3);
+}
+
+.error-field
+{
+	background-color:var(--red-light);
+}
+
+
+.btn-next{
+	display: block;
+
+	padding: 12px;
+	width:20vw;
+	background-color: var(--red-light);
+	border: none;
+	font-size: 24px;
+	/*border-radius: 25px;*/
+	color:white;
+	margin: 0px auto;
+	margin-bottom:50px;
+	text-align: center;
+	cursor: pointer;
+}
+
+.btn-next:hover{
+
+	background-color: var(--red-dark);
+  transition: all 0.3s ease-in-out 0.1s;
+}
+#buttons-below i:hover{
+		color: var(--red-dark);
+		  transition: all 0.3s ease-in-out 0.1s;
+		  cursor: pointer;
+}

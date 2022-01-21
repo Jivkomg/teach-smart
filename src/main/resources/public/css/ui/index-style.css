@@ -1,0 +1,121 @@
+:root{
+    --grey-color: #cfd8dc;
+    --light-grey: #eceff1;
+    --dark-grey: #607d8b;
+    --red-light: #ff7043;
+    --red-dark: #d84315;
+    --pink-light: #ffab91;
+    --shadow: #7f0000;
+
+}
+*{
+	box-sizing: border-box;
+}
+html{
+	background: url(../../images/ui/landing.jpg) no-repeat top center fixed;
+	 -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  font-size: 0;
+  color:white;
+}
+
+#register{
+	transition: transform .3s;
+	transition: box-shadow .3s;
+	 transition: all 0.3s ease-in-out 0.1s
+}
+
+#register:hover{
+	background-color: var(--red-dark);
+	box-shadow: 1px 1px 10px 5px  var(--dark-grey), -1px -1px 10px 5px var(--dark-grey);
+	 transform: scale(1.1);
+  transition: all 0.3s ease-in-out 0.1s;
+  cursor: pointer;
+}
+#register:hover i{
+	transform: translateX(50%);
+	  transition: all 0.3s ease-in-out 0.1s;
+}
+
+
+#main-section{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+
+	height: 70vh;
+	margin-top:10vh;
+	margin-bottom:10vh;
+}
+
+
+h1{
+	font-size: 72px;
+	color:white;
+	margin-bottom: 0;
+}
+h2{
+	font-size: 36px;
+	font-weight: 100;
+}
+
+.card{
+	background-color: var(--red-light);
+	border-style: 3px solid var(--red-light);
+	width:400px;
+	height:300px;
+	font-size: 36px; 
+	margin-bottom:200px;
+	display:flex;
+	flex-direction: column;
+	align-items: center;
+	border-radius: 25px;
+	justify-content: center;
+	align-content: center;
+	text-align: center;
+
+}
+
+.highlight{
+	font-size: 56px;
+	color:black;
+}
+.card-btn{
+	display: inline-block;
+	font-size: 24px;
+	cursor: pointer;
+	background-color: inherit;
+	border:none;
+	color:white;
+
+}
+.card-btn:hover{
+	transform:scale(1.1);
+	transition: all 0.3s ease-in-out 0.1s;
+
+}
+.btn{
+	border: none;
+	background-color: var(--red-light);
+	color:white;
+	padding: 12px 100px;
+	border-radius: 25px;
+	font-size: 24px;
+}
+
+#main-options{
+	display:flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+}
+button i{
+	margin-left:5px;
+}
+.card > p
+{
+	color: white;
+}

@@ -1,0 +1,143 @@
+:root{
+	--dark-grey: #607d8b;
+--grid-rows:1;
+--grid-cols:1;
+
+--grid-rows:1;
+--grid-cols:1;
+}
+
+#wrapper{
+	margin-bottom: 100px;
+}
+section{
+	position: relative;
+  min-height: 90vh;
+  height:auto;
+	overflow:hidden;
+}
+
+#user-card{
+	float:left;
+	margin: 50px;
+  width:300px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding:25px 10px 25px 10px;
+  background-color: var(--light-grey);
+
+ }
+ #user-card img{
+   width:300px;
+   height: auto;
+ }
+ #user-card p{
+margin:10px 0 10px 0;
+font-size: 24px;
+ }
+/* #user-card:hover{
+   box-shadow: 0 0 10px var(--dark-grey);
+} */
+
+#user-card a{
+	text-decoration: none;
+	color: var(--dark-grey);
+	display: inline;
+
+}
+  
+.btn-play{
+  width: 100px;
+  border: none;
+  background-color: var(--red-light);
+  color:white;
+  padding: 12px 24px;
+  font-size: 14px;
+  cursor: pointer;
+
+}
+#user-card .btn-play{
+	width:90%;
+}
+
+.btn-play:hover{
+
+  background-color: var(--red-dark);
+  transition: all 0.3s ease-in-out 0.1s;
+  transform: scale(1.1);
+}
+.category-content{
+	width:60vw;
+	height: 200px;
+  display: inline-grid;
+
+  /*float: right;*/
+
+  grid-gap:1em;
+  grid-template-rows: repeat(var(--grid-rows),1fr);
+  grid-column-gap: 10px;
+  grid-template-columns: repeat(var(--grid-cols),1fr);
+  padding-bottom: 0px;
+}
+
+.category-content img{
+	width:100px;
+	height:100px;
+}
+
+.event-card{
+  width:200px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: 20px 10px;
+  background-color: var(--light-grey);
+
+ }
+ .event-card p{
+height: 12px;
+ }
+/* .event-card:hover{
+   box-shadow: 0 0 10px var(--dark-grey);
+} */
+
+.category{
+	  margin-left:20px;
+    display: inline-block;
+    margin-top:50px;
+}
+.category:nth-child(2){
+  margin-top:100px;
+}
+.category:first-child h1{
+	margin-top:0px;
+}
+#event-screen
+{
+  display: none;
+}
+#event-screen img{
+  height:500px;
+  width: auto;
+}
+#noTicketsContainer{
+  display: none;
+}
+h2{
+  text-align: center;
+}
+#no-tickets-container
+{
+  margin-top: 100px;
+}
+
+.no-tickets
+{
+  display: flex;
+  justify-content: center;
+}

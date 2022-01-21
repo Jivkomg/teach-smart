@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+   <head>
+	<meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="Wevip - FMI project"/>
+	<link rel="icon" type="image/png" href="https://i.ibb.co/QFjMRm9/favicon-wevip.png">
+    <link th:href="@{/css/ui/style.css}" rel="stylesheet"/>
+    <link th:href="@{/css/ui/login-style.css}" rel="stylesheet"/>
+	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+	
+    <script src="https://kit.fontawesome.com/0b4303f61f.js" crossorigin="anonymous"></script>
+	<script th:src="@{/js/jquery.min.js}"></script>
+	<script th:src="@{/js/registrationForm.js}"></script>
+	
+	<title>Register</title>
+
+   </head>
+   <body>
+      <div id="content">
+         <header>
+			<a><img th:src="@{/images/ui/logo.png}" id="logo" alt="logo"></a>
+			<button type="button" id="login-header" class="text-button" onclick="location.href='/loginForm'">Login</button>
+         </header>
+         <section id="register-section">
+            <div id="wrapper-popup">
+				<div id="wrapper" class="extended">
+				<div id="registration-steps">
+					<h1>Register</h1>
+				</div>
+					<div class="form-group field">
+						<input type="text" class="form-field" id="name" name="name" placeholder="Username" required>
+						<label for="name" class="form-label">Username</label> 
+					</div>
+
+					<div class="form-group field">
+						<input type="email" class="form-field" id="email" name="email" placeholder="Email" required>
+						<label for="email" class="form-label">Email</label> 
+					</div>
+					<p class="error">Invalid email</p>
+
+					<div class="form-group field">
+						<input type="password" class="form-field" id="password" placeholder="Password" name="password">
+						<label for="password"  class="form-label">Password</label>
+					</div>
+				
+					<div class="form-group field">
+							<input type="password" class="form-field" id="repeatPassword" placeholder="Confirm Password" name="repeatPassword">
+							<label for="repeatPassword" class="form-label">Confirm Password</label>
+					</div>
+					<p class="error">Passwords do not match</p>
+				
+						<h2>Credit card details</h2>
+						<div class="dropdown-bar">
+							<div class="dropdown-content">
+								 <label></label> 
+								<ul>
+									<li><a id="selected_card" class="activeli">Visa<i class="fa fa-angle-down"></i></a>
+										<ul>
+											<li><a id="card_1" onClick="setCurrentCreditCard(this.id)">MasterCard</a></li>
+											<li><a id="card_2" onClick="setCurrentCreditCard(this.id)">AmericanExpress</a><li>
+											<li><a id="card_3" onClick="setCurrentCreditCard(this.id)">Diners Club</a><li></li>
+											</li>
+										</ul>
+									</li>
+									</ul>
+							</div>
+						</div>
+
+						<div class="form-group field">
+							<input type="text" class="form-field" id="name-on-card" name="name-on-card" placeholder="Name on card" required>
+							<label for="name-on-card" class="form-label">Name on card</label> 
+						</div>
+						<p class="error">Invalid name.Please provide first and last name.</p>
+
+						<div class="form-group field">
+							<input type="text" class="form-field" id="card-number" name="card-number" placeholder="Card number" required>
+							<label for="card-number" class="form-label">Card number</label> 
+						</div>
+						<p class="error">Invalid card number. Verify you have selected the correct credit card type.</p>
+
+						<div class="form-group field">
+							<input type="text" class="form-field" id="expiry-date" name="expiry-date" placeholder="Expiry date" required>
+							<label for="expiry-date" class="form-label">Expiry date</label> 
+						</div>
+						<p class="error">Invalid expiry date</p>
+
+						<div class="form-group field">
+							<input type="text" class="form-field" id="security-code" name="security-code" placeholder="CVV code" required>
+							<label for="security-code" class="form-label">CVV code</label> 
+						</div>
+						<p class="error">Invalid CVV code</p>
+				
+                 
+                     <button type="submit" id="register" value="register" class="btn">Register</button>
+                  
+               </div>
+            </div>
+         </section>
+      </div>
+      <footer>
+		<button class="text-button">About us</button>
+		<button class="text-button">Team</button>
+		<button class="text-button">Contact us</button>
+      </footer>
+   </body>
+</html>

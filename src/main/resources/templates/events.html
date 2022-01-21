@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<link rel="icon" type="image/png" href="https://i.ibb.co/QFjMRm9/favicon-wevip.png">
+	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+	<script src="https://kit.fontawesome.com/0b4303f61f.js" crossorigin="anonymous"></script>
+	<link th:href="@{/css/ui/style.css}" rel="stylesheet" />
+	<link th:href="@{/css/ui/all-events-style.css}" rel="stylesheet" />
+	<link th:href="@{/css/ui/event-screen-style.css}" rel="stylesheet" />
+
+	<script th:src="@{/js/jquery.min.js}"></script>
+	<script defer th:src="@{/js/events.js}"></script>
+	<script defer th:src="@{/js/ui/event-screen-script.js}"></script>
+	<title>Events</title>
+</head>
+
+<body>
+	<div id="content">
+		<header>
+			<a><img th:src="@{/images/ui/logo.png}" id="logo" alt="logo"></a>
+			<nav id="nav-bar">
+				<ul>
+					<li><a href="/events">Events</a>
+						<ul>
+							<li><a id="a-events-top30">Top 30</a></li>
+							<li><a id="a-events-all">All events</a></li>
+						</ul>
+					</li>
+					<li><a href="/userProfile">My collection</a></li>
+					<li><a href="/users">Users</a></li>
+					<li id="account-button"><a href="/settings">
+							<!--<img src="img/woman.png" alt="My Profile">-->
+							<label id="username">vixypixy</label>
+							<i class="fa fa-angle-down"></i>
+						</a>
+						<ul>
+							<li><a href="/settings">My profile</a></li>
+							<li><a href="/index">Log out</a></li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+		</header>
+		<section id="login-section">
+			<div id="all-events">
+				<div id="wrapper">
+					<div class="filters">
+						<div class="dropdown-bar">
+							<div class="dropdown-content">
+								<label></label>
+								<ul>
+									<li><a href="#" id="selected_time" class="activeli">Filter by:</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="dropdown-bar">
+							<div class="dropdown-content">
+								<label></label>
+								<ul>
+									<li><a href="#" id="selected_time" class="activeli">Time<i
+												class="fa fa-angle-down"></i></a>
+										<ul>
+											<li><a href="#" id="time_1" onClick="setCurrentOption(1,this.id)">Upcoming events</a></li>
+
+									</li>
+								</ul>
+								</li>
+								</ul>
+							</div>
+						</div>
+						<div class="dropdown-bar">
+							<div class="dropdown-content">
+								<label></label>
+								<ul>
+									<li><a href="#" id="selected_price" class="activeli">Price<i
+												class="fa fa-angle-down"></i></a>
+										<ul>
+											<li><a href="#" id="price_1" onClick="setCurrentOption(2,this.id)">Lowest to highest</a></li>
+											<li><a href="#" id="price_2" onClick="setCurrentOption(2,this.id)">Highest to lowest</a>
+											<li>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="dropdown-bar">
+							<div class="dropdown-content">
+								<label></label>
+								<ul>
+									<li><a href="#" id="selected_time" class="activeli">Category<i
+												class="fa fa-angle-down"></i></a>
+										<ul>
+											<li><a href="#" id="category_1" onClick="setCurrentOption(3,this.id)">Tech event</a></li>
+											<li><a href="#" id="category_2"
+													onClick="setCurrentOption(3,this.id)">Seminars</a>
+											<li>
+											<li><a href="#" id="category_3"
+													onClick="setCurrentOption(3,this.id)">Concert</a>
+											<li></li>
+											<li><a href="#" id="category_4" onClick="setCurrentOption(3,this.id)">Music Festival</a>
+											<li>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="category">
+						<h1 id="h1_name">Top Events</h1>
+						<p id="events-count"></p>
+						<div id="events-container">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="event-screen">
+				<div class="main-column">
+					<h1 id="event-name">Event name</h1>
+					<div class="event-screen">
+						<img src=""></img>
+					</div>
+					<div class="event-info">
+						<p id="type">Event type: </p>
+						<p id="performer">Performer: </p>
+						<p id="organizer">Organizer: </p>
+						<p id="start-time">Start time: </p>
+						<p id="duration">Duration: </p>
+						<p id="price">Price: $</p>
+					</div>
+					<button class="btn-event" onclick="showPopup('confirmation-popup'); addUserTicket();">Buy
+						ticket</button>
+					<div class="fullscreen-container">
+						<div class="popup" id="confirmation-popup">
+							<header>
+								<h1>Done</h1>
+								<a href="#" id="close-popup-1" onClick="closePopup('confirmation-popup')"><i
+										class="fa fa-times fa-2x"></i></a>
+							</header>
+							<section class="popup-content">
+								<p id="popup-message">You bought successfully your ticket for <label
+										id="popup-event-name">EVENT_NAME</label> for <label
+										id="popup-event-price">PRICE</label>.<br>You can see all your events in "My
+									collection" section.</p>
+							</section>
+							<button type="submit" class="btn-event" id="confirmation-popup-ok"
+								value="confirmation-popup-ok" onclick="closePopup('confirmation-popup')">OK</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+	<footer>
+		<button class="text-button">About us</button>
+		<button class="text-button">Team</button>
+		<button class="text-button">Contact us</button>
+	</footer>
+</body>
+
+</html>
