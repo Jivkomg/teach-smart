@@ -11,7 +11,7 @@
 	<groupId>bg.sofia.uni.fmi.piss.project.wevip</groupId>
 	<artifactId>wevip</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<username>wevip</username>
+	<name>wevip</name>
 	<description>University project for Design and Integration of Software Systems</description>
 
 	<properties>
