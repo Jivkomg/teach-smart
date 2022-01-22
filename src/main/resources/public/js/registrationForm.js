@@ -1,5 +1,7 @@
 $(document).ready(function () {
 
+   hideErrors();
+
   $(document).on("click", "#register", function (event1) {
     event1.preventDefault();
     registerUser();
@@ -58,12 +60,12 @@ $(document).ready(function () {
 
 function validate()
 {
-  var result = true;
-	var errorFieldsDOM = document.getElementsByClassName("error");
-	console.log(errorFieldsDOM);
-	//make all error messages display:none 
-	for(let i=0;i<errorFieldsDOM.length;i++)
-		errorFieldsDOM[i].style.display = "none";
+    var result = true;
+    var errorFieldsDOM = document.getElementsByClassName("error");
+       console.log(errorFieldsDOM);
+       for(let i=0;i<errorFieldsDOM.length;i++)
+       errorFieldsDOM[i].style.display = "none";
+
 
 	var username = document.getElementById("name").value;
 	var email = document.getElementById("email").value;	
@@ -144,4 +146,12 @@ function setCurrentCreditCard(card_id){
 	console.log(currentCardElement.textContent);
 	currentCardElement.innerHTML = currentCard + '<i class="fa fa-angle-down"></i>';
 	oldCardElement.innerHTML = oldCard;
+}
+
+function hideErrors(){
+    var errorFieldsDOM = document.getElementsByClassName("error");
+    console.log(errorFieldsDOM);
+    for(let i=0;i<errorFieldsDOM.length;i++)
+    errorFieldsDOM[i].style.display = "none";
+
 }
