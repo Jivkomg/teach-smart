@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface ContractRepository extends JpaRepository<Contract, Long> {
+public interface ContractRepository extends JpaRepository<Contract, String> {
 
-    List<Contract> findByEventId(long eventId);
+    List<Contract> findByEventId(String eventId);
 }

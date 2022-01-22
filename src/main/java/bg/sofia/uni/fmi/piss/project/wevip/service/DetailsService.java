@@ -1,7 +1,7 @@
 package bg.sofia.uni.fmi.piss.project.wevip.service;
 
-import bg.sofia.uni.fmi.piss.project.wevip.model.WevipUser;
-import bg.sofia.uni.fmi.piss.project.wevip.repository.WevipUserRepository;
+import bg.sofia.uni.fmi.piss.project.wevip.model.TeachSmartUser;
+import bg.sofia.uni.fmi.piss.project.wevip.repository.TeachSmartUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,11 +13,11 @@ import org.springframework.stereotype.Service;
 public class DetailsService implements UserDetailsService {
 
   @Autowired
-  WevipUserRepository userRepository;
+  private TeachSmartUserRepository userRepository;
 
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    WevipUser user = userRepository.findByUsername(username);
+    TeachSmartUser user = this.userRepository.findByUsername(username);
     if (user == null) {
       throw new UsernameNotFoundException(String.format("%s was not found", username));
     }

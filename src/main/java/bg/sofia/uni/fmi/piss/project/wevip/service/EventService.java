@@ -14,11 +14,11 @@ public interface EventService {
 
     ResponseEntity<List<EventDto>> getTop30Events();
 
-    ResponseEntity<EventDto> getEventById(long id);
+    ResponseEntity<EventDto> getEventById(String id);
 
-    ResponseEntity getPoster(@PathVariable long eventId);
+    ResponseEntity getPoster(@PathVariable String eventId);
 
-    ResponseEntity getEventOrganizersById(long eventId);
+    ResponseEntity getEventOrganizersById(String eventId);
 
-    ResponseEntity getEventPerformersById(long eventId);
+    ResponseEntity getEventPerformersById(String eventId);
 }

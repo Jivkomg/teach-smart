@@ -1,6 +1,6 @@
 package bg.sofia.uni.fmi.piss.project.wevip.jwt;
 
-import bg.sofia.uni.fmi.piss.project.wevip.model.WevipUser;
+import bg.sofia.uni.fmi.piss.project.wevip.model.TeachSmartUser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -33,13 +33,13 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     public Authentication attemptAuthentication(HttpServletRequest req,
                                                 HttpServletResponse res) throws AuthenticationException {
         try {
-            WevipUser user = new ObjectMapper()
-                    .readValue(req.getInputStream(), WevipUser.class);
+            TeachSmartUser teachSmartUser = new ObjectMapper()
+                    .readValue(req.getInputStream(), TeachSmartUser.class);
 
             Authentication authentication = new UsernamePasswordAuthenticationToken(
-                    user.getUsername(),
-                    user.getPassword(),
-                    user.getAuthorities()
+                    teachSmartUser.getUsername(),
+                    teachSmartUser.getPassword(),
+                    teachSmartUser.getAuthorities()
             );
 
             return authenticationManager.authenticate(authentication);
