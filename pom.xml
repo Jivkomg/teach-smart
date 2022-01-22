@@ -6,12 +6,12 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.4.0</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/> <!-- lookup parent from repositories -->
 	</parent>
-	<groupId>bg.sofia.uni.fmi.piss.project.wevip</groupId>
-	<artifactId>wevip</artifactId>
+	<groupId>bg.sofia.uni.fmi.piss.project.tm</groupId>
+	<artifactId>teach-smart</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>wevip</name>
+	<name>TeachSmart</name>
 	<description>University project for Design and Integration of Software Systems</description>
 
 	<properties>

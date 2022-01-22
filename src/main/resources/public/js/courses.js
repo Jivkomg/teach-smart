@@ -199,7 +199,7 @@ function getEventPosterById(id, selector) {
     $.ajax({
         type: "POST",
         contentType: "application/json",
-        url: "/events/poster/" + id,
+        url: "/courses/poster/" + id,
         success: function (response) {
             console.log(response);
             var image = new Image();
@@ -216,7 +216,7 @@ function getEventOrganizers(id) {
     $.ajax({
         type: "POST",
         contentType: "application/json",
-        url: "/events/organizers/" + id,
+        url: "/courses/organizers/" + id,
         success: function (organizers) {
             var organizersStr = "<b>Organizers:</b> ";
             if (organizers.length) {
@@ -239,7 +239,7 @@ function getEventPerformers(id) {
     var performers = $.ajax({
         type: "POST",
         contentType: "application/json",
-        url: "/events/performers/" + id,
+        url: "/courses/tutors/" + id,
         success: function (performers) {
             console.log(performers);
             var performersStr = "<b>Performers:</b> ";

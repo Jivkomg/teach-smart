@@ -8,7 +8,7 @@ import warnings
 HOST = 'localhost'  # Standard loopback interface address (localhost)
 PORT = 5678        # Port to listen on (non-privileged ports are > 1023)
 
-sys.stdout = sys.stderr = open('/var/log/wevip', 'a')
+sys.stdout = sys.stderr = open('/var/log/teachsmart', 'a')
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' # Disables tensorflow spamflow
 
 from nudity import Nudity

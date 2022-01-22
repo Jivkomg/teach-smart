@@ -31,5 +31,4 @@ build/
 
 ### VS Code ###
 .vscode/
-src/main/resources/templates/event-screen.html
-src/main/resources/templates/event-screen.html
+src/main/resources/templates/course-screen.html
