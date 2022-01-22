@@ -1,6 +1,7 @@
 package bg.sofia.uni.fmi.piss.project.tm.controllers;
 
 import bg.sofia.uni.fmi.piss.project.tm.services.FileService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,7 @@ public class FileController {
 
     @PostMapping("/upload/{username}")
     public ResponseEntity uploadFile(@RequestParam("profile_pic") MultipartFile file,
-                                     @PathVariable String username) {
+        @PathVariable String username) {
         return fileService.uploadFile(file, username);
     }
 }

@@ -5,5 +5,6 @@ public class SecurityConstants {
     public static final String SECRET = "ezIalNUHkHSvylcTafZCCptkFb6Gxx3A";
     public static final String TOKEN_PREFIX = "Bearer ";
     public static final String HEADER_STRING = "Authorization";
-    public static final String USER_DIR = "/home/ec2-user/teach_smart_users/";
+//    public static final String USER_DIR = "/home/ec2-user/teach_smart_users/";
+        public static final String USER_DIR = "C:\\Users\\zhivkogeorgiev\\teach_smart\\assets";
 }

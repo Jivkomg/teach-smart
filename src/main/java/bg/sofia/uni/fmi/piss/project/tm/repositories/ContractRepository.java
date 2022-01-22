@@ -1,6 +1,7 @@
 package bg.sofia.uni.fmi.piss.project.tm.repositories;
 
 import bg.sofia.uni.fmi.piss.project.tm.models.Contract;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

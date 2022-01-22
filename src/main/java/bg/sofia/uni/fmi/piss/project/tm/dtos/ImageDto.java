@@ -17,8 +17,8 @@ public class ImageDto {
 
     private void fromByteArrayToBase64String(String location) throws IOException {
 
-            FileInputStream in = new FileInputStream(location);
-            this.encodedImage = encodeToString(IOUtils.toByteArray(in));
+        FileInputStream in = new FileInputStream(location);
+        this.encodedImage = encodeToString(IOUtils.toByteArray(in));
     }
 
     public String getEncodedImage() {

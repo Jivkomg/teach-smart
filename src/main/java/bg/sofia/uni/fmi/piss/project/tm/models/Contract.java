@@ -6,14 +6,13 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "contracts")
-public class Contract extends BaseEntity{
+public class Contract extends BaseEntity {
 
     private String tutorId;
 
     private String courseId;
 
     private String organizerId;
-
 
     public Contract() {
     }

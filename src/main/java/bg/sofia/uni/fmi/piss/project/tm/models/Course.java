@@ -50,7 +50,6 @@ public class Course extends BaseEntity {
         this.type = type;
     }
 
-
     @Column(name = "duration_hours")
     public int getDurationHours() {
         return durationHours;

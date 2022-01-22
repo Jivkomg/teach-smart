@@ -6,6 +6,7 @@ import bg.sofia.uni.fmi.piss.project.tm.dtos.ImageDto;
 import bg.sofia.uni.fmi.piss.project.tm.dtos.TeachSmartUserDto;
 import bg.sofia.uni.fmi.piss.project.tm.models.TeachSmartUser;
 import bg.sofia.uni.fmi.piss.project.tm.repositories.TeachSmartUserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,9 +35,8 @@ public class UserServiceImpl implements UserService {
     public ResponseEntity<TeachSmartUserDto> register(TeachSmartUserDto userDto) {
         TeachSmartUser existingUser = userRepository.findByUsername(userDto.getUsername());
         if (existingUser != null) {
-          return new ResponseEntity<>(HttpStatus.CONFLICT);
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
-
 
         TeachSmartUser user = userAssembler.toUser(userDto);
         try {
@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService {
     public ResponseEntity login(TeachSmartUserDto userDto) {
         TeachSmartUser user = userRepository.findByUsername(userDto.getUsername());
         if (user == null) {
-          return new ResponseEntity(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
 
         return new ResponseEntity(HttpStatus.OK);
@@ -84,9 +84,9 @@ public class UserServiceImpl implements UserService {
         }
 
         return new ResponseEntity<>(allUsers
-                .stream()
-                .map(EntityToDtoMapper::toUserDto)
-                .collect(Collectors.toList()), HttpStatus.OK);
+            .stream()
+            .map(EntityToDtoMapper::toUserDto)
+            .collect(Collectors.toList()), HttpStatus.OK);
     }
 
     @Override
@@ -101,7 +101,7 @@ public class UserServiceImpl implements UserService {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
-        return new ResponseEntity<>(image , HttpStatus.OK);
+        return new ResponseEntity<>(image, HttpStatus.OK);
     }
 }
 
