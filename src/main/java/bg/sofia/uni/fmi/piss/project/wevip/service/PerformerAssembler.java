@@ -6,12 +6,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class PerformerAssembler {
-    Performer toPerformer(PerformerDto performerDto) {
-        return new Performer(performerDto.getId(),
-                performerDto.getName(),
-                performerDto.getDescription());
-    }
-
     PerformerDto toPerformerDto(Performer performer) {
         PerformerDto performerDto = new PerformerDto();
         performerDto.setId(performer.getId());

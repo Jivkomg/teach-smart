@@ -1,13 +1,11 @@
 package bg.sofia.uni.fmi.piss.project.wevip.controller;
 
-import bg.sofia.uni.fmi.piss.project.wevip.dto.WevipUserDto;
+import bg.sofia.uni.fmi.piss.project.wevip.dto.TeachSmartUserDto;
 
 import javax.validation.Valid;
 
-import bg.sofia.uni.fmi.piss.project.wevip.model.Event;
-import bg.sofia.uni.fmi.piss.project.wevip.model.WevipUser;
 import bg.sofia.uni.fmi.piss.project.wevip.service.UserService;
-import bg.sofia.uni.fmi.piss.project.wevip.service.UserServiceImpl;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +22,7 @@ public class UserController {
   private UserService userService;
 
   @PostMapping("/registrationForm")
-  public ResponseEntity<WevipUserDto> processRegisterUser(@Valid @RequestBody WevipUserDto userDto, BindingResult binding) {
+  public ResponseEntity<TeachSmartUserDto> processRegisterUser(@Valid @RequestBody TeachSmartUserDto userDto, BindingResult binding) {
     if (binding.hasErrors()) {
       return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
     }
@@ -33,7 +31,7 @@ public class UserController {
   }
 
   @PostMapping("/loginForm")
-  public ResponseEntity processLoginUser(@Valid @RequestBody WevipUserDto userDto, BindingResult binding) {
+  public ResponseEntity processLoginUser(@Valid @RequestBody TeachSmartUserDto userDto, BindingResult binding) {
     if (binding.hasErrors()) {
       return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
     }
@@ -42,7 +40,7 @@ public class UserController {
   }
 
   @PostMapping("/current/{username}")
-  public ResponseEntity<WevipUserDto> getCurrentUser(@PathVariable String username) {
+  public ResponseEntity<TeachSmartUserDto> getCurrentUser(@PathVariable String username) {
     return userService.getAuthUser(username);
   }
 

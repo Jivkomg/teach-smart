@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -70,23 +71,20 @@ public class EventServiceImpl implements EventService{
     }
 
     @Override
-    public ResponseEntity<EventDto> getEventById(long id) {
-        Event event = eventRepository.findById(id);
+    public ResponseEntity<EventDto> getEventById(String id) {
+        Optional<Event> event = eventRepository.findById(id);
 
-        if (event == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        return event.map(value -> new ResponseEntity<>(eventAssembler.toEventDto(value), HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
 
-        return new ResponseEntity<>(eventAssembler.toEventDto(event), HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity getEventOrganizersById(long eventId) {
-        List <Contract> contracts = contractRepository.findByEventId(eventId);
+    public ResponseEntity getEventOrganizersById(String eventId) {
+        List<Contract> contracts = contractRepository.findByEventId(eventId);
 
         List<Organizer> organizers = contracts
                 .stream()
-                .map(contract -> organizerRepository.findById(contract.getOrganizerId()))
+                .map(contract -> organizerRepository.findById(contract.getOrganizerId()).get())
                 .collect(Collectors.toList());
 
         if (organizers.isEmpty()) {
@@ -106,12 +104,12 @@ public class EventServiceImpl implements EventService{
     }
 
     @Override
-    public ResponseEntity getEventPerformersById(long eventId) {
+    public ResponseEntity getEventPerformersById(String eventId) {
         List <Contract> contracts = contractRepository.findByEventId(eventId);
 
         List<Performer> performers = contracts
                 .stream()
-                .map(contract -> performerRepository.findById(contract.getPerformerId()))
+                .map(contract -> performerRepository.findById(contract.getId()).get())
                 .collect(Collectors.toList());
 
         if (performers.isEmpty()) {
@@ -131,17 +129,17 @@ public class EventServiceImpl implements EventService{
     }
 
     @Override
-    public ResponseEntity getPoster(long eventId) {
+    public ResponseEntity getPoster(String eventId) {
 
-        Event event = eventRepository.findById(eventId);
+        Optional<Event> event = eventRepository.findById(eventId);
 
-        if (event == null) {
+        if (!event.isPresent()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        String location = event.getPosterLocation();
+        String location = event.get().getPosterLocation();
 
-        ImageDto image = null;
+        ImageDto image;
 
         try {
             image = new ImageDto(location);

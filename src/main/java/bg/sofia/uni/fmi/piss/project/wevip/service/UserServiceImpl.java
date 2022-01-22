@@ -1,13 +1,12 @@
 package bg.sofia.uni.fmi.piss.project.wevip.service;
 
 import bg.sofia.uni.fmi.piss.project.wevip.dto.ImageDto;
-import bg.sofia.uni.fmi.piss.project.wevip.dto.WevipUserDto;
-import bg.sofia.uni.fmi.piss.project.wevip.model.WevipUser;
-import bg.sofia.uni.fmi.piss.project.wevip.repository.WevipUserRepository;
+import bg.sofia.uni.fmi.piss.project.wevip.dto.TeachSmartUserDto;
+import bg.sofia.uni.fmi.piss.project.wevip.model.TeachSmartUser;
+import bg.sofia.uni.fmi.piss.project.wevip.repository.TeachSmartUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -24,20 +23,20 @@ import static bg.sofia.uni.fmi.piss.project.wevip.SecurityConstants.USER_DIR;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private WevipUserRepository userRepository;
+    private TeachSmartUserRepository userRepository;
 
     @Autowired
     private UserAssembler userAssembler;
 
     @Override
-    public ResponseEntity<WevipUserDto> register(WevipUserDto userDto) {
-        WevipUser existingUser = userRepository.findByUsername(userDto.getUsername());
+    public ResponseEntity<TeachSmartUserDto> register(TeachSmartUserDto userDto) {
+        TeachSmartUser existingUser = userRepository.findByUsername(userDto.getUsername());
         if (existingUser != null) {
           return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
 
 
-        WevipUser user = userAssembler.toUser(userDto);
+        TeachSmartUser user = userAssembler.toUser(userDto);
         try {
 
             Path path = Paths.get(USER_DIR + user.getUsername());
@@ -54,8 +53,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseEntity login(WevipUserDto userDto) {
-        WevipUser user = userRepository.findByUsername(userDto.getUsername());
+    public ResponseEntity login(TeachSmartUserDto userDto) {
+        TeachSmartUser user = userRepository.findByUsername(userDto.getUsername());
         if (user == null) {
           return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
@@ -64,8 +63,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseEntity<WevipUserDto> getAuthUser(String username) {
-        WevipUser user = userRepository.findByUsername(username);
+    public ResponseEntity<TeachSmartUserDto> getAuthUser(String username) {
+        TeachSmartUser user = userRepository.findByUsername(username);
 
         if (user == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -76,7 +75,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseEntity getAllUsers() {
-        List<WevipUser> allUsers = userRepository.findAll();
+        List<TeachSmartUser> allUsers = userRepository.findAll();
 
         if (allUsers.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -7,20 +7,13 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "performers")
-public class Performer {
+public class Performer extends BaseEntity {
 
-    @Id
-    @Column(name = "id", nullable = false)
-    private long id;
-
-    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "description")
     private String description;
 
-    public Performer(long id, String name, String description) {
-        this.id = id;
+    public Performer(String name, String description) {
         this.name = name;
         this.description = description;
     }
@@ -28,14 +21,7 @@ public class Performer {
     public Performer() {
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
+    @Column(name = "name", nullable = false)
     public String getName() {
         return name;
     }
@@ -44,6 +30,7 @@ public class Performer {
         this.name = name;
     }
 
+    @Column(name = "description")
     public String getDescription() {
         return description;
     }

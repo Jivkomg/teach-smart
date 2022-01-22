@@ -1,8 +1,7 @@
 package bg.sofia.uni.fmi.piss.project.wevip;
 
-import bg.sofia.uni.fmi.piss.project.wevip.jwt.JWTAuthenticationFilter;
-import bg.sofia.uni.fmi.piss.project.wevip.jwt.JWTTokenVerifier;
 import bg.sofia.uni.fmi.piss.project.wevip.service.DetailsService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,32 +18,37 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-  @Autowired
-  private DetailsService detailsService;
+    @Autowired
+    private DetailsService detailsService;
 
-  @Bean
-  public BCryptPasswordEncoder passwordEncoder() {
-    return new BCryptPasswordEncoder(10);
-  };
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(10);
+    }
 
-  @Override
-  public void configure(AuthenticationManagerBuilder auth) throws Exception {
-    auth.userDetailsService(detailsService).passwordEncoder(passwordEncoder());
-  }
+    ;
 
-  @Override
-  protected void configure(HttpSecurity http) throws Exception {
-    http
+    @Override
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(detailsService).passwordEncoder(passwordEncoder());
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+
+        http
             .sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
-            .addFilter(new JWTAuthenticationFilter(authenticationManager()))
-            .addFilterAfter(new JWTTokenVerifier(), JWTAuthenticationFilter.class )
+//            .addFilter(new JWTAuthenticationFilter(authenticationManager()))
+//            .addFilterAfter(new JWTTokenVerifier(), JWTAuthenticationFilter.class)
             .authorizeRequests()
             .antMatchers("/registrationForm", "/css/**", "/images/**", "/js/**").permitAll()
-            .antMatchers("/index", "/main", "/events/**" ,"/settings", "/loginForm").permitAll()
+            .antMatchers("/index", "/main", "/events/**", "/settings", "/loginForm").permitAll()
             .antMatchers("/user/**", "/userProfile", "/users", "/file/**").permitAll()
-            .anyRequest().authenticated()
+            .antMatchers("/").permitAll()
+            .antMatchers("/h2-console/**").permitAll()
+//            .anyRequest().authenticated()
             .and()
             //wants to authenticate using a form
             .formLogin()
@@ -58,12 +62,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .httpBasic()
             .and()
             .csrf().disable();
-  }
 
-  @Bean(name = "multipartResolver")
-  public CommonsMultipartResolver multipartResolver() {
-    CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-    multipartResolver.setMaxUploadSize(Long.MAX_VALUE);
-    return multipartResolver;
-  }
+        http.headers().frameOptions().disable();
+    }
+
+    @Bean(name = "multipartResolver")
+    public CommonsMultipartResolver multipartResolver() {
+        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+        multipartResolver.setMaxUploadSize(Long.MAX_VALUE);
+        return multipartResolver;
+    }
 }
