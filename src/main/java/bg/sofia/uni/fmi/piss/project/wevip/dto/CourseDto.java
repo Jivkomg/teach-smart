@@ -2,9 +2,9 @@ package bg.sofia.uni.fmi.piss.project.wevip.dto;
 
 import java.time.LocalDateTime;
 
-public class EventDto {
+public class CourseDto {
 
-    private String eventId;
+    private String courseId;
 
     private String name;
 
@@ -24,12 +24,12 @@ public class EventDto {
 
     private String posterLocation;
 
-    public String getEventId() {
-        return eventId;
+    public String getCourseId() {
+        return courseId;
     }
 
-    public void setEventId(String eventId) {
-        this.eventId = eventId;
+    public void setCourseId(String courseId) {
+        this.courseId = courseId;
     }
 
     public String getName() {

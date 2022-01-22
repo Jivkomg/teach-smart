@@ -1,0 +1,2 @@
+insert into teach_smart_users (id, email, password, role, username) values ('7276dc72-cde8-454a-9015-35aa3428bd23', 'zhivko.m.georgiev@gmail.com', '$2a$10$oU9mp5mK1mbbMBeYb1HrHOwIaDEiQ8IBDFnelS5ctGiyKeWhBbrlO', 'ROLE_USER', 'zhivkomg');
+insert into courses (id, description, duration_hours, name, poster_location, sale_end, start_time, ticket_price, tickets_sold, type) values ('7276dc72-cde8-454a-9015-35aa3428bd24', 'My Course', '10', 'JAVA', '', '2021-01-01 00:00:01', '2022-01-01 00:00:01', '10', '100', 'coding');

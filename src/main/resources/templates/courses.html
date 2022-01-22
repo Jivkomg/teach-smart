@@ -7,12 +7,12 @@
 	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
 	<script src="https://kit.fontawesome.com/0b4303f61f.js" crossorigin="anonymous"></script>
 	<link th:href="@{/css/ui/style.css}" rel="stylesheet" />
-	<link th:href="@{/css/ui/all-events-style.css}" rel="stylesheet" />
-	<link th:href="@{/css/ui/event-screen-style.css}" rel="stylesheet" />
+	<link th:href="@{/css/ui/all-courses-style.css}" rel="stylesheet" />
+	<link th:href="@{/css/ui/course-screen-style.css}" rel="stylesheet" />
 
 	<script th:src="@{/js/jquery.min.js}"></script>
-	<script defer th:src="@{/js/events.js}"></script>
-	<script defer th:src="@{/js/ui/event-screen-script.js}"></script>
+	<script defer th:src="@{/js/courses.js}"></script>
+	<script defer th:src="@{/js/ui/course-screen-script.js}"></script>
 	<title>Events</title>
 </head>
 
@@ -22,10 +22,10 @@
 			<a><img th:src="@{/images/ui/logo.png}" id="logo" alt="logo"></a>
 			<nav id="nav-bar">
 				<ul>
-					<li><a href="/events">Events</a>
+					<li><a href="/courses">Events</a>
 						<ul>
-							<li><a id="a-events-top30">Top 30</a></li>
-							<li><a id="a-events-all">All events</a></li>
+							<li><a id="a-courses-top30">Top 30</a></li>
+							<li><a id="a-courses-all">All courses</a></li>
 						</ul>
 					</li>
 					<li><a href="/userProfile">My collection</a></li>
@@ -44,7 +44,7 @@
 			</nav>
 		</header>
 		<section id="login-section">
-			<div id="all-events">
+			<div id="all-courses">
 				<div id="wrapper">
 					<div class="filters">
 						<div class="dropdown-bar">
@@ -63,7 +63,7 @@
 									<li><a href="#" id="selected_time" class="activeli">Time<i
 												class="fa fa-angle-down"></i></a>
 										<ul>
-											<li><a href="#" id="time_1" onClick="setCurrentOption(1,this.id)">Upcoming events</a></li>
+											<li><a href="#" id="time_1" onClick="setCurrentOption(1,this.id)">Upcoming courses</a></li>
 
 									</li>
 								</ul>
@@ -94,7 +94,7 @@
 									<li><a href="#" id="selected_time" class="activeli">Category<i
 												class="fa fa-angle-down"></i></a>
 										<ul>
-											<li><a href="#" id="category_1" onClick="setCurrentOption(3,this.id)">Tech event</a></li>
+											<li><a href="#" id="category_1" onClick="setCurrentOption(3,this.id)">Tech course</a></li>
 											<li><a href="#" id="category_2"
 													onClick="setCurrentOption(3,this.id)">Seminars</a>
 											<li>
@@ -112,19 +112,19 @@
 					</div>
 					<div class="category">
 						<h1 id="h1_name">Top Events</h1>
-						<p id="events-count"></p>
-						<div id="events-container">
+						<p id="courses-count"></p>
+						<div id="courses-container">
 						</div>
 					</div>
 				</div>
 			</div>
-			<div id="event-screen">
+			<div id="course-screen">
 				<div class="main-column">
-					<h1 id="event-name">Event name</h1>
-					<div class="event-screen">
+					<h1 id="course-name">Event name</h1>
+					<div class="course-screen">
 						<img src=""></img>
 					</div>
-					<div class="event-info">
+					<div class="course-info">
 						<p id="type">Event type: </p>
 						<p id="performer">Performer: </p>
 						<p id="organizer">Organizer: </p>
@@ -132,7 +132,7 @@
 						<p id="duration">Duration: </p>
 						<p id="price">Price: $</p>
 					</div>
-					<button class="btn-event" onclick="showPopup('confirmation-popup'); addUserTicket();">Buy
+					<button class="btn-course" onclick="showPopup('confirmation-popup'); addUserTicket();">Buy
 						ticket</button>
 					<div class="fullscreen-container">
 						<div class="popup" id="confirmation-popup">
@@ -143,11 +143,11 @@
 							</header>
 							<section class="popup-content">
 								<p id="popup-message">You bought successfully your ticket for <label
-										id="popup-event-name">EVENT_NAME</label> for <label
-										id="popup-event-price">PRICE</label>.<br>You can see all your events in "My
+										id="popup-course-name">EVENT_NAME</label> for <label
+										id="popup-course-price">PRICE</label>.<br>You can see all your courses in "My
 									collection" section.</p>
 							</section>
-							<button type="submit" class="btn-event" id="confirmation-popup-ok"
+							<button type="submit" class="btn-course" id="confirmation-popup-ok"
 								value="confirmation-popup-ok" onclick="closePopup('confirmation-popup')">OK</button>
 						</div>
 					</div>

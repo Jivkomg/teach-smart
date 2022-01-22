@@ -3,11 +3,11 @@
 <head>
 	<meta charset="utf-8">
 	<link th:href="@{/css/ui/style.css}" rel="stylesheet"/>
-	<link th:href="@{/css/ui/events-screen-style.css}" rel="stylesheet"/>
+	<link th:href="@{/css/ui/courses-screen-style.css}" rel="stylesheet"/>
 	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
     <script src="https://kit.fontawesome.com/0b4303f61f.js" crossorigin="anonymous"></script>
-	<script th:src="@{/js/events.js}"></script>
-	<script th:src="@{/js/ui/event-screen-script.js}"></script> 
+	<script th:src="@{/js/courses.js}"></script>
+	<script th:src="@{/js/ui/course-screen-script.js}"></script>
 	<script th:src="@{/js/jquery.min.js}"></script>
 	<title>Event</title>
 </head>
@@ -17,10 +17,10 @@
 		<a><img th:src="@{/images/ui/logo.png}" id="logo" alt="logo"></a>
 		<nav id="nav-bar">
 			<ul>
-			<li><a href="/events">Events</a>
+			<li><a href="/courses">Events</a>
 				<ul>
-                    <li><a href="all-events.html">Top 30</a></li>
-                    <li><a href="all-events.html">All events</a></li>
+                    <li><a href="all-courses.html">Top 30</a></li>
+                    <li><a href="all-courses.html">All courses</a></li>
 				</ul>
 			</li>
 			<!-- <li><a href="user-profile.html">My collection</a></li>
@@ -42,8 +42,8 @@
 	<section id="login-section">
   			<div class="main-column">
 				  <h1>Event name</h1>
-				  <div class="event-screen"></div>
-				  <div class="event-info">
+				  <div class="course-screen"></div>
+				  <div class="course-info">
 				  <p id="type">Event type:</p>
 				  <p id="performer">Performer:</p>
 				  <p id="organizer">Organizer:</p>
@@ -51,7 +51,7 @@
 				  <p id="duration">Duration:</p>
 				  <p id="price">Price:</p>
 				  </div>
-				<button class="btn-event" onclick="showPopup('confirmation-popup')">Buy ticket</button>
+				<button class="btn-course" onclick="showPopup('confirmation-popup')">Buy ticket</button>
 				<div class="fullscreen-container">
 					<div class="popup" id="confirmation-popup">
 					   <header>
@@ -59,9 +59,9 @@
 						  <a href="#" id="close-popup-1" onClick="closePopup('confirmation-popup')"><i class="fa fa-times fa-2x"></i></a>	
 					   </header>
 					   <section class="popup-content">
-						  <p>You bought successfully your ticket for EVENT_NAME for PRICE.<br>You can see all your events in "My collection" section.</p>
+						  <p>You bought successfully your ticket for EVENT_NAME for PRICE.<br>You can see all your courses in "My collection" section.</p>
 					   </section>
-					   <button type="submit" class="btn-event" id="confirmation-popup-ok" value="confirmation-popup-ok" onclick="closePopup('confirmation-popup')">OK</button>
+					   <button type="submit" class="btn-course" id="confirmation-popup-ok" value="confirmation-popup-ok" onclick="closePopup('confirmation-popup')">OK</button>
 					</div>
 					</div>
   			</div>

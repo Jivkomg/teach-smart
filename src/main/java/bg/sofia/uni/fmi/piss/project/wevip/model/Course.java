@@ -4,8 +4,9 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "events")
-public class Event extends BaseEntity{
+@Table(name = "courses")
+//Course
+public class Course extends BaseEntity{
 
     private String name;
 
@@ -15,6 +16,7 @@ public class Event extends BaseEntity{
 
     private int durationHours;
 
+    //
     private double ticketPrice;
 
     private long ticketsSold;
@@ -25,7 +27,7 @@ public class Event extends BaseEntity{
 
     private String posterLocation;
 
-    public Event(String name, String type, LocalDateTime startTime,
+    public Course(String name, String type, LocalDateTime startTime,
                  int durationHours, double ticketPrice, long ticketsSold,
                  LocalDateTime saleEnd, String description, String posterLocation) {
         this.name = name;
@@ -39,7 +41,7 @@ public class Event extends BaseEntity{
         this.posterLocation = posterLocation;
     }
 
-    public Event() {
+    public Course() {
     }
 
     @Column(name = "name", nullable = false)

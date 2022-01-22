@@ -40,7 +40,7 @@ function getAllEvents() {
     $.ajax({
         type: "POST",
         contentType: "application/json",
-        url: "/events/all",
+        url: "/courses/all",
         success: function (events) {
             allEvents = events;
             displayEvents(events, "All events");
@@ -60,7 +60,7 @@ function getTop30Events() {
     $.ajax({
         type: "POST",
         contentType: "application/json",
-        url: "/events/top30",
+        url: "/courses/top30",
         success: function (events) {
             top30events = events;
             displayEvents(events, "Top 30 events");
@@ -140,7 +140,7 @@ function getEventById(id) {
     $.ajax({
         type: "POST",
         contentType: "application/json",
-        url: "/events/" + id,
+        url: "/courses/" + id,
         success: function (event) {
             // localStorage.setItem('chosenEventId', id);
             console.log(event);

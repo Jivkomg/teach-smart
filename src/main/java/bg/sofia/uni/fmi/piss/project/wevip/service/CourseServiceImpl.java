@@ -1,13 +1,14 @@
 package bg.sofia.uni.fmi.piss.project.wevip.service;
 
-import bg.sofia.uni.fmi.piss.project.wevip.dto.EventDto;
+import bg.sofia.uni.fmi.piss.project.wevip.EntityToDtoMapper;
+import bg.sofia.uni.fmi.piss.project.wevip.dto.CourseDto;
 import bg.sofia.uni.fmi.piss.project.wevip.dto.ImageDto;
 import bg.sofia.uni.fmi.piss.project.wevip.model.Contract;
-import bg.sofia.uni.fmi.piss.project.wevip.model.Event;
+import bg.sofia.uni.fmi.piss.project.wevip.model.Course;
 import bg.sofia.uni.fmi.piss.project.wevip.model.Organizer;
 import bg.sofia.uni.fmi.piss.project.wevip.model.Performer;
 import bg.sofia.uni.fmi.piss.project.wevip.repository.ContractRepository;
-import bg.sofia.uni.fmi.piss.project.wevip.repository.EventRepository;
+import bg.sofia.uni.fmi.piss.project.wevip.repository.CourseRepository;
 import bg.sofia.uni.fmi.piss.project.wevip.repository.OrganizerRepository;
 import bg.sofia.uni.fmi.piss.project.wevip.repository.PerformerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,16 +17,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class EventServiceImpl implements EventService{
+public class CourseServiceImpl implements CourseService {
 
     @Autowired
-    private EventRepository eventRepository;
+    private CourseRepository courseRepository;
 
     @Autowired
     private ContractRepository contractRepository;
@@ -36,51 +36,42 @@ public class EventServiceImpl implements EventService{
     @Autowired
     private PerformerRepository performerRepository;
 
-    @Autowired
-    private EventAssembler eventAssembler;
-
-    @Autowired
-    private OrganizerAssembler organizerAssembler;
-
-    @Autowired
-    private PerformerAssembler performerAssembler;
-
     @Override
-    public ResponseEntity<List<EventDto>> getAllEvents() {
-        List<Event> events = eventRepository.findAll();
-        if (events.isEmpty()) {
+    public ResponseEntity<List<CourseDto>> getAllCourses() {
+        List<Course> courses = courseRepository.findAll();
+        if (courses.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(events
+        return new ResponseEntity<>(courses
                 .stream()
-                .map(event -> eventAssembler.toEventDto(event))
+                .map(EntityToDtoMapper::toCourseDto)
                 .collect(Collectors.toList()), HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<List<EventDto>> getTop30Events() {
-        List<Event> topEvents = eventRepository.findTop30SoldOut();
-        if (topEvents.isEmpty()) {
+    public ResponseEntity<List<CourseDto>> getTop30Courses() {
+        List<Course> topCourses = courseRepository.findTop30SoldOut();
+        if (topCourses.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<>(topEvents
+        return new ResponseEntity<>(topCourses
                 .stream()
-                .map(event -> eventAssembler.toEventDto(event))
+                .map(EntityToDtoMapper::toCourseDto)
                 .collect(Collectors.toList()), HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<EventDto> getEventById(String id) {
-        Optional<Event> event = eventRepository.findById(id);
+    public ResponseEntity<CourseDto> getCourseById(String id) {
+        Optional<Course> course = courseRepository.findById(id);
 
-        return event.map(value -> new ResponseEntity<>(eventAssembler.toEventDto(value), HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        return course.map(value -> new ResponseEntity<>(EntityToDtoMapper.toCourseDto(value), HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
 
     }
 
     @Override
-    public ResponseEntity getEventOrganizersById(String eventId) {
-        List<Contract> contracts = contractRepository.findByEventId(eventId);
+    public ResponseEntity getCourseOrganizersById(String courseId) {
+        List<Contract> contracts = contractRepository.findByCourseId(courseId);
 
         List<Organizer> organizers = contracts
                 .stream()
@@ -99,13 +90,13 @@ public class EventServiceImpl implements EventService{
 
         return new ResponseEntity<>(organizers
                 .stream()
-                .map(organizer -> organizerAssembler.toOrganizerDto(organizer))
+                .map(EntityToDtoMapper::toOrganizerDto)
                 .collect(Collectors.toList()), HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity getEventPerformersById(String eventId) {
-        List <Contract> contracts = contractRepository.findByEventId(eventId);
+    public ResponseEntity getCoursePerformersById(String courseId) {
+        List <Contract> contracts = contractRepository.findByCourseId(courseId);
 
         List<Performer> performers = contracts
                 .stream()
@@ -124,20 +115,20 @@ public class EventServiceImpl implements EventService{
 
         return new ResponseEntity<>(performers
                 .stream()
-                .map(performer -> performerAssembler.toPerformerDto(performer))
+                .map(EntityToDtoMapper::toPerformerDto)
                 .collect(Collectors.toList()), HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity getPoster(String eventId) {
+    public ResponseEntity getPoster(String courseId) {
 
-        Optional<Event> event = eventRepository.findById(eventId);
+        Optional<Course> course = courseRepository.findById(courseId);
 
-        if (!event.isPresent()) {
+        if (!course.isPresent()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        String location = event.get().getPosterLocation();
+        String location = course.get().getPosterLocation();
 
         ImageDto image;
 

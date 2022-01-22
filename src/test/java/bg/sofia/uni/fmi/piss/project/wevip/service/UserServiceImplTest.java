@@ -1,5 +1,6 @@
 package bg.sofia.uni.fmi.piss.project.wevip.service;
 
+import bg.sofia.uni.fmi.piss.project.wevip.EntityToDtoMapper;
 import bg.sofia.uni.fmi.piss.project.wevip.dto.TeachSmartUserDto;
 import bg.sofia.uni.fmi.piss.project.wevip.model.TeachSmartUser;
 import bg.sofia.uni.fmi.piss.project.wevip.repository.TeachSmartUserRepository;
@@ -13,6 +14,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import static org.junit.Assert.*;
+
+import javax.swing.text.html.parser.Entity;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceImplTest {
@@ -52,7 +55,7 @@ public class UserServiceImplTest {
         Mockito.when(userRepository.findByUsername(dto.getUsername())).
                 thenReturn(null);
         Mockito.when(userAssembler.toUser(dto)).thenReturn(user);
-        Mockito.when(userAssembler.toUserDto(user)).thenReturn(dto);
+        Mockito.when(EntityToDtoMapper.toUserDto(user)).thenReturn(dto);
 
         ResponseEntity<TeachSmartUserDto> result = userService.register(dto);
         assertEquals(HttpStatus.CREATED, result.getStatusCode());
@@ -85,7 +88,7 @@ public class UserServiceImplTest {
     public void getAuthUser_UserFound(){
         Mockito.when(userRepository.findByUsername(user.getUsername())).
                 thenReturn(user);
-        Mockito.when(userAssembler.toUserDto(user)).thenReturn(dto);
+        Mockito.when(EntityToDtoMapper.toUserDto(user)).thenReturn(dto);
 
         ResponseEntity<TeachSmartUserDto> result = userService.getAuthUser(user.getUsername());
         assertEquals(HttpStatus.OK,result.getStatusCode());

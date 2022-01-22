@@ -17,13 +17,4 @@ class UserAssembler {
             userDto.getEmail(),
             passwordEncoder.encode(userDto.getPassword()));
   }
-
-  TeachSmartUserDto toUserDto(TeachSmartUser user) {
-    TeachSmartUserDto userDto = new TeachSmartUserDto();
-    userDto.setUserId(user.getId());
-    userDto.setUsername(user.getUsername());
-    userDto.setEmail(user.getEmail());
-    userDto.setRole(user.getRole());
-    return userDto;
-  }
 }
