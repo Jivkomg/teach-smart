@@ -5,11 +5,11 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link th:href="@{/css/ui/style.css}" rel="stylesheet"/>
-	<link th:href="@{/css/ui/events-screen-style.css}" rel="stylesheet"/>
+	<link th:href="@{/css/ui/courses-screen-style.css}" rel="stylesheet"/>
 	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
-    <script src="https://kit.fontawesome.com/0b4303f61f.js" crossorigin="anonymous"></script>
-	<script th:src="@{/js/events.js}"></script>
-	<script th:src="@{/js/ui/event-screen-script.js}"></script>
+	<script src="https://kit.fontawesome.com/0b4303f61f.js" crossorigin="anonymous"></script>
+	<script th:src="@{/js/courses.js}"></script>
+	<script th:src="@{/js/ui/course-screen-script.js}"></script>
 	<script th:src="@{/js/jquery.min.js}"></script>
 	<title>Курсове</title>
 	<!-- CSS only -->
@@ -22,10 +22,10 @@
 <a><img th:src="@{/images/ui/logo.png}" id="logo" alt="logo"></a>
 <nav id="nav-bar">
     <ul>
-    <li><a href="/events">Events</a>
+    <li><a href="/courses">Events</a>
         <ul>
-            <li><a href="all-events.html">Top 30</a></li>
-            <li><a href="all-events.html">All events</a></li>
+            <li><a href="all-courses.html">Top 30</a></li>
+            <li><a href="all-courses.html">All events</a></li>
         </ul>
     </li>
     <li><a href="user-profile.html">My collection</a></li>
@@ -38,7 +38,6 @@
     <ul>
         <li><a href="/settings">My profile</a></li>
         <li><a href="/index">Log out</a></li>
-
     </ul>
     </li>
 </ul>
@@ -64,23 +63,23 @@
 					</li>
 				</ul>
 
-			</li>
-			<!-- <li><a href="user-profile.html">My collection</a></li>
-			<li><a href="users.html">Users</a></li>
-			<li id="account-button"><a href="/settings">
-					<img src="img/woman.png" alt="My Profile">-->
-					<label id="username">vixypixy</label>
-					<i class="fa fa-angle-down"></i>
+				</li>
+				<!-- <li><a href="user-profile.html">My collection</a></li>
+                <li><a href="users.html">Users</a></li>
+                <li id="account-button"><a href="/settings">
+                        <img src="img/woman.png" alt="My Profile">-->
+				<label id="username">vixypixy</label>
+				<i class="fa fa-angle-down"></i>
 				</a>
-			<ul>
-				<li><a href="/settings">My profile</a></li>
-				<li><a href="/index">Log out</a></li>
+				<ul>
+					<li><a href="/settings">My profile</a></li>
+					<li><a href="/index">Log out</a></li>
 
 
-				<div class="d-flex">
-					<button class="btn btn-success" onclick="location.href='/loginForm'" type="button" id="login-header">Вход</button>
-				</div>
-			</ul>
+					<div class="d-flex">
+						<button class="btn btn-success" onclick="location.href='/loginForm'" type="button" id="login-header">Вход</button>
+					</div>
+				</ul>
 	</nav>
 </header>
 <section>

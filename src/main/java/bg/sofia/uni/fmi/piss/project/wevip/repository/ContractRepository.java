@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface ContractRepository extends JpaRepository<Contract, String> {
 
-    List<Contract> findByEventId(String eventId);
+    List<Contract> findByCourseId(String courseId);
 }

@@ -31,7 +31,7 @@ $(document).ready(function () {
           localStorage.setItem("userTickets", JSON.stringify(userTickets));
           console.log("USER ", localStorage.getItem("username"),"|| userTickets: ",localStorage.getItem("userEmail"));
 
-          window.location.href = "/events";
+          window.location.href = "/courses";
         },
         error: function (jqXHR) {
           if (jqXHR.status === 401) {

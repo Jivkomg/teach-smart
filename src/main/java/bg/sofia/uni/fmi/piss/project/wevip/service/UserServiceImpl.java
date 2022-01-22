@@ -1,5 +1,6 @@
 package bg.sofia.uni.fmi.piss.project.wevip.service;
 
+import bg.sofia.uni.fmi.piss.project.wevip.EntityToDtoMapper;
 import bg.sofia.uni.fmi.piss.project.wevip.dto.ImageDto;
 import bg.sofia.uni.fmi.piss.project.wevip.dto.TeachSmartUserDto;
 import bg.sofia.uni.fmi.piss.project.wevip.model.TeachSmartUser;
@@ -49,7 +50,7 @@ public class UserServiceImpl implements UserService {
         }
 
         userRepository.save(user);
-        return new ResponseEntity<>(userAssembler.toUserDto(user), HttpStatus.CREATED);
+        return new ResponseEntity<>(EntityToDtoMapper.toUserDto(user), HttpStatus.CREATED);
     }
 
     @Override
@@ -70,7 +71,7 @@ public class UserServiceImpl implements UserService {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<>(userAssembler.toUserDto(user), HttpStatus.OK);
+        return new ResponseEntity<>(EntityToDtoMapper.toUserDto(user), HttpStatus.OK);
     }
 
     @Override
@@ -83,14 +84,14 @@ public class UserServiceImpl implements UserService {
 
         return new ResponseEntity<>(allUsers
                 .stream()
-                .map(user -> userAssembler.toUserDto(user))
+                .map(EntityToDtoMapper::toUserDto)
                 .collect(Collectors.toList()), HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity getAuthUserProfilePic(String username) {
 
-        ImageDto image = null;
+        ImageDto image;
 
         try {
             image = new ImageDto(USER_DIR + username + File.separator + "profile_pic.jpg");

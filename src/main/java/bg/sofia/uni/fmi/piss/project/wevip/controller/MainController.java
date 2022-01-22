@@ -41,13 +41,13 @@ public class MainController {
     return "settings.html";
   }
 
-  @GetMapping("/events")
-  String events() {
-    return "events";
+  @GetMapping("/courses")
+  String courses() {
+    return "courses";
   }
 
-  @GetMapping("/events/top30")
-  String eventsTop30() {
-    return "eventsTop30";
+  @GetMapping("/courses/top30")
+  String coursesTop30() {
+    return "coursesTop30";
   }
 }

@@ -1,15 +1,16 @@
 package bg.sofia.uni.fmi.piss.project.wevip.service;
 
 
-import bg.sofia.uni.fmi.piss.project.wevip.dto.EventDto;
+import bg.sofia.uni.fmi.piss.project.wevip.EntityToDtoMapper;
+import bg.sofia.uni.fmi.piss.project.wevip.dto.CourseDto;
 import bg.sofia.uni.fmi.piss.project.wevip.dto.OrganizerDto;
 import bg.sofia.uni.fmi.piss.project.wevip.dto.PerformerDto;
 import bg.sofia.uni.fmi.piss.project.wevip.model.Contract;
-import bg.sofia.uni.fmi.piss.project.wevip.model.Event;
+import bg.sofia.uni.fmi.piss.project.wevip.model.Course;
 import bg.sofia.uni.fmi.piss.project.wevip.model.Organizer;
 import bg.sofia.uni.fmi.piss.project.wevip.model.Performer;
 import bg.sofia.uni.fmi.piss.project.wevip.repository.ContractRepository;
-import bg.sofia.uni.fmi.piss.project.wevip.repository.EventRepository;
+import bg.sofia.uni.fmi.piss.project.wevip.repository.CourseRepository;
 import bg.sofia.uni.fmi.piss.project.wevip.repository.OrganizerRepository;
 import bg.sofia.uni.fmi.piss.project.wevip.repository.PerformerRepository;
 import org.junit.Test;
@@ -29,10 +30,10 @@ import static org.junit.Assert.*;
 
 //TODO extract hardcoded constants
 @RunWith(MockitoJUnitRunner.class)
-public class EventServiceImplTest {
+public class CourseServiceImplTest {
 
     @Mock
-    private EventRepository eventRepository;
+    private CourseRepository courseRepository;
 
     @Mock
     private ContractRepository contractRepository;
@@ -43,60 +44,60 @@ public class EventServiceImplTest {
     @Mock
     private PerformerRepository performerRepository;
 
-    @Mock
-    private EventAssembler eventAssembler;
-
-    @Mock
-    private OrganizerAssembler organizerAssembler;
-
-    @Mock
-    private PerformerAssembler performerAssembler;
+//    @Mock
+//    private EventAssembler eventAssembler;
+//
+//    @Mock
+//    private OrganizerAssembler organizerAssembler;
+//
+//    @Mock
+//    private PerformerAssembler performerAssembler;
 
     @InjectMocks
-    private EventServiceImpl eventService;
+    private CourseServiceImpl eventService;
 
 
     @Test
     public void getAllEvents_NoEventsFound(){
-        Mockito.when(eventRepository.findAll()).thenReturn(Collections.emptyList());
-        ResponseEntity<List<EventDto>> response = eventService.getAllEvents();
+        Mockito.when(courseRepository.findAll()).thenReturn(Collections.emptyList());
+        ResponseEntity<List<CourseDto>> response = eventService.getAllCourses();
         assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
         assertNull(response.getBody());
     }
 
     @Test
     public void getAllEvents_EventsFound(){
-        EventDto dto = new EventDto();
-        dto.setEventId("1234");
+        CourseDto dto = new CourseDto();
+        dto.setCourseId("1234");
 
-        Mockito.when(eventRepository.findAll()).thenReturn(Arrays.asList(new Event()));
-        Mockito.when(eventAssembler.toEventDto(Mockito.any())).thenReturn(dto);
+        Mockito.when(courseRepository.findAll()).thenReturn(Arrays.asList(new Course()));
+        Mockito.when(EntityToDtoMapper.toCourseDto(Mockito.any())).thenReturn(dto);
 
-        ResponseEntity<List<EventDto>> result = eventService.getAllEvents();
+        ResponseEntity<List<CourseDto>> result = eventService.getAllCourses();
         assertEquals(HttpStatus.OK,result.getStatusCode());
         assertEquals(Arrays.asList(dto),result.getBody());
     }
 
     @Test
     public void getTop30Events_NoEventsFound(){
-        ResponseEntity<List<EventDto>> response = eventService.getAllEvents();
+        ResponseEntity<List<CourseDto>> response = eventService.getAllCourses();
         assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
     }
 
     @Test
     public void getTop30Events_EventsFound(){
-        EventDto dto = new EventDto();
-        Mockito.when(eventRepository.findTop30SoldOut()).thenReturn(Arrays.asList(new Event(),new Event()));
-        Mockito.when(eventAssembler.toEventDto(Mockito.any())).thenReturn(dto,dto);
+        CourseDto dto = new CourseDto();
+        Mockito.when(courseRepository.findTop30SoldOut()).thenReturn(Arrays.asList(new Course(),new Course()));
+        Mockito.when(EntityToDtoMapper.toCourseDto(Mockito.any())).thenReturn(dto,dto);
 
-        ResponseEntity<List<EventDto>> result = eventService.getTop30Events();
+        ResponseEntity<List<CourseDto>> result = eventService.getTop30Courses();
         assertEquals(HttpStatus.OK,result.getStatusCode());
         assertEquals(Arrays.asList(dto,dto),result.getBody());
     }
 
     @Test
     public void getEventById_NoEventsFound() {
-        ResponseEntity<EventDto> result = eventService.getEventById("1");
+        ResponseEntity<CourseDto> result = eventService.getCourseById("1");
         assertEquals(HttpStatus.NOT_FOUND,result.getStatusCode());
         assertNull(result.getBody());
     }
@@ -104,24 +105,23 @@ public class EventServiceImplTest {
     @Test
     public void getEventById_EventFound() {
         final String id = "1";
-        Event event = new Event();
-        EventDto dto = new EventDto();
-        dto.setEventId(id);
-        Mockito.when(eventRepository.findById(id)).thenReturn(java.util.Optional.of(event));
-        Mockito.when(eventAssembler.toEventDto(event)).thenReturn(dto);
+        Course course = new Course();
+        CourseDto dto = new CourseDto();
+        dto.setCourseId(id);
+        Mockito.when(courseRepository.findById(id)).thenReturn(java.util.Optional.of(course));
+        Mockito.when(EntityToDtoMapper.toCourseDto(course)).thenReturn(dto);
 
-        ResponseEntity<EventDto> result = eventService.getEventById(id);
+        ResponseEntity<CourseDto> result = eventService.getCourseById(id);
         assertEquals(HttpStatus.OK,result.getStatusCode());
         assertEquals(dto,result.getBody());
     }
 
     @Test
     public void getEventOrganizersById_NoContractsFound(){
-        Mockito.when(contractRepository.findByEventId(Mockito.anyString())).
+        Mockito.when(contractRepository.findByCourseId(Mockito.anyString())).
                 thenReturn(Collections.emptyList());
-        ResponseEntity result = eventService.getEventOrganizersById("1");
+        ResponseEntity result = eventService.getCourseOrganizersById("1");
         Mockito.verify(organizerRepository,Mockito.never()).findById(Mockito.anyString());
-        Mockito.verify(organizerAssembler,Mockito.never()).toOrganizerDto(Mockito.any());
 
         assertEquals(HttpStatus.NOT_FOUND,result.getStatusCode());
         assertNull(result.getBody());
@@ -131,11 +131,10 @@ public class EventServiceImplTest {
     public void getEventOrganizersById_NoOrganizersFound() {
         Contract contract = new Contract();
         contract.setOrganizerId("2");
-        Mockito.when(contractRepository.findByEventId("1")).
+        Mockito.when(contractRepository.findByCourseId("1")).
                 thenReturn(Collections.singletonList(contract));
 
-        ResponseEntity result = eventService.getEventOrganizersById("1");
-        Mockito.verify(organizerAssembler,Mockito.never()).toOrganizerDto(Mockito.any());
+        ResponseEntity result = eventService.getCourseOrganizersById("1");
 
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,result.getStatusCode());
         assertNull(result.getBody());
@@ -145,7 +144,7 @@ public class EventServiceImplTest {
     public void getEventOrganizersById_OrganizersFound() {
         Contract contract = new Contract();
         contract.setOrganizerId("2");
-        Mockito.when(contractRepository.findByEventId("1")).
+        Mockito.when(contractRepository.findByCourseId("1")).
                 thenReturn(Collections.singletonList(contract));
 
         Organizer org = new Organizer();
@@ -153,9 +152,9 @@ public class EventServiceImplTest {
                 thenReturn(java.util.Optional.of(org));
 
         OrganizerDto dto = new OrganizerDto();
-        Mockito.when(organizerAssembler.toOrganizerDto(org)).thenReturn(dto);
+        Mockito.when(EntityToDtoMapper.toOrganizerDto(org)).thenReturn(dto);
 
-        ResponseEntity result = eventService.getEventOrganizersById("1");
+        ResponseEntity result = eventService.getCourseOrganizersById("1");
 
         assertEquals(HttpStatus.OK,result.getStatusCode());
         assertEquals(Arrays.asList(dto),result.getBody());
@@ -163,11 +162,10 @@ public class EventServiceImplTest {
 
     @Test
     public void getEventPerformersById_NoContractsFound(){
-        Mockito.when(contractRepository.findByEventId(Mockito.anyString())).
+        Mockito.when(contractRepository.findByCourseId(Mockito.anyString())).
                 thenReturn(Collections.emptyList());
-        ResponseEntity result = eventService.getEventPerformersById("1");
+        ResponseEntity result = eventService.getCoursePerformersById("1");
         Mockito.verify(performerRepository,Mockito.never()).findById(Mockito.anyString());
-        Mockito.verify(performerAssembler,Mockito.never()).toPerformerDto(Mockito.any());
 
         assertEquals(HttpStatus.NOT_FOUND,result.getStatusCode());
         assertNull(result.getBody());
@@ -177,11 +175,10 @@ public class EventServiceImplTest {
     public void getEventPerformersById_NoPerformersFound() {
         Contract contract = new Contract();
         contract.setOrganizerId("1");
-        Mockito.when(contractRepository.findByEventId("1")).
+        Mockito.when(contractRepository.findByCourseId("1")).
                 thenReturn(Collections.singletonList(contract));
 
-        ResponseEntity result = eventService.getEventPerformersById("1");
-        Mockito.verify(performerAssembler,Mockito.never()).toPerformerDto(Mockito.any());
+        ResponseEntity result = eventService.getCoursePerformersById("1");
 
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,result.getStatusCode());
         assertNull(result.getBody());
@@ -191,7 +188,7 @@ public class EventServiceImplTest {
     public void getEventPerformersById_PerformersFound() {
         Contract contract = new Contract();
         contract.setPerformerId("2");
-        Mockito.when(contractRepository.findByEventId("1")).
+        Mockito.when(contractRepository.findByCourseId("1")).
                 thenReturn(Collections.singletonList(contract));
 
         Performer performer = new Performer();
@@ -199,9 +196,9 @@ public class EventServiceImplTest {
                 thenReturn(java.util.Optional.of(performer));
 
         PerformerDto dto = new PerformerDto();
-        Mockito.when(performerAssembler.toPerformerDto(performer)).thenReturn(dto);
+        Mockito.when(EntityToDtoMapper.toPerformerDto(performer)).thenReturn(dto);
 
-        ResponseEntity result = eventService.getEventPerformersById("1");
+        ResponseEntity result = eventService.getCoursePerformersById("1");
 
         assertEquals(HttpStatus.OK,result.getStatusCode());
         assertEquals(Arrays.asList(dto),result.getBody());
@@ -216,9 +213,9 @@ public class EventServiceImplTest {
 
     @Test
     public void getPoster_NoPosterFound(){
-        Event event = new Event();
-        event.setPosterLocation("/some/path");
-        Mockito.when(eventRepository.findById("1")).thenReturn(java.util.Optional.of(event));
+        Course course = new Course();
+        course.setPosterLocation("/some/path");
+        Mockito.when(courseRepository.findById("1")).thenReturn(java.util.Optional.of(course));
         ResponseEntity result = eventService.getPoster("1");
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,result.getStatusCode());
         assertNull(result.getBody());
