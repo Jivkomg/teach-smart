@@ -42,7 +42,6 @@ public class EntityToDtoMapper {
         return tutorDto;
     }
 
-
     public static TeachSmartUserDto toUserDto(TeachSmartUser user) {
         TeachSmartUserDto userDto = new TeachSmartUserDto();
         userDto.setUserId(user.getId());

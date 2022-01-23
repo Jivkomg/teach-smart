@@ -211,6 +211,4 @@ public class CourseServiceImplTest {
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,result.getStatusCode());
         assertNull(result.getBody());
     }
-
-    //TODO the success scenario in the poster exists
 }
