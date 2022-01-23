@@ -1,169 +1,408 @@
 <!DOCTYPE html>
 <html>
-<head>
-   <meta charset="utf-8" />
-   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-   <meta name="viewport" content="width=device-width, initial-scale=1" />
-   <meta name="description" content="TeachSmart"/>
-   <title>TeachSmart</title>
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content="TeachSmart" />
+		<title>TeachSmart</title>
+		<link
+			rel="icon"
+			type="image/icon"
+			sizes="114x114"
+			href="images/ui/logo_icon.ico"
+		/>
 
-   <!-- OLD CSS
-   <link th:href="@{/css/ui/style.css}" rel="stylesheet" />
-   <link th:href="@{/css/ui/index-style.css}" rel="stylesheet" /> -->
+		<link
+			href="/css/ui/style.css"
+			rel="stylesheet"
+			type="text/css"
+			crossorigin="anonymous"
+		/>
 
-   <!-- CSS only -->
-   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+		<!-- Bootstrap CSS -->
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+			crossorigin="anonymous"
+		/>
+	</head>
+	<body>
+		<div id="content">
+			<header>
+				<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+					<div class="container-fluid">
+						<a class="navbar-brand" href=""> TeachSmart </a>
+						<span class="logo"></span>
+						<button
+							class="navbar-toggler"
+							type="button"
+							data-bs-toggle="collapse"
+							data-bs-target="#navbarCollapse"
+							aria-controls="navbarCollapse"
+							aria-expanded="false"
+							aria-label="Toggle navigation"
+						>
+							<span class="navbar-toggler-icon"></span>
+						</button>
+						<div
+							class="collapse navbar-collapse"
+							id="navbarCollapse"
+						>
+							<ul class="navbar-nav me-auto mb-2 mb-md-0">
+								<li class="nav-item">
+									<a
+										class="nav-link"
+										aria-current="page"
+										href=""
+										>Начало</a
+									>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="#courses"
+										>Курсове</a
+									>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="#about-us"
+										>За нас</a
+									>
+								</li>
+							</ul>
+							<div class="d-flex">
+								<button
+									class="btn btn-success primary-button"
+									onclick="location.href='/loginForm'"
+									type="button"
+									id="login-header"
+								>
+									Вход
+								</button>
+							</div>
+						</div>
+					</div>
+				</nav>
+			</header>
+			<main>
+				<section class="py-5 text-center container">
+					<div class="row py-lg-5 align-items-center">
+						<div class="col-lg-6 col-md-8 mx-auto">
+							<h1 class="fw-light">
+								Kick-start your on-boarding!
+							</h1>
+							<p class="lead text-muted">
+								Тук ще намериш списък с необходимите курсове за
+								твоя успешен старт при нас!
+							</p>
+							<p>
+								<a
+									type="button"
+									class="btn btn-primary my-2 primary-button"
+									onclick="location.href='/registrationForm'"
+									>Регистрирай се!</a
+								>
+							</p>
+						</div>
+						<div class="col-lg-6 col-md-8 mx-auto">
+							<img
+								src="https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/v916-nunny-101_1.jpg?w=1000&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&auto=format&ixlib=js-2.2.1&s=f92971469f6d5e1deb9ea1e03476c2bf"
+								class="d-block mx-lg-auto img-fluid"
+								alt="Bootstrap Themes"
+								width="700"
+								height="700"
+								loading="lazy"
+							/>
+						</div>
+					</div>
+				</section>
 
-</head>
-<body>
-<div id="content">
-   <!-- OLD HEADER
-   <header>
-       <a><img th:src="@{/images/ui/logo.png}" id="logo" alt="logo"></a>
-       <button type="button" id="login-header" class="text-button" onclick="location.href='/loginForm'">Login</button>
-    </header>
-    -->
-   <header>
-      <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-         <div class="container-fluid">
-            <a class="navbar-brand" href="">TeachSmart</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-               <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-               <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                  <li class="nav-item">
-                     <a class="nav-link" aria-current="page" href="">Начало</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="#courses">Курсове</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="#about-us">За нас</a>
-                  </li>
-               </ul>
+				<div class="album py-5 bg-light" id="courses">
+					<div class="container">
+						<div>
+							<h2 class="fw-light">Курсове</h2>
+							<p>Препоръчани курсове</p>
+						</div>
+						<div
+							class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3"
+						>
+							<div class="col">
+								<div class="card shadow-sm">
+									<svg
+										class="bd-placeholder-img card-img-top"
+										width="100%"
+										height="225"
+										xmlns="http://www.w3.org/2000/svg"
+										role="img"
+										aria-label="Placeholder: Thumbnail"
+										preserveAspectRatio="xMidYMid slice"
+										focusable="false"
+									>
+										<title>Placeholder</title>
+										<rect
+											width="100%"
+											height="100%"
+											fill="#55595c"
+										/>
+										<text
+											x="50%"
+											y="50%"
+											fill="#eceeef"
+											dy=".3em"
+										>
+											HTML & CSS
+										</text>
+									</svg>
 
-               <div class="d-flex">
-                  <button class="btn btn-success" onclick="location.href='/loginForm'" type="button" id="login-header">Вход</button>
-               </div>
-            </div>
-         </div>
-      </nav>
-   </header>
-   <main>
+									<div class="card-body">
+										<p class="card-text">
+											Целта на курса "HTML & CSS" е да
+											положи основни знания по уеб
+											технологии и по-конкретно
+											запознаване с HTML5 и CSS3.
+										</p>
+										<div
+											class="d-flex justify-content-between align-items-center"
+										>
+											<div class="btn-group">
+												<button
+													type="button"
+													class="btn btn-sm btn-outline-secondary"
+												>
+													Отвори
+												</button>
+												<button
+													type="button"
+													class="btn btn-sm btn-outline-secondary"
+												>
+													Edit
+												</button>
+											</div>
+											<small class="text-muted"
+												>9 mins</small
+											>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col">
+								<div class="card shadow-sm">
+									<svg
+										class="bd-placeholder-img card-img-top"
+										width="100%"
+										height="225"
+										xmlns="http://www.w3.org/2000/svg"
+										role="img"
+										aria-label="Placeholder: Thumbnail"
+										preserveAspectRatio="xMidYMid slice"
+										focusable="false"
+									>
+										<title>Placeholder</title>
+										<rect
+											width="100%"
+											height="100%"
+											fill="#55595c"
+										/>
+										<text
+											x="50%"
+											y="50%"
+											fill="#eceeef"
+											dy=".3em"
+										>
+											HTML & CSS
+										</text>
+									</svg>
 
-      <section class="py-5 text-center container">
-         <div class="row py-lg-5">
-            <div class="col-lg-6 col-md-8 mx-auto">
-               <h1 class="fw-light">Намери перфектния курс за теб</h1>
-               <p class="lead text-muted">TeachSmart е най-бързо развиващата се платформа за онлайн курсове. Най-полезните курсове на едно място!
-               <p>
-                  <a type="button" class="btn btn-primary my-2" onclick="location.href='/registrationForm'">Регистрирай се!</a>
-               </p>
-            </div>
-         </div>
-      </section>
+									<div class="card-body">
+										<p class="card-text">
+											Целта на курса "HTML & CSS" е да
+											положи основни знания по уеб
+											технологии и по-конкретно
+											запознаване с HTML5 и CSS3.
+										</p>
+										<div
+											class="d-flex justify-content-between align-items-center"
+										>
+											<div class="btn-group">
+												<button
+													type="button"
+													class="btn btn-sm btn-outline-secondary"
+												>
+													Отвори
+												</button>
+												<button
+													type="button"
+													class="btn btn-sm btn-outline-secondary"
+												>
+													Edit
+												</button>
+											</div>
+											<small class="text-muted"
+												>9 mins</small
+											>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col">
+								<div class="card shadow-sm">
+									<svg
+										class="bd-placeholder-img card-img-top"
+										width="100%"
+										height="225"
+										xmlns="http://www.w3.org/2000/svg"
+										role="img"
+										aria-label="Placeholder: Thumbnail"
+										preserveAspectRatio="xMidYMid slice"
+										focusable="false"
+									>
+										<title>Placeholder</title>
+										<rect
+											width="100%"
+											height="100%"
+											fill="#55595c"
+										/>
+										<text
+											x="50%"
+											y="50%"
+											fill="#eceeef"
+											dy=".3em"
+										>
+											HTML & CSS
+										</text>
+									</svg>
 
-      <div class="album py-5 bg-light" id="courses">
-         <div class="container">
-            <div>
-               <h2 class="fw-light">Курсове</h2>
-               <button class="btn btn-success" onclick="location.href='/loginForm'" type="button" id="_login-header">Вход</button>
-               <p>Разгледай всичките ни курсове сега!</p>
-            </div>
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-               <div class="col">
-                  <div class="card shadow-sm">
-                     <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">HTML & CSS</text></svg>
+									<div class="card-body">
+										<p class="card-text">
+											Целта на курса "HTML & CSS" е да
+											положи основни знания по уеб
+											технологии и по-конкретно
+											запознаване с HTML5 и CSS3.
+										</p>
+										<div
+											class="d-flex justify-content-between align-items-center"
+										>
+											<div class="btn-group">
+												<button
+													type="button"
+													class="btn btn-sm btn-outline-secondary"
+												>
+													Отвори
+												</button>
+												<button
+													type="button"
+													class="btn btn-sm btn-outline-secondary"
+												>
+													Edit
+												</button>
+											</div>
+											<small class="text-muted"
+												>9 mins</small
+											>
+										</div>
+									</div>
+								</div>
+							</div>
 
-                     <div class="card-body">
-                        <p class="card-text">Целта на курса "HTML & CSS" е да положи основни знания по уеб технологии и по-конкретно запознаване с HTML5 и CSS3.
-                        <div class="d-flex justify-content-between align-items-center">
-                           <div class="btn-group">
-                              <button type="button" class="btn btn-sm btn-outline-secondary">Отвори</button>
-                              <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                           </div>
-                           <small class="text-muted">9 mins</small>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col">
-                  <div class="card shadow-sm">
-                     <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">HTML & CSS</text></svg>
+							<div class="col">
+								<div class="card shadow-sm">
+									<svg
+										class="bd-placeholder-img card-img-top"
+										width="100%"
+										height="225"
+										xmlns="http://www.w3.org/2000/svg"
+										role="img"
+										aria-label="Placeholder: Thumbnail"
+										preserveAspectRatio="xMidYMid slice"
+										focusable="false"
+									>
+										<title>Placeholder</title>
+										<rect
+											width="100%"
+											height="100%"
+											fill="#55595c"
+										/>
+										<text
+											x="50%"
+											y="50%"
+											fill="#eceeef"
+											dy=".3em"
+										>
+											HTML & CSS
+										</text>
+									</svg>
 
-                     <div class="card-body">
-                        <p class="card-text">Целта на курса "HTML & CSS" е да положи основни знания по уеб технологии и по-конкретно запознаване с HTML5 и CSS3.
-                        <div class="d-flex justify-content-between align-items-center">
-                           <div class="btn-group">
-                              <button type="button" class="btn btn-sm btn-outline-secondary">Отвори</button>
-                              <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                           </div>
-                           <small class="text-muted">9 mins</small>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col">
-                  <div class="card shadow-sm">
-                     <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">HTML & CSS</text></svg>
-
-                     <div class="card-body">
-                        <p class="card-text">Целта на курса "HTML & CSS" е да положи основни знания по уеб технологии и по-конкретно запознаване с HTML5 и CSS3.
-                        <div class="d-flex justify-content-between align-items-center">
-                           <div class="btn-group">
-                              <button type="button" class="btn btn-sm btn-outline-secondary">Отвори</button>
-                              <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                           </div>
-                           <small class="text-muted">9 mins</small>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-
-               <div class="col">
-                  <div class="card shadow-sm">
-                     <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">HTML & CSS</text></svg>
-
-                     <div class="card-body">
-                        <p class="card-text">Целта на курса "HTML & CSS" е да положи основни знания по уеб технологии и по-конкретно запознаване с HTML5 и CSS3.
-                        <div class="d-flex justify-content-between align-items-center">
-                           <div class="btn-group">
-                              <button type="button" class="btn btn-sm btn-outline-secondary">Отвори</button>
-                              <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                           </div>
-                           <small class="text-muted">9 mins</small>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <div class="container col-xxl-8 px-4 py-5" id="about-us">
-         <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
-            <div class="col-10 col-sm-8 col-lg-6">
-               <img src="https://www.fmi.uni-sofia.bg/sites/default/files/fmi-logo-bg.png" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
-            </div>
-            <div class="col-lg-6">
-               <h1 class="display-5 fw-bold lh-1 mb-3">За нас</h1>
-               <p class="lead"></p>
-               <ul class="list-group list-group-flush">
-                  <li class="list-group-item">Живко</li>
-                  <li class="list-group-item">Буба</li>
-                  <li class="list-group-item">Гери</li>
-                  <li class="list-group-item">Сашо</li>
-               </ul>
-            </div>
-         </div>
-      </div>
-   </main>
-   <footer class="text-muted">
-      <div class="container">
-         <p>© 2022 TeachSmart, All rights reserved.</p>
-      </div>
-   </footer>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-</body>
+									<div class="card-body">
+										<p class="card-text">
+											Целта на курса "HTML & CSS" е да
+											положи основни знания по уеб
+											технологии и по-конкретно
+											запознаване с HTML5 и CSS3.
+										</p>
+										<div
+											class="d-flex justify-content-between align-items-center"
+										>
+											<div class="btn-group">
+												<button
+													type="button"
+													class="btn btn-sm btn-outline-secondary"
+												>
+													Отвори
+												</button>
+												<button
+													type="button"
+													class="btn btn-sm btn-outline-secondary"
+												>
+													Edit
+												</button>
+											</div>
+											<small class="text-muted"
+												>9 mins</small
+											>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="container col-xxl-8 px-4 py-5" id="about-us">
+					<div
+						class="row flex-lg-row-reverse align-items-center g-5 py-5"
+					>
+						<div class="col-10 col-sm-8 col-lg-6">
+							<img
+								src="https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/v916-nunny-100-x_5.jpg?w=1000&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&auto=format&ixlib=js-2.2.1&s=67a0b35486198456515ce056edeecc24"
+								class="d-block mx-lg-auto img-fluid"
+								alt="Bootstrap Themes"
+								width="700"
+								height="500"
+								loading="lazy"
+							/>
+						</div>
+						<div class="col-lg-6">
+							<h1 class="display-5 fw-bold lh-1 mb-3">За нас</h1>
+							<p class="lead"></p>
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">Живко</li>
+								<li class="list-group-item">Буба</li>
+								<li class="list-group-item">Гери</li>
+								<li class="list-group-item">Сашо</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</main>
+			<footer class="text-muted">
+				<div class="container">
+					<p>© 2022 TeachSmart, All rights reserved.</p>
+				</div>
+			</footer>
+		</div>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+			crossorigin="anonymous"
+		></script>
+	</body>
 </html>
