@@ -1,5 +1,3 @@
-<style>
-        .h-custom {
-            height: calc(100% - 70px);
-        }
-    </style>
+.h-custom {
+	height: calc(100% - 70px);
+}
