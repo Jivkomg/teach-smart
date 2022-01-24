@@ -1,53 +1,66 @@
-var allEvents;
-var top30events;
-var eventTypes = new Set();
-//menu
-document.getElementById("a-events-top30").addEventListener("click", function (e) {
-    console.log("clickeddeded 30");
-    document.getElementById("event-screen").style.display = "none";
-    document.getElementById("all-events").style.display = "block";
-    localStorage.setItem("active-events", "top30");
-    console.log("active tab = ", localStorage.getItem("active-events"));
-    getTop30Events();
+var allCourses;
+var top30courses;
+var courseTypes = new Set();
+
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#courses-container div").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
 });
-document.getElementById("a-events-all").addEventListener("click", function (e) {
-    document.getElementById("event-screen").style.display = "none";
-    document.getElementById("all-events").style.display = "block";
-    localStorage.setItem("active-events", "all");
-    console.log("active tab = ", localStorage.getItem("active-events"));
-    getAllEvents();
+
+function loadFilter(){
+    $('#myInput').trigger('keyup');
+}
+
+
+function hideCourse(){
+    $("#course-screen").addClass('d-none');
+    document.getElementById("courses-section").style.display = 'block';
+}
+
+document.getElementById("all-courses").addEventListener("click", function (e) {
+    $("#course-screen").addClass('d-none');
+    document.getElementById("courses-section").style.display = "block";
+    localStorage.setItem("active-courses", "all");
+    console.log("active tab = ", localStorage.getItem("active-courses"));
+    getAllcourses();
 });
-document.addEventListener("DOMContentLoaded", function (event) {
+
+document.addEventListener("DOMContentLoaded", function (course) {
     document.getElementById("username").innerText = localStorage.getItem("username");
 })
+
+//OK
 $(document).ready(function () {
-    console.log(localStorage.getItem("active-events"));
-    if (localStorage.getItem("active-events") == undefined) {
-        localStorage.setItem("active-events", "all");
-        getAllEvents();
+    let x = localStorage.getItem("active-courses");
+    switch (x){
+        case "all":
+            getAllcourses();
+            break;
+        case "top30":
+            getTop30courses("top30");
+            break;
+        default:
+            localStorage.setItem("active-courses", "all");
     }
+});
 
-    if (localStorage.getItem("active-events") == "top30")
-        getTop30Events();
-
-    if (localStorage.getItem("active-events") == "all")
-        getAllEvents();
-    console.log(localStorage.getItem("active-events"));
-}
-);
-function getAllEvents() {
+function getAllcourses() {
     var deferred = $.Deferred();
     $.ajax({
         type: "POST",
         contentType: "application/json",
         url: "/courses/all",
-        success: function (events) {
-            allEvents = events;
-            displayEvents(events, "All events");
+        success: function (courses) {
+            allCourses = courses;
+            displayCourses(courses, "All courses");
             deferred.resolve();
         },
         error: function (e) {
-            allEvents = [];
+            allCourses = [];
             console.log("ERROR: ", e);
             deferred.resolve();
         }
@@ -55,19 +68,19 @@ function getAllEvents() {
     return deferred.promise();
 }
 
-function getTop30Events() {
+function getTop30courses() {
     var deferred = $.Deferred();
     $.ajax({
         type: "POST",
         contentType: "application/json",
         url: "/courses/top30",
-        success: function (events) {
-            top30events = events;
-            displayEvents(events, "Top 30 events");
+        success: function (courses) {
+            top30courses = courses;
+            displayCourses(courses, "Top 30 courses");
             deferred.resolve();
         },
         error: function (e) {
-            top30events = [];
+            top30courses = [];
             console.log("ERROR: ", e);
             deferred.resolve();
         }
@@ -75,127 +88,105 @@ function getTop30Events() {
     return deferred.promise();
 }
 
-function getUpcomingEvents() {
-    var activeObj = getActiveEventsFunction();
-    var eventsFunction = activeObj["functionName"];
+function getUpcomingCourses() {
+    var activeObj = getActiveCoursesFunction();
+    var coursesFunction = activeObj["functionName"];
     var title = activeObj["title"];
-    var events = activeObj["events"];
-    console.log("INSIDE UPCOMING", eventsFunction);
+    var courses = activeObj["courses"];
+    console.log("INSIDE UPCOMING", coursesFunction);
 
     $.when(
-        window[eventsFunction]()
+        window[coursesFunction]()
     ).done(function () {
-        var sortedEvenets = events.sort((a, b) => new Date(a.startTime).getTime() - new Date(b.startTime).getTime());
-        displayEvents(sortedEvenets, title);
-        console.log(sortedEvenets);
+        var sortedCourses = courses.sort((a, b) => new Date(a.startTime).getTime() - new Date(b.startTime).getTime());
+        displayCourses(sortedCourses, title);
+        console.log(sortedCourses);
     });
 }
-
-function getEventsByPrice(number) {
+// NEED TO REMOVE
+function getCoursesByPrice(number) {
     // number = 1 - cheapest; 2 - most expensive
-    var activeObj = getActiveEventsFunction();    // var title = "";
-    var eventsFunction = activeObj["functionName"];
+    var activeObj = getActiveCoursesFunction();    // var title = "";
+    var coursesFunction = activeObj["functionName"];
     var title = activeObj["title"];
-    var events = activeObj["events"];
-    console.log("INSIDE cheapest: ", eventsFunction);
+    var courses = activeObj["courses"];
+    console.log("INSIDE cheapest: ", coursesFunction);
     $.when(
-        window[eventsFunction]()
+        window[coursesFunction]()
     ).done(function () {
-        var sortedEvenets = events.sort((a, b) => a.ticketPrice - b.ticketPrice); // cheapest default
+        var sortedCourses = courses.sort((a, b) => a.ticketPrice - b.ticketPrice); // cheapest default
         if (number == 2)
-            sortedEvenets = events.sort((a, b) => b.ticketPrice - a.ticketPrice); //most expenisve
+            sortedCourses = courses.sort((a, b) => b.ticketPrice - a.ticketPrice); //most expenisve
 
-        displayEvents(sortedEvenets, title);
-        console.log(sortedEvenets);
+        displayCourses(sortedCourses, title);
+        console.log(sortedCourses);
     });
 }
-function getEventTypes() {
+function getCoursesTypes() {
     $.when(
-        getAllEvents()
+        getAllCourses()
     ).done(function () {
-        allEvents.forEach(event => {
-            eventTypes.add(event.type);
+        allCourses.forEach(course => {
+            courseTypes.add(course.type);
         });
-        console.log(eventTypes);
+        alert(courseTypes);
     });
+}
+
+function onlyUnique(value, index, self) {
+  return self.indexOf(value) === index;
 }
 
 // this is used for filtering by type - just pass the type you filter by as an argument
-function getEventByType(type) {
-    var activeObj = getActiveEventsFunction();    // var title = "";
-    var eventsFunction = activeObj["functionName"];
+function getCoursesByType(type) {
+    var activeObj = getActiveCoursesFunction();    // var title = "";
+    var coursesFunction = activeObj["functionName"];
     var title = activeObj["title"];
-    var events = activeObj["events"];
-    console.log("INSIDE category: ", eventsFunction);
+    var courses = activeObj["courses"];
+    console.log("INSIDE category: ", coursesFunction);
     $.when(
-        window[eventsFunction]() //getAllEvents() or getTop30Events()
+        window[coursesFunction]() //getAllcourses() or getTop30courses()
     ).done(function () {
-        var filteredEvents = events.filter(event => event.type === type);
-        displayEvents(filteredEvents, title);
-        console.log(filteredEvents);
+        var filteredCourses = courses.filter(course => course.type === type);
+        displayCourses(filteredCourses, title);
+        console.log(filteredCourses);
     });
 }
 
-function getEventById(id) {
+
+function getCourseById(id) {
     $.ajax({
         type: "POST",
         contentType: "application/json",
         url: "/courses/" + id,
-        success: function (event) {
-            // localStorage.setItem('chosenEventId', id);
-            console.log(event);
-            localStorage.setItem('chosenEventObj', JSON.stringify(event));
-            showEventScreen(event);
-            // window.location.href = "/event-screen";
-
+        success: function (course) {
+            console.log(course);
+            localStorage.setItem('chosenCourseObj', JSON.stringify(course));
+            showCourseScreen(course);
         },
         error: function (e) {
             console.log("ERROR: ", e);
         }
     });
 }
-function showEventScreen(event) {
-    currentId = event.eventId;
-    console.log("eventid =", currentId)
-    document.getElementById("all-events").style.display = "none";
-    document.getElementById("event-screen").style.display = "block";
-    document.getElementById("event-name").innerText = event.name;
-    let selector = ".event-screen";
-    getEventPosterById(currentId, selector);
-    //popup elements
-    document.getElementById("popup-event-name").innerHTML = "<b>" + event.name + "</b>";
-    document.getElementById("popup-event-price").innerHTML = "<b>$" + event.ticketPrice + "</b>";
-    localStorage.setItem("event-price",event.ticketPrice);
-    
-    localStorage.setItem("event-name",event.name);
-    console.log("price = ", localStorage.getItem('event-price'));
-    console.log("name = ", localStorage.getItem('event-name'));
-    
-    var type = event.type;
 
-    //document.getElementById("type").innerHTML = type + event.type;
-    var startTime = event.startTime;
-    var duration = event.durationHours;
-    var price = event.ticketPrice;
-    getEventPerformers(currentId);
-    getEventOrganizers(currentId);
 
-    var ids = ["type", "start-time", "duration", "price"];
-    var initialIdValues = [];
-    var values = [type, startTime, duration, price];
-    var initialIdValues = ["Event type: ", "Start time: ", "Duration: ", "Price: $"];
-    for (let i = 0; i < ids.length; i++) {
-        document.getElementById(ids[i]).innerHTML = "<b>" + initialIdValues[i] + "</b> " + values[i];
-        if (ids[i] == "duration")
-            document.getElementById(ids[i]).innerHTML += " hours";
-    }
-    var successfulMessage = document.getElementById("popup-message").innerHTML;
-    console.log(successfulMessage);
-    localStorage.setItem("popup-message",successfulMessage);
-    console.log("LOCAL storage =", localStorage.getItem('popup-message'));
+function showCourseScreen(course) {
+    currentId = course.courseId;
+    //console.log("courseId =", currentId);
+    $("#course-screen").removeClass('d-none');
+    document.getElementById("courses-section").style.display = 'none';
+
+    //fill info for course popup
+    document.getElementById("popup-course-name").innerHTML = course.name;
+    document.getElementById("popup-course-description").innerHTML = course.description;
+    document.getElementById("popup-course-type").innerHTML = "Категория: "+"<b>"+course.type+ "</b>";
+    document.getElementById("popup-course-duration").innerHTML = "Продължителност на курса: "+"<b>"+course.durationHours + "</b>" +" часа";
+    document.getElementById("popup-course-attendants").innerHTML = "Удобрили курса: "+"<b>"+course.attendants + "</b>" + " потребители";
+    document.getElementById("youtube").src = "https://www.youtube.com/embed/" + course.posterLocation;
 }
 
-function getEventPosterById(id, selector) {
+function getCoursePosterById(id, selector) {
     $.ajax({
         type: "POST",
         contentType: "application/json",
@@ -212,7 +203,7 @@ function getEventPosterById(id, selector) {
     });
 }
 
-function getEventOrganizers(id) {
+function getCourseOrganizers(id) {
     $.ajax({
         type: "POST",
         contentType: "application/json",
@@ -235,7 +226,7 @@ function getEventOrganizers(id) {
     });
 }
 
-function getEventPerformers(id) {
+function getCoursePerformers(id) {
     var performers = $.ajax({
         type: "POST",
         contentType: "application/json",
@@ -260,72 +251,88 @@ function getEventPerformers(id) {
 }
 
 
-function displayEvents(events, h1_name) {
-    removeExistingEvents();
-    document.getElementById("h1_name").innerHTML = h1_name;
-    document.getElementById("events-count").innerHTML = events.length + " events shown";
-    const container = document.getElementById("events-container");
-    const cols = 4;
-    const rows = Math.ceil(events.length / cols);
-    container.style.setProperty('--grid-rows', rows);
-    container.style.setProperty('--grid-cols', cols);
+function displayCourses(courses, h1_name) {
+    removeExistingCourses();
+    //document.getElementById("h1_name").innerHTML = h1_name;
+    document.getElementById("courses-count").innerHTML ="Брой курсове: " + courses.length;
+    const container = document.getElementById("courses-container");
+    let courseTypes = new Set();
+    //Create all course cards and add it to courses-container
+    for (i = 0; i < courses.length; i++) {
 
-    for (i = 0; i < events.length; i++) {
-        let eventA = document.createElement('a');
+        courseTypes.add(courses[i].type);
 
-        let eventDiv = document.createElement('div');
-        let currentId = "event_"+events[i].eventId;
-        eventDiv.setAttribute("id", currentId);
-        eventDiv.className = 'event-card';
-        let selector = "#" + currentId;
+        //course - div (container card)
+        let courseDiv = document.createElement('div');
+        courseDiv.setAttribute("onclick", "getCourseById("+courses[i].courseId+")");
+        courseDiv.className='card border-0 bg-dark text-white';
 
-        let eventName = document.createElement('p');
-        let text = document.createTextNode(events[i].name.toUpperCase());
-        eventName.appendChild(text);
-        eventDiv.appendChild(eventName);
+        let courseImg = document.createElement('img');
+        courseImg.className = 'card-img-top';
+        courseImg.src = "https://img.youtube.com/vi/" + courses[i].posterLocation+"/mqdefault.jpg";
+        courseDiv.appendChild(courseImg);
 
-        let eventTime = document.createElement('p');
-        let timeText = document.createTextNode(events[i].startTime);
-        eventTime.appendChild(timeText);
-        eventDiv.appendChild(eventTime);
+        //course - div (container card)
+        let cardBody = document.createElement('div');
+        cardBody.className='card-body';
+        courseDiv.appendChild(cardBody);
 
-        let eventPrice = document.createElement('p');
-        let price = document.createTextNode("$" + events[i].ticketPrice);
-        eventPrice.appendChild(price);
-        eventDiv.appendChild(eventPrice);
-        container.appendChild(eventDiv);
-        getEventPosterById(currentId, selector);
+        //course - name
+        let courseName = document.createElement('h5');
+        courseName.className='card-title';
+        let _name = document.createTextNode(courses[i].name.toUpperCase());
+        courseName.appendChild(_name);
+        cardBody.appendChild(courseName);
 
-        eventDiv.addEventListener("click", function (e) {
-            console.log(e.target.id);
-            var eventId = e.target.id;
-            eventId = eventId.split("_")[1];
-            getEventById(eventId); // returns eventId object - to load in new html page
+        //course - description
+        let courseType = document.createElement('p');
+        courseType.className='card-text';
+        let _courseType = document.createTextNode(courses[i].type);
+        courseType.appendChild(_courseType);
+        cardBody.appendChild(courseType);
 
-        });
+        //Add course card to courses container
+        courses-container.appendChild(courseDiv);
+        };
+
+        console.log(courseTypes);
+        displayTypes(courseTypes);
+
     }
 
+function filterByType(type){
+    let searchBox = document.getElementById("myInput");
+    searchBox.value = type;
+    searchBox.click();
 }
-function getActiveEventsFunction() {
+
+function displayTypes(courseTypes){
+    const typesContainer = document.getElementById("typesContainer");
+    courseTypes.forEach(function(type){
+        let typeLink = document.createElement('button');
+        typeLink.className = 'btn btn-success';
+        typeLink.setAttribute("onclick", "filterByType('"+type+"'); loadFilter(); ");
+        console.log("filterByType("+type+")");
+        typeLink.innerText = type;
+        typesContainer.appendChild(typeLink);
+    })
+}
+
+
+function getActiveCoursesFunction() {
     var activeObj = {};
-    var activeEvents = localStorage.getItem("active-events");
-    if (activeEvents == "top30") {
-        activeObj["functionName"] = "getTop30Events";
-        activeObj["title"] = "Top 30 events";
-        activeObj["events"] = top30events;
-    } else {
-        activeObj["functionName"] = "getAllEvents";
-        activeObj["title"] = "All events";
-        activeObj["events"] = allEvents;
-    }
+    var activeCourses = localStorage.getItem("active-courses");
+    activeObj["functionName"] = "getAllcourses";
+    activeObj["title"] = "Всички курсове";
+    activeObj ["courses"] = allCourses;
 
     console.log("active FUNC", activeObj["functionName"]);
     return activeObj;
 }
 
 function setCurrentOption(dropdown_id, option_id) {
-    var functionName = getActiveEventsFunction()["functionName"];
-    var title = getActiveEventsFunction().title;
+    var functionName = getActiveCoursesFunction()["functionName"];
+    var title = getActiveCoursesFunction().title;
     let currentOptionElement;
     var optionsArr = [];
     switch (dropdown_id) {
@@ -354,23 +361,23 @@ function setCurrentOption(dropdown_id, option_id) {
     currentOptionElement.innerHTML = currentOption + '<i class="fa fa-angle-down"></i>';
     oldOptionElement.innerHTML = oldOption;
 
-   
+
     switch (dropdown_id + '|' + currentOption) {
-        case "1|Upcoming events": { console.log("Time filtering"); getUpcomingEvents(); break; }
-        case "1|Time": { console.log("Time unfiltering"); window[functionName](); break; }//calling getTop30Events() or getAllEvents() according to option chosen by user}
-        case "2|Lowest to highest": { console.log("Price filtering - cheap"); getEventsByPrice(1); break; }
-        case "2|Highest to lowest": { console.log("price filtering - expensive"); getEventsByPrice(2); break; } //calling getTop30Events() or getAllEvents() according to option chosen by user}
-        case "2|Price": { console.log("price unfiltering"); window[functionName](); break; } //calling getTop30Events() or getAllEvents() according to option chosen by user}
-        case "3|Tech event": { console.log("Tech event filtering"); getEventByType("Tech event"); break; }
-        case "3|Seminars": { console.log("Seminars filtering"); getEventByType("Seminars"); break; }
-        case "3|Concert": { console.log("Concert filtering"); getEventByType("Concert"); break; }
-        case "3|Music Festival": { console.log("Music festival filtering"); getEventByType("Music Festival"); break; }
+        case "1|Upcoming courses": { console.log("Time filtering"); getUpcomingcourses(); break; }
+        case "1|Time": { console.log("Time unfiltering"); window[functionName](); break; }//calling getTop30courses() or getAllcourses() according to option chosen by user}
+        case "2|Lowest to highest": { console.log("Price filtering - cheap"); getcoursesByPrice(1); break; }
+        case "2|Highest to lowest": { console.log("price filtering - expensive"); getcoursesByPrice(2); break; } //calling getTop30courses() or getAllcourses() according to option chosen by user}
+        case "2|Price": { console.log("price unfiltering"); window[functionName](); break; } //calling getTop30courses() or getAllcourses() according to option chosen by user}
+        case "3|Tech course": { console.log("Tech course filtering"); getCourseByType("Tech course"); break; }
+        case "3|Seminars": { console.log("Seminars filtering"); getCourseByType("Seminars"); break; }
+        case "3|Concert": { console.log("Concert filtering"); getCourseByType("Concert"); break; }
+        case "3|Music Festival": { console.log("Music festival filtering"); getCourseByType("Music Festival"); break; }
         case "3|Category": { console.log("unfilter category"); window[functionName](); } //click Category - remove filter
     }
 
 }
-function removeExistingEvents() {
-    const container = document.getElementById("events-container");
+function removeExistingCourses() {
+    const container = document.getElementById("courses-container");
     container.textContent = '';
 
 }
