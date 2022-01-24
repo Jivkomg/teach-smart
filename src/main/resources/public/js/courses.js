@@ -183,7 +183,7 @@ function showCourseScreen(course) {
     document.getElementById("popup-course-type").innerHTML = "Категория: "+"<b>"+course.type+ "</b>";
     document.getElementById("popup-course-duration").innerHTML = "Продължителност на курса: "+"<b>"+course.durationHours + "</b>" +" часа";
     document.getElementById("popup-course-attendants").innerHTML = "Удобрили курса: "+"<b>"+course.attendants + "</b>" + " потребители";
-    document.getElementById("youtube").src = "https://www.youtube.com/embed/" + course.posterLocation;
+    document.getElementById("youtube").src = course.posterLocation;
 }
 
 function getCoursePosterById(id, selector) {
@@ -269,7 +269,7 @@ function displayCourses(courses, h1_name) {
 
         let courseImg = document.createElement('img');
         courseImg.className = 'card-img-top';
-        courseImg.src = "https://img.youtube.com/vi/" + courses[i].posterLocation+"/mqdefault.jpg";
+        courseImg.src = courses[i].posterLocation;
         courseDiv.appendChild(courseImg);
 
         //course - div (container card)
