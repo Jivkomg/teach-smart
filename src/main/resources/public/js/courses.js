@@ -155,12 +155,12 @@ function getCoursesByType(type) {
 
 
 function getCourseById(id) {
+    console.log(id);
     $.ajax({
         type: "POST",
         contentType: "application/json",
         url: "/courses/" + id,
         success: function (course) {
-            console.log(course);
             localStorage.setItem('chosenCourseObj', JSON.stringify(course));
             showCourseScreen(course);
         },
@@ -264,7 +264,7 @@ function displayCourses(courses, h1_name) {
 
         //course - div (container card)
         let courseDiv = document.createElement('div');
-        courseDiv.setAttribute("onclick", "getCourseById("+courses[i].courseId+")");
+        courseDiv.setAttribute("onclick", "getCourseById('"+courses[i].courseId+"')");
         courseDiv.className='card border-0 bg-dark text-white';
 
         let courseImg = document.createElement('img');
@@ -294,8 +294,6 @@ function displayCourses(courses, h1_name) {
         //Add course card to courses container
         courses-container.appendChild(courseDiv);
         };
-
-        console.log(courseTypes);
         displayTypes(courseTypes);
 
     }
@@ -312,7 +310,6 @@ function displayTypes(courseTypes){
         let typeLink = document.createElement('button');
         typeLink.className = 'btn btn-success';
         typeLink.setAttribute("onclick", "filterByType('"+type+"'); loadFilter(); ");
-        console.log("filterByType("+type+")");
         typeLink.innerText = type;
         typesContainer.appendChild(typeLink);
     })
@@ -381,4 +378,3 @@ function removeExistingCourses() {
     container.textContent = '';
 
 }
-
