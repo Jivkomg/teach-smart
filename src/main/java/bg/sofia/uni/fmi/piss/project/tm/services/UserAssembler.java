@@ -10,8 +10,12 @@ import org.springframework.stereotype.Component;
 @Component
 class UserAssembler {
 
-    @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    public UserAssembler(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
 
     TeachSmartUser toUser(TeachSmartUserDto userDto) {
         return new TeachSmartUser(userDto.getUsername(),

@@ -25,11 +25,15 @@ import static bg.sofia.uni.fmi.piss.project.tm.utils.SecurityConstants.USER_DIR;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
     private TeachSmartUserRepository userRepository;
 
-    @Autowired
     private UserAssembler userAssembler;
+
+    @Autowired
+    public UserServiceImpl(TeachSmartUserRepository userRepository, UserAssembler userAssembler) {
+        this.userRepository = userRepository;
+        this.userAssembler = userAssembler;
+    }
 
     @Override
     public ResponseEntity<TeachSmartUserDto> register(TeachSmartUserDto userDto) {

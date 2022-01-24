@@ -8,7 +8,7 @@ public class CourseDto {
 
     private String type;
 
-    private int durationHours;
+    private int duration;
 
     private long attendants;
 
@@ -40,12 +40,12 @@ public class CourseDto {
         this.type = type;
     }
 
-    public int getDurationHours() {
-        return durationHours;
+    public int getDuration() {
+        return duration;
     }
 
-    public void setDurationHours(int durationHours) {
-        this.durationHours = durationHours;
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 
     public long getAttendants() {

@@ -8,6 +8,7 @@ import bg.sofia.uni.fmi.piss.project.tm.models.Course;
 import bg.sofia.uni.fmi.piss.project.tm.models.Organizer;
 import bg.sofia.uni.fmi.piss.project.tm.models.Tutor;
 import bg.sofia.uni.fmi.piss.project.tm.models.TeachSmartUser;
+import bg.sofia.uni.fmi.piss.project.tm.utils.dtos.Module;
 
 public class EntityToDtoMapper {
 
@@ -16,7 +17,7 @@ public class EntityToDtoMapper {
         courseDto.setCourseId(course.getId());
         courseDto.setName(course.getName());
         courseDto.setType(course.getType());
-        courseDto.setDurationHours(course.getDurationHours());
+        courseDto.setDuration(course.getDuration());
         courseDto.setAttendants(course.getAttendants());
         courseDto.setDescription(course.getDescription());
         courseDto.setPosterLocation(course.getPosterLocation());
@@ -49,5 +50,26 @@ public class EntityToDtoMapper {
         userDto.setEmail(user.getEmail());
         userDto.setRole(user.getRole());
         return userDto;
+    }
+
+    public static Course toCourseEntity(CourseDto courseDto) {
+        Course course = new Course();
+        course.setName(courseDto.getName());
+        course.setPosterLocation(courseDto.getPosterLocation());
+        course.setAttendants(courseDto.getAttendants());
+        course.setDescription(courseDto.getDescription());
+        course.setDuration(courseDto.getDuration());
+        course.setType(courseDto.getType());
+        return course;
+    }
+
+    public static CourseDto moduleToCourseDto(Module module) {
+        CourseDto courseDto = new CourseDto();
+        courseDto.setName(module.getTitle());
+        courseDto.setPosterLocation(module.getIconUrl());
+        courseDto.setDescription(module.getSummary());
+        courseDto.setDuration(Integer.parseInt(module.getDurationInMinutes()));
+        courseDto.setType(module.getProducts().get(0));
+        return courseDto;
     }
 }
