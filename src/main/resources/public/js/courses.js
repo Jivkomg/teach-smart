@@ -155,12 +155,12 @@ function getCoursesByType(type) {
 
 
 function getCourseById(id) {
+    console.log(id);
     $.ajax({
         type: "POST",
         contentType: "application/json",
         url: "/courses/" + id,
         success: function (course) {
-            console.log(course);
             localStorage.setItem('chosenCourseObj', JSON.stringify(course));
             showCourseScreen(course);
         },
@@ -183,7 +183,7 @@ function showCourseScreen(course) {
     document.getElementById("popup-course-type").innerHTML = "Категория: "+"<b>"+course.type+ "</b>";
     document.getElementById("popup-course-duration").innerHTML = "Продължителност на курса: "+"<b>"+course.durationHours + "</b>" +" часа";
     document.getElementById("popup-course-attendants").innerHTML = "Удобрили курса: "+"<b>"+course.attendants + "</b>" + " потребители";
-    document.getElementById("youtube").src = "https://www.youtube.com/embed/" + course.posterLocation;
+    document.getElementById("youtube").src = course.posterLocation;
 }
 
 function getCoursePosterById(id, selector) {
@@ -264,12 +264,12 @@ function displayCourses(courses, h1_name) {
 
         //course - div (container card)
         let courseDiv = document.createElement('div');
-        courseDiv.setAttribute("onclick", "getCourseById("+courses[i].courseId+")");
+        courseDiv.setAttribute("onclick", "getCourseById('"+courses[i].courseId+"')");
         courseDiv.className='card border-0 bg-dark text-white';
 
         let courseImg = document.createElement('img');
         courseImg.className = 'card-img-top';
-        courseImg.src = "https://img.youtube.com/vi/" + courses[i].posterLocation+"/mqdefault.jpg";
+        courseImg.src = courses[i].posterLocation;
         courseDiv.appendChild(courseImg);
 
         //course - div (container card)
@@ -294,8 +294,6 @@ function displayCourses(courses, h1_name) {
         //Add course card to courses container
         courses-container.appendChild(courseDiv);
         };
-
-        console.log(courseTypes);
         displayTypes(courseTypes);
 
     }
@@ -312,7 +310,6 @@ function displayTypes(courseTypes){
         let typeLink = document.createElement('button');
         typeLink.className = 'btn btn-success';
         typeLink.setAttribute("onclick", "filterByType('"+type+"'); loadFilter(); ");
-        console.log("filterByType("+type+")");
         typeLink.innerText = type;
         typesContainer.appendChild(typeLink);
     })
