@@ -32,7 +32,8 @@ public class MicrosoftCoursesConnector {
     public void syncCoursesFromMicrosoftWithTechSmartCourses() {
         List<Module> modules = getGetCoursesFromMicrosoft().getModules();
 
-        for (Module module : modules) {
+        for (int i = 0; i < 100; i++) {
+            Module module = modules.get(i);
             CourseDto courseDto = EntityToDtoMapper.moduleToCourseDto(module);
             try {
                 this.courseService.createCourse(courseDto);

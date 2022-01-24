@@ -1,3 +1,5 @@
+@import 'style.css';
+
 .h-custom {
 	height: calc(100% - 70px);
 }

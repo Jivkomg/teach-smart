@@ -1,9 +1,9 @@
-var successfulMessage = document.querySelector("#confirmation-popup .popup-content > p").innerText;
+let successfulMessage = document.querySelector("#confirmation-popup .popup-content > p").innerText;
 function showPopup(popup_id) {
-  var ticketBought = JSON.parse(localStorage.getItem('chosenEventObj'));//when calling getEventById everytime item is clicked, once it is bought it can be retrieved from here
-  var currentUserTickets = JSON.parse(localStorage.getItem("userTickets"));
+  let ticketBought = JSON.parse(localStorage.getItem('chosenEventObj'));//when calling getEventById everytime item is clicked, once it is bought it can be retrieved from here
+  let currentUserTickets = JSON.parse(localStorage.getItem("userTickets"));
 
-  var flag = false;
+  let flag = false;
   for (let i = 0; i < currentUserTickets.length; i++) {
     if (ticketBought.eventId == currentUserTickets[i].eventId)
       flag = true;

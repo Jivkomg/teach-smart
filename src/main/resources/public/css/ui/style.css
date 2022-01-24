@@ -1,18 +1,55 @@
-.card{
-			min-width: calc(100%/5);
-		}
+:root {
+	--primary: #00ce9d;
+	--secondary: #00a4a6;
+	--accent: #8debda;
+	--primary-border: #06b189;
+	--secondary-border: #088d8f;
 
-		.card-img-top{
-			width: 90%;
-			margin: auto;
-			margin-top: 10px;
-		}
+	--bs-success: #198754;
+	--bs-info: #0dcaf0;
+	--bs-warning: #ffc107;
+	--bs-danger: #dc3545;
+	--bs-light: #f8f9fa;
+	--bs-dark: #212529;
 
-		.card-group{
-			gap: 10px;
-		}
+	--grey-color: #5c6672;
+	--light-grey: #6c6f7f;
+	--dark-grey: #313e50;
+	--red-light: #ff7043;
+	--red-dark: #d84315;
+	--pink-light: #ffab91;
+	--shadow: #7f0000;
+	--line: ##9b9b9b;
+	--checkbox-dark-grey: #ccc;
+	--checkbox-fill: #2196f3;
+	--dark-blue: #0d47a1;
+	--light-blue: #90caf9;
+	--grey-3: #b0bec5;
+}
 
-		div#typesContainer >* {
-			margin-right:
-			10px;
-		}
+html,
+body {
+	height: 100%;
+}
+
+#logo {
+	width: auto;
+	height: 70px;
+	margin: 10px;
+}
+
+.primary-button {
+	background-color: var(--primary) !important;
+	border: 1px solid var(--primary-border) !important;
+	text-align: center !important;
+}
+
+.secondary-button {
+	background-color: var(--secondary) !important;
+	border: 1px solid var(--secondary-border) !important;
+	text-align: center !important;
+}
+
+.active-link {
+	color: var(--secondary);
+}

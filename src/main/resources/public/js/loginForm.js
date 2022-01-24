@@ -7,16 +7,16 @@ $(document).ready(function () {
 
   function checkUser() {
 
-    var username = $("#name").val();
-    var password = $("#password").val();
+    let username = $("#name").val().toString();
+    let password = $("#password").val().toString();
 
     if ((!username) || (!password)) {
       alert("Всички полета трябва да се попълнят!");
     } else {
-      var formData = {
-        username: username,
+      let formData = {
+        username,
         email: "",
-        password: password
+        password
       };
 
       $.ajax({
@@ -27,15 +27,15 @@ $(document).ready(function () {
         success: function () {
           sessionStorage.setItem("username", username);
           localStorage.setItem("username", username);
-          var userTickets = [];
+          let userTickets = [];
           localStorage.setItem("userTickets", JSON.stringify(userTickets));
-          console.log("USER ", localStorage.getItem("username"),"|| userTickets: ",localStorage.getItem("userEmail"));
+          console.log("USER ", localStorage.getItem("username"), "|| userTickets: ", localStorage.getItem("userEmail"));
 
           window.location.href = "/courses";
         },
         error: function (jqXHR) {
           if (jqXHR.status === 401) {
-            alert("Невалидни данни!")
+            alert("Невалидни данни!");
           } else {
             alert(jqXHR.status);
             console.log(jqXHR);

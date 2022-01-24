@@ -1,20 +1,19 @@
-function validate()
-{
-	var errorFieldsDOM = document.getElementsByClassName("error");
+function validate() {
+	let errorFieldsDOM = document.getElementsByClassName("error");
 	console.log(errorFieldsDOM);
 	//make all error messages display:none 
-	for(let i=0;i<errorFieldsDOM.length;i++)
+	for (let i = 0; i < errorFieldsDOM.length; i++)
 		errorFieldsDOM[i].style.display = "none";
 
-	var username = document.getElementById("name").value;
-	var email = document.getElementById("email").value;	
-	var password = document.getElementById("password").value;
-	var confirmPassword = document.getElementById("repeatPassword").value;	
-	var nameOnCard = document.getElementById("name-on-card").value;
-	var cardNumber = document.getElementById("card-number").value;
-	var expiryDate = document.getElementById("expiry-date").value;
-	var cvv = document.getElementById("security-code").value;
-	var selectedCreditCard = document.getElementById("selected_card").textContent;
+	let username = document.getElementById("name").value;
+	let email = document.getElementById("email").value;
+	let password = document.getElementById("password").value;
+	let confirmPassword = document.getElementById("repeatPassword").value;
+	let nameOnCard = document.getElementById("name-on-card").value;
+	let cardNumber = document.getElementById("card-number").value;
+	let expiryDate = document.getElementById("expiry-date").value;
+	let cvv = document.getElementById("security-code").value;
+	let selectedCreditCard = document.getElementById("selected_card").textContent;
 	console.log(selectedCreditCard);
 
 	const visaRegex = /^4[0-9]{3}\s?([0-9]\s?){9}(?:[0-9]{3})?$/;
@@ -36,20 +35,19 @@ function validate()
 	// const passwordRegex = //;
 	// errorFields[2] = passwordRegex.test(password);
 
-	errorFields[1] = ((password == confirmPassword)== true && password!= "" )? true : false;
-	console.log(password == confirmPassword,errorFields[3]);
+	errorFields[1] = ((password == confirmPassword) == true && password != "") ? true : false;
+	console.log(password == confirmPassword, errorFields[3]);
 
 	const nameRegex = /^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)/;
 	errorFields[2] = nameRegex.test(nameOnCard);
 
-	var cardNumberRegex;
-	var cvvRegex = regularCvvRegex;
-	switch(selectedCreditCard)
-	{
-		case "Visa": {cardNumberRegex = visaRegex; break;}
-		case "MasterCard": {cardNumberRegex = masterCardRegex; break;}
-		case "AmericanExpress": {cardNumberRegex = americanExpressRegex; cvvRegex = americanExpressCvvRegex; break;}
-		case "Diners Club": {cardNumberRegex = dinersClubRegex; break;}
+	let cardNumberRegex;
+	let cvvRegex = regularCvvRegex;
+	switch (selectedCreditCard) {
+		case "Visa": { cardNumberRegex = visaRegex; break; }
+		case "MasterCard": { cardNumberRegex = masterCardRegex; break; }
+		case "AmericanExpress": { cardNumberRegex = americanExpressRegex; cvvRegex = americanExpressCvvRegex; break; }
+		case "Diners Club": { cardNumberRegex = dinersClubRegex; break; }
 
 	}
 
@@ -60,11 +58,9 @@ function validate()
 
 	errorFields[5] = cvvRegex.test(cvv);
 
-	for(let i=0;i<errorFieldsDOM.length;i++)
-	{
+	for (let i = 0; i < errorFieldsDOM.length; i++) {
 		console.log(errorFields[i]);
-		if(!errorFields[i])
-		{
+		if (!errorFields[i]) {
 			errorFieldsDOM[i].style.display = "block";
 		}
 	}
@@ -73,12 +69,12 @@ function validate()
 
 
 
-function setCurrentCreditCard(card_id){
+function setCurrentCreditCard(card_id) {
 	let currentCardElement = document.querySelector(".dropdown-bar ul li a:first-child");
 	let oldCard = currentCardElement.textContent; //old user because will be replased with new current user
 	//let saveBtn = document.getElementById("saveBtn");
-	
-    let oldCardElement = document.getElementById(card_id);
+
+	let oldCardElement = document.getElementById(card_id);
 	let currentCard = oldCardElement.textContent;
 	console.log(currentCard);
 	console.log(currentCardElement.textContent);
