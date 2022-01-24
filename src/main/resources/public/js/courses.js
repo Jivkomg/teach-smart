@@ -1,21 +1,25 @@
 var allCourses;
 var top30courses;
 var courseTypes = new Set();
-//menu
+
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#courses-container div").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+
+function loadFilter(){
+    $('#myInput').trigger('keyup');
+}
+
 
 function hideCourse(){
     $("#course-screen").addClass('d-none');
     document.getElementById("courses-section").style.display = 'block';
 }
-
-document.getElementById("top30").addEventListener("click", function(e) {
-    console.log("clickeddeded 30");
-    $("#course-screen").addClass('d-none');
-    document.getElementById("courses-section").style.display = 'block';
-    localStorage.setItem("active-courses", "top30");
-    //console.log("active tab = ", localStorage.getItem("active-courses"));
-    getTop30courses();
-});
 
 document.getElementById("all-courses").addEventListener("click", function (e) {
     $("#course-screen").addClass('d-none');
@@ -125,8 +129,12 @@ function getCoursesTypes() {
         allCourses.forEach(course => {
             courseTypes.add(course.type);
         });
-        console.log(courseTypes);
+        alert(courseTypes);
     });
+}
+
+function onlyUnique(value, index, self) {
+  return self.indexOf(value) === index;
 }
 
 // this is used for filtering by type - just pass the type you filter by as an argument
@@ -245,18 +253,20 @@ function getCoursePerformers(id) {
 
 function displayCourses(courses, h1_name) {
     removeExistingCourses();
-    document.getElementById("h1_name").innerHTML = h1_name;
-    document.getElementById("courses-count").innerHTML = courses.length + " courses shown";
+    //document.getElementById("h1_name").innerHTML = h1_name;
+    document.getElementById("courses-count").innerHTML ="Брой курсове: " + courses.length;
     const container = document.getElementById("courses-container");
-
+    let courseTypes = new Set();
     //Create all course cards and add it to courses-container
     for (i = 0; i < courses.length; i++) {
 
+        courseTypes.add(courses[i].type);
+
         //course - div (container card)
         let courseDiv = document.createElement('div');
-        courseDiv.className='card';
+        courseDiv.setAttribute("onclick", "getCourseById("+courses[i].courseId+")");
+        courseDiv.className='card border-0 bg-dark text-white';
 
-        //TODO: course - img
         let courseImg = document.createElement('img');
         courseImg.className = 'card-img-top';
         courseImg.src = "https://img.youtube.com/vi/" + courses[i].posterLocation+"/mqdefault.jpg";
@@ -281,29 +291,40 @@ function displayCourses(courses, h1_name) {
         courseType.appendChild(_courseType);
         cardBody.appendChild(courseType);
 
-        //course - link
-        let courseLink =  document.createElement('a');
-        courseLink.setAttribute("onclick", "getCourseById("+courses[i].courseId+")");
-        courseLink.appendChild(courseDiv);
-
-
         //Add course card to courses container
-        courses-container.appendChild(courseLink);
+        courses-container.appendChild(courseDiv);
         };
 
+        console.log(courseTypes);
+        displayTypes(courseTypes);
+
     }
+
+function filterByType(type){
+    let searchBox = document.getElementById("myInput");
+    searchBox.value = type;
+    searchBox.click();
+}
+
+function displayTypes(courseTypes){
+    const typesContainer = document.getElementById("typesContainer");
+    courseTypes.forEach(function(type){
+        let typeLink = document.createElement('button');
+        typeLink.className = 'btn btn-success';
+        typeLink.setAttribute("onclick", "filterByType('"+type+"'); loadFilter(); ");
+        console.log("filterByType("+type+")");
+        typeLink.innerText = type;
+        typesContainer.appendChild(typeLink);
+    })
+}
+
+
 function getActiveCoursesFunction() {
     var activeObj = {};
     var activeCourses = localStorage.getItem("active-courses");
-    if (activeCourses == "top30") {
-        activeObj["functionName"] = "getTop30courses";
-        activeObj["title"] = "Top 30 courses";
-        activeObj["courses"] = top30courses;
-    } else {
-        activeObj["functionName"] = "getAllcourses";
-        activeObj["title"] = "All courses";
-        activeObj["courses"] = allCourses;
-    }
+    activeObj["functionName"] = "getAllcourses";
+    activeObj["title"] = "Всички курсове";
+    activeObj ["courses"] = allCourses;
 
     console.log("active FUNC", activeObj["functionName"]);
     return activeObj;
