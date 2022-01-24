@@ -86,4 +86,6 @@ public class Course extends BaseEntity {
     public void setPosterLocation(String posterLocation) {
         this.posterLocation = posterLocation;
     }
+
+
 }
