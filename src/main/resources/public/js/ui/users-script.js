@@ -11,7 +11,7 @@ document.getElementById("a-events-all").addEventListener("click", function (e) {
 
 document.addEventListener("DOMContentLoaded", function (event) {
 	document.getElementById("username").innerText = localStorage.getItem("username");
-})
+});
 
 document.addEventListener("DOMContentLoaded", function (event) {
 	getAllUsers();
@@ -32,7 +32,7 @@ function getAllUsers() {
 		}
 	});
 }
-var userAvatars = ["https://i.ibb.co/z69VD7h/1.png", "https://i.ibb.co/mhMM7hJ/2.png", "https://i.ibb.co/G0VZ5Kv/3.png", "https://i.ibb.co/7zhNdGN/4.png", "https://i.ibb.co/rZ48ZYM/5.png", "https://i.ibb.co/cJ8zhmj/6.png", "https://i.ibb.co/C8jQYW5/7.png", "https://i.ibb.co/2ZgCnHQ/8.png", "https://i.ibb.co/VBKb5Qz/9.png", "https://i.ibb.co/74mzc0B/10.png"];
+let userAvatars = ["https://i.ibb.co/z69VD7h/1.png", "https://i.ibb.co/mhMM7hJ/2.png", "https://i.ibb.co/G0VZ5Kv/3.png", "https://i.ibb.co/7zhNdGN/4.png", "https://i.ibb.co/rZ48ZYM/5.png", "https://i.ibb.co/cJ8zhmj/6.png", "https://i.ibb.co/C8jQYW5/7.png", "https://i.ibb.co/2ZgCnHQ/8.png", "https://i.ibb.co/VBKb5Qz/9.png", "https://i.ibb.co/74mzc0B/10.png"];
 
 
 function displayUsers(users) {
@@ -48,7 +48,7 @@ function displayUsers(users) {
 		userDiv.className = 'user-card';
 		userDiv.id = users[i].userId;
 		let userImg = document.createElement('img');
-		var randomAvatar = Math.floor(Math.random() * 10); //10 avatars available
+		let randomAvatar = Math.floor(Math.random() * 10); //10 avatars available
 		userImg.src = userAvatars[randomAvatar];
 		console.log(userImg.src);
 		userDiv.appendChild(userImg);

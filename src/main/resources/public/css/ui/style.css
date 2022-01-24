@@ -2,7 +2,8 @@
 	--primary: #00ce9d;
 	--secondary: #00a4a6;
 	--accent: #8debda;
-	--border: #06b189;
+	--primary-border: #06b189;
+	--secondary-border: #088d8f;
 
 	--bs-success: #198754;
 	--bs-info: #0dcaf0;
@@ -26,6 +27,11 @@
 	--grey-3: #b0bec5;
 }
 
+html,
+body {
+	height: 100%;
+}
+
 #logo {
 	width: auto;
 	height: 70px;
@@ -34,7 +40,14 @@
 
 .primary-button {
 	background-color: var(--primary) !important;
-	border: 1px solid var(--border) !important;
+	border: 1px solid var(--primary-border) !important;
+	text-align: center !important;
+}
+
+.secondary-button {
+	background-color: var(--secondary) !important;
+	border: 1px solid var(--secondary-border) !important;
+	text-align: center !important;
 }
 
 .active-link {

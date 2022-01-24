@@ -1,18 +1,18 @@
-document.getElementById("a-events-top30").addEventListener("click", function(e) {
+document.getElementById("a-events-top30").addEventListener("click", function (e) {
     console.log("clickeddeded 30");
     localStorage.setItem("active-events", "top30");
     console.log("active tab = ", localStorage.getItem("active-events"));
 });
-document.getElementById("a-events-all").addEventListener("click", function(e) {
+document.getElementById("a-events-all").addEventListener("click", function (e) {
     localStorage.setItem("active-events", "all");
     console.log("active tab = ", localStorage.getItem("active-events"));
 });
 
 
-document.addEventListener("DOMContentLoaded", function(event) {
+document.addEventListener("DOMContentLoaded", function (event) {
     document.getElementById("username").innerText = localStorage.getItem("username");
     getCurrentUser();
-})
+});
 
 function ShowSaveConfirmation() {
     document.getElementById("save-info-message").style.visibility = "visible";
@@ -27,13 +27,13 @@ function getCurrentUser() {
         type: "POST",
         contentType: "application/json",
         url: "/user/current/" + sessionStorage.getItem('username'),
-        success: function(user) {
+        success: function (user) {
             console.log(user);
             document.getElementById("username-h2").innerHTML = "<h2>Username: " + user.username + "</h2>";
             document.getElementById("email-h2").innerHTML = "<h2>Email: " + user.email + "</h2>";
 
         },
-        error: function(e) {
+        error: function (e) {
             console.log("ERROR: ", e);
         }
     });
@@ -45,10 +45,10 @@ function onFileUploadSubmit() {
     $('#profile_pic_upload').ajaxForm({
         url: "/file/upload",
         type: "POST",
-        success: function(response) {
+        success: function (response) {
             alert("The server says: " + response);
         },
-        error: function(e) {
+        error: function (e) {
             console.log("ERROR: ", e);
         }
     });
@@ -57,9 +57,9 @@ function onFileUploadSubmit() {
 function formSubmit(e) {
     e.preventDefault(); //This will prevent the default click action
 
-    var formData = new FormData();
-    var input = document.getElementById("profile_pic");
-    var file = input.files[0];
+    let formData = new FormData();
+    let input = document.getElementById("profile_pic");
+    let file = input.files[0];
     formData.append("profile_pic", file);
 
     $.ajax({
@@ -68,10 +68,10 @@ function formSubmit(e) {
         data: formData,
         processData: false,
         contentType: false,
-        success: function(response) {
+        success: function (response) {
             alert("The server says: " + response);
         },
-        error: function(e) {
+        error: function (e) {
             alert("ERROR: ", e);
         }
     });
@@ -79,17 +79,17 @@ function formSubmit(e) {
 
 function readURL(input) {
     if (input.files && input.files[0]) {
-        var reader = new FileReader();
+        let reader = new FileReader();
 
-        reader.onload = function(e) {
+        reader.onload = function (e) {
             $('#pic_preview').attr('src', e.target.result);
-        }
+        };
 
         reader.readAsDataURL(input.files[0]); // convert to base64 string
     }
 }
 
-$("#profile_pic").change(function() {
+$("#profile_pic").change(function () {
     document.getElementById('uploaded-h2').style.visibility = "visible";
     readURL(this);
 });
