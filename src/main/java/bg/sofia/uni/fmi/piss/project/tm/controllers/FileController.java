@@ -15,8 +15,12 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping(path = "/file")
 public class FileController {
 
-    @Autowired
     private FileService fileService;
+
+    @Autowired
+    public FileController(FileService fileService) {
+        this.fileService = fileService;
+    }
 
     @PostMapping("/upload/{username}")
     public ResponseEntity uploadFile(@RequestParam("profile_pic") MultipartFile file,

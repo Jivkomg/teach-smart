@@ -17,8 +17,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(path = "/user", produces = "application/json", consumes = "application/json")
 public class UserController {
 
-    @Autowired
     private UserService userService;
+
+    @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @PostMapping("/registrationForm")
     public ResponseEntity<TeachSmartUserDto> processRegisterUser(@Valid @RequestBody TeachSmartUserDto userDto, BindingResult binding) {

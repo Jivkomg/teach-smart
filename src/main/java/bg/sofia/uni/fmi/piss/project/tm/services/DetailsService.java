@@ -13,8 +13,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class DetailsService implements UserDetailsService {
 
-    @Autowired
     private TeachSmartUserRepository userRepository;
+
+    @Autowired
+    public DetailsService(TeachSmartUserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

@@ -37,9 +37,7 @@ public class MainController {
     }
 
     @GetMapping("/settings")
-    String settings() {
-        return "settings.html";
-    }
+    String settings() { return "settings.html"; }
 
     @GetMapping("/courses")
     String courses() {

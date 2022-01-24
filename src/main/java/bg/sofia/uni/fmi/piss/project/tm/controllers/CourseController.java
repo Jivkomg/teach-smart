@@ -14,8 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(path = "/courses", produces = "application/json", consumes = "application/json")
 public class CourseController {
 
-    @Autowired
     private CourseService courseService;
+
+    @Autowired
+    public CourseController(CourseService courseService) {
+        this.courseService = courseService;
+    }
 
     @PostMapping("/all")
     public ResponseEntity getCourses() {

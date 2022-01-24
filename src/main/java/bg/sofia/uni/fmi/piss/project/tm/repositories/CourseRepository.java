@@ -11,4 +11,6 @@ public interface CourseRepository extends JpaRepository<Course, String> {
 
     @Query(value = "SELECT * FROM courses ORDER BY attendants DESC LIMIT 30", nativeQuery = true)
     List<Course> findTop30SoldOut();
+
+    boolean existsByName(String name);
 }

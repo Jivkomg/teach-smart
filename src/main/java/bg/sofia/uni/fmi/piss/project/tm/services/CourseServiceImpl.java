@@ -12,6 +12,7 @@ import bg.sofia.uni.fmi.piss.project.tm.repositories.ContractRepository;
 import bg.sofia.uni.fmi.piss.project.tm.repositories.CourseRepository;
 import bg.sofia.uni.fmi.piss.project.tm.repositories.OrganizerRepository;
 import bg.sofia.uni.fmi.piss.project.tm.repositories.TutorRepository;
+import bg.sofia.uni.fmi.piss.project.tm.utils.ExceptionMessages;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,17 +27,22 @@ import java.util.stream.Collectors;
 @Service
 public class CourseServiceImpl implements CourseService {
 
-    @Autowired
     private CourseRepository courseRepository;
 
-    @Autowired
     private ContractRepository contractRepository;
 
-    @Autowired
     private OrganizerRepository organizerRepository;
 
-    @Autowired
     private TutorRepository tutorRepository;
+
+    @Autowired
+    public CourseServiceImpl(CourseRepository courseRepository, ContractRepository contractRepository,
+        OrganizerRepository organizerRepository, TutorRepository tutorRepository) {
+        this.courseRepository = courseRepository;
+        this.contractRepository = contractRepository;
+        this.organizerRepository = organizerRepository;
+        this.tutorRepository = tutorRepository;
+    }
 
     @Override
     public ResponseEntity<List<CourseDto>> getAllCourses() {
@@ -68,7 +74,18 @@ public class CourseServiceImpl implements CourseService {
         Optional<Course> course = courseRepository.findById(id);
 
         return course.map(value -> new ResponseEntity<>(EntityToDtoMapper.toCourseDto(value), HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
 
+    @Override public CourseDto createCourse(CourseDto courseDto) {
+        if (this.courseRepository.existsByName(courseDto.getName())) {
+            throw new IllegalArgumentException(ExceptionMessages.INVALID_COURSE_NAME);
+        }
+
+        Course course = EntityToDtoMapper.toCourseEntity(courseDto);
+
+        Course savedCourse = this.courseRepository.save(course);
+
+        return EntityToDtoMapper.toCourseDto(savedCourse);
     }
 
     @Override
