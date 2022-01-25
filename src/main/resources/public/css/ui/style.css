@@ -5,12 +5,12 @@
 	--primary-border: #06b189;
 	--secondary-border: #088d8f;
 
-	--bs-success: #198754;
-	--bs-info: #0dcaf0;
-	--bs-warning: #ffc107;
-	--bs-danger: #dc3545;
-	--bs-light: #f8f9fa;
-	--bs-dark: #212529;
+	--success: #198754;
+	--info: #0dcaf0;
+	--warning: #ffc107;
+	--danger: #dc3545;
+	--light: #f8f9fa;
+	--dark: #212529;
 
 	--grey-color: #5c6672;
 	--light-grey: #6c6f7f;
@@ -52,4 +52,8 @@ body {
 
 .active-link {
 	color: var(--secondary);
+}
+
+.error {
+	color: var(--danger) !important;
 }

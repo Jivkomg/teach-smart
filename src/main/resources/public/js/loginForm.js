@@ -1,47 +1,61 @@
-$(document).ready(function () {
+$(function () {
+  const loginForm = $("#loginForm");
+  const displayError = $("#errorField");
 
-  $(document).on("click", "#login", function (event) {
-    event.preventDefault();
-    checkUser();
-  });
-
-  function checkUser() {
-
-    let username = $("#name").val().toString();
-    let password = $("#password").val().toString();
-
-    if ((!username) || (!password)) {
-      alert("Всички полета трябва да се попълнят!");
-    } else {
-      let formData = {
-        username,
-        email: "",
-        password
-      };
-
-      $.ajax({
-        type: "POST",
-        contentType: "application/json",
-        url: "/user/loginForm",
-        data: JSON.stringify(formData),
-        success: function () {
-          sessionStorage.setItem("username", username);
-          localStorage.setItem("username", username);
-          let userTickets = [];
-          localStorage.setItem("userTickets", JSON.stringify(userTickets));
-          console.log("USER ", localStorage.getItem("username"), "|| userTickets: ", localStorage.getItem("userEmail"));
-
-          window.location.href = "/courses";
-        },
-        error: function (jqXHR) {
-          if (jqXHR.status === 401) {
-            alert("Невалидни данни!");
-          } else {
-            alert(jqXHR.status);
-            console.log(jqXHR);
-          }
-        }
-      });
+  const validationRules = {
+    rules: {
+      username: {
+        required: true,
+        minlength: 4
+      },
+      password: {
+        required: true,
+      },
+    },
+    messages: {
+      username: {
+        required: "Моля, въведете потребителско име!",
+        minlength: "Потребителското име трябва да е поне 4 символа!",
+      },
+      password: {
+        required: "Моля, въведете парола!",
+      }
     }
-  }
+  };
+
+  const submitForm = () => {
+    console.log('heyo, you re in!');
+    let username = $("#username").val().toString();
+    let password = $("#password").val().toString();
+    const userData = {
+      username,
+      password
+    };
+
+    $.ajax({
+      type: "POST",
+      url: "/user/loginForm",
+      data: JSON.stringify(userData),
+      contentType: "application/json",
+
+      success: () => {
+        sessionStorage.setItem("username", username);
+        localStorage.setItem("username", username);
+
+        window.location.href = "/courses";
+      },
+      error: (jqXHR) => {
+        if (jqXHR.status === 401) {
+          displayError.text("Не съществува такъв потребител!");
+        } else {
+          console.log(jqXHR);
+          displayError.text("Something went wrong! Please, try again later!");
+        }
+      }
+    });
+  };
+
+  $(document).on("click", "#submitButton", (e) => {
+    loginForm.validate({ ...validationRules, submitHandler: submitForm });
+  });
 });
