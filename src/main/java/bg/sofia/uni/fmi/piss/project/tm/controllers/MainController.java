@@ -31,9 +31,9 @@ public class MainController {
         return "users";
     }
 
-    @GetMapping("/userProfile")
-    String userProfile() {
-        return "user-profile.html";
+    @GetMapping("/userCourses")
+    String userCourses() {
+        return "user-courses.html";
     }
 
     @GetMapping("/settings")

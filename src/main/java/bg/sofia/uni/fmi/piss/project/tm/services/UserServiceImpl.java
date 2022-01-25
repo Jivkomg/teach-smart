@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
 
         try {
 
-            Path path = Paths.get(USER_DIR + user.getUsername());
+            Path path = Paths.get(USER_DIR);
             Files.createDirectories(path);
             System.out.println("Directory is created!");
 

@@ -86,7 +86,7 @@ section {
 	height: 100px;
 }
 
-.event-card {
+.course-card {
 	width: 200px;
 	display: flex;
 	align-items: center;
@@ -96,10 +96,11 @@ section {
 	padding: 20px 10px;
 	background-color: var(--light-grey);
 }
-.event-card p {
+.course-card p {
 	height: 12px;
 }
-/* .event-card:hover{
+
+/* .course-card:hover{
    box-shadow: 0 0 10px var(--dark-grey);
 } */
 
@@ -114,24 +115,24 @@ section {
 .category:first-child h1 {
 	margin-top: 0px;
 }
-#event-screen {
+#course-screen {
 	display: none;
 }
-#event-screen img {
+#course-screen img {
 	height: 500px;
 	width: auto;
 }
-#noTicketsContainer {
+/* #noTicketsContainer {
 	display: none;
-}
+} */
 h2 {
 	text-align: center;
 }
-#no-tickets-container {
+/* #no-tickets-container {
 	margin-top: 100px;
-}
-
+} */
+/* 
 .no-tickets {
 	display: flex;
 	justify-content: center;
-}
+} */
