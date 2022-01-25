@@ -43,9 +43,4 @@ public class MainController {
     String courses() {
         return "courses";
     }
-
-    @GetMapping("/courses/top30")
-    String coursesTop30() {
-        return "coursesTop30";
-    }
 }

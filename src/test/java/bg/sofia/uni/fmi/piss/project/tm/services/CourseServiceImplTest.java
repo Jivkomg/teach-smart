@@ -61,29 +61,18 @@ public class CourseServiceImplTest {
         CourseDto dto = new CourseDto();
         dto.setCourseId("1234");
 
-        Mockito.when(courseRepository.findAll()).thenReturn(Arrays.asList(new Course()));
+        Mockito.when(courseRepository.findAll()).thenReturn(Collections.singletonList(new Course()));
         Mockito.when(EntityToDtoMapper.toCourseDto(Mockito.any())).thenReturn(dto);
 
         ResponseEntity<List<CourseDto>> result = eventService.getAllCourses();
         assertEquals(HttpStatus.OK,result.getStatusCode());
-        assertEquals(Arrays.asList(dto),result.getBody());
+        assertEquals(Collections.singletonList(dto),result.getBody());
     }
 
     @Test
-    public void getTop30Events_NoEventsFound(){
+    public void getTop30Events_NoEventsFound() {
         ResponseEntity<List<CourseDto>> response = eventService.getAllCourses();
-        assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
-    }
-
-    @Test
-    public void getTop30Events_EventsFound(){
-        CourseDto dto = new CourseDto();
-        Mockito.when(courseRepository.findTop30SoldOut()).thenReturn(Arrays.asList(new Course(),new Course()));
-        Mockito.when(EntityToDtoMapper.toCourseDto(Mockito.any())).thenReturn(dto,dto);
-
-        ResponseEntity<List<CourseDto>> result = eventService.getTop30Courses();
-        assertEquals(HttpStatus.OK,result.getStatusCode());
-        assertEquals(Arrays.asList(dto,dto),result.getBody());
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 
     @Test
@@ -148,7 +137,7 @@ public class CourseServiceImplTest {
         ResponseEntity result = eventService.getCourseOrganizersById("1");
 
         assertEquals(HttpStatus.OK,result.getStatusCode());
-        assertEquals(Arrays.asList(dto),result.getBody());
+        assertEquals(Collections.singletonList(dto),result.getBody());
     }
 
     @Test
@@ -192,7 +181,7 @@ public class CourseServiceImplTest {
         ResponseEntity result = eventService.getCourseTutorById("1");
 
         assertEquals(HttpStatus.OK,result.getStatusCode());
-        assertEquals(Arrays.asList(dto),result.getBody());
+        assertEquals(Collections.singletonList(dto),result.getBody());
     }
 
     @Test

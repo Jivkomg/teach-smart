@@ -11,8 +11,6 @@ public interface CourseService {
 
     ResponseEntity<List<CourseDto>> getAllCourses();
 
-    ResponseEntity<List<CourseDto>> getTop30Courses();
-
     CourseDto createCourse(CourseDto courseDto);
 
     ResponseEntity<CourseDto> getCourseById(String id);

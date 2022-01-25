@@ -26,11 +26,6 @@ public class CourseController {
         return courseService.getAllCourses();
     }
 
-    @PostMapping("/top30")
-    public ResponseEntity getTop30Courses() {
-        return courseService.getTop30Courses();
-    }
-
     @PostMapping("/{courseId}")
     public ResponseEntity getCourseById(@PathVariable String courseId) {
         return courseService.getCourseById(courseId);

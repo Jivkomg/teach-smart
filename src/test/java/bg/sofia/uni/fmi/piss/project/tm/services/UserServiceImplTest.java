@@ -15,6 +15,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import static org.junit.Assert.*;
 
+import java.util.Optional;
+
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceImplTest {
     @Mock
@@ -42,7 +44,7 @@ public class UserServiceImplTest {
     @Test
     public void register_AlreadyExistingUser(){
         Mockito.when(userRepository.findByUsername(dto.getUsername())).
-                thenReturn(new TeachSmartUser());
+                thenReturn(Optional.of(new TeachSmartUser()));
         ResponseEntity<TeachSmartUserDto> result = userService.register(dto);
         assertEquals(HttpStatus.CONFLICT, result.getStatusCode());
         assertNull(result.getBody());
@@ -70,7 +72,7 @@ public class UserServiceImplTest {
     @Test
     public void login_UserFound(){
         Mockito.when(userRepository.findByUsername(dto.getUsername())).
-                thenReturn(user);
+                thenReturn(Optional.ofNullable(user));
         ResponseEntity<TeachSmartUserDto> result = userService.login(dto);
         assertEquals(HttpStatus.OK,result.getStatusCode());
         assertNull(result.getBody());
@@ -85,7 +87,7 @@ public class UserServiceImplTest {
     @Test
     public void getAuthUser_UserFound(){
         Mockito.when(userRepository.findByUsername(user.getUsername())).
-                thenReturn(user);
+                thenReturn(Optional.ofNullable(user));
         Mockito.when(EntityToDtoMapper.toUserDto(user)).thenReturn(dto);
 
         ResponseEntity<TeachSmartUserDto> result = userService.getAuthUser(user.getUsername());
