@@ -122,17 +122,17 @@ section {
 	height: 500px;
 	width: auto;
 }
-#noTicketsContainer {
+/* #noTicketsContainer {
 	display: none;
-}
+} */
 h2 {
 	text-align: center;
 }
-#no-tickets-container {
+/* #no-tickets-container {
 	margin-top: 100px;
-}
-
+} */
+/* 
 .no-tickets {
 	display: flex;
 	justify-content: center;
-}
+} */
