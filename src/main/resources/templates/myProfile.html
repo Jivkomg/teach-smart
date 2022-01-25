@@ -3,14 +3,14 @@
 	<head>
 		<meta charset="utf-8" />
 		<link
-			href="/css/settings-style.css"
+			href="css/my-profile-style.css"
 			rel="stylesheet"
 			type="text/css"
 			crossorigin="anonymous"
 		/>
 
-		<script defer src="js/settings-script.js"></script>
-		<title>Settings</title>
+		<script defer src="js/my-profile-script.js"></script>
+		<title>My profile</title>
 		<link
 			rel="icon"
 			type="image/icon"
@@ -39,7 +39,9 @@
 					class="navbar navbar-expand-md navbar-dark bg-dark fixed-top"
 				>
 					<div class="container-fluid">
-						<a class="navbar-brand" href=""> TeachSmart </a>
+						<a class="navbar-brand" href="index.html">
+							TeachSmart
+						</a>
 						<button
 							class="navbar-toggler"
 							type="button"
@@ -81,7 +83,7 @@
 										<a
 											class="dropdown-item"
 											href="user-courses.html"
-											>Твоите курсове
+											>Моите курсове
 										</a>
 										<a
 											class="dropdown-item"
@@ -90,40 +92,26 @@
 										</a>
 									</div>
 								</li>
-								<li class="nav-item dropdown">
+								<li class="nav-item">
 									<a
-										class="nav-link dropdown-toggle"
-										id="navbarDropdown"
-										role="button"
-										data-toggle="dropdown"
-										aria-haspopup="true"
-										aria-expanded="false"
+										class="nav-link"
+										aria-current="page"
+										href="#"
 									>
-										Профил
+										Моя профил
 									</a>
-									<div
-										class="dropdown-menu"
-										aria-labelledby="navbarDropdown"
-									>
-										<a
-											class="dropdown-item"
-											href="user-courses.html"
-											>Твоите курсове</a
-										>
-										<a
-											class="dropdown-item"
-											href="settings.html"
-											>Настройки</a
-										>
-										<div class="dropdown-divider"></div>
-										<a
-											class="dropdown-item"
-											onclick="location.href='/index'"
-											>Изход</a
-										>
-									</div>
 								</li>
 							</ul>
+							<div class="d-flex">
+								<button
+									class="btn primary-button"
+									onclick="location.href='/loginForm'"
+									type="button"
+									id="login-button-header"
+								>
+									Изход
+								</button>
+							</div>
 						</div>
 					</div>
 				</nav>
@@ -138,25 +126,42 @@
 						onclick="location.href='/index'"
 				/></a>
 		     -->
-				<h2 class="title mx-auto mb-5">Редактиране</h2>
-				<section id="settings-section" class="w-50 h-75 mx-auto">
-					<form>
+				<section id="myProfile-section" class="container-fluid d-flex flex-column align-items-center  h-100 my-5">
+				<h2 class="title mx-auto mb-5">Моя профил</h2>
+					<form id="profileForm">
 						<div class="form-group row mb-2">
 							<label
-								for="inputEmail3"
-								class="col-sm-2 col-form-label"
-								>Имейл</label
-							>
-							<div class="col-sm-10">
+								for="readonlyUsername"
+								class="col-sm-5 col-form-label"
+								>Потребителско име
+							</label>
+							<div class="col-sm-7">
 								<input
+									readonly
+									id="readonlyUsername"
 									type="email"
 									class="form-control"
-									id="email"
-									placeholder="Email"
 								/>
 							</div>
 						</div>
 						<div class="form-group row mb-2">
+							<label
+								for="readonlyEmail"
+								class="col-sm-5 col-form-label"
+								>Имейл
+							</label>
+							<div class="col-sm-7">
+								<input
+									readonly
+									id="readonlyEmail"
+									type="email"
+									class="form-control"
+								/>
+							</div>
+						</div>
+
+						<!-- CHANGE PASSWORD FIELDS -->
+						<!-- <div class="form-group row mb-2">
 							<label
 								for="inputPassword3"
 								class="col-sm-2 col-form-label"
@@ -184,16 +189,10 @@
 									id="newPassword"
 									placeholder="Password"
 								/>
-								<small
-									id="passwordHelpBlock"
-									class="form-text text-muted"
-								>
-									Паролата трябва да бъде поне 5
-									символа</small
-								>
 							</div>
-						</div>
-						<fieldset class="form-group mb-2">
+						</div> -->
+						<!-- CHOOSE ROLE FIELDS -->
+						<!-- <fieldset class="form-group mb-2">
 							<div class="row">
 								<legend class="col-form-label col-sm-2 pt-0">
 									Роля
@@ -248,10 +247,10 @@
 									</div>
 								</div>
 							</div>
-						</fieldset>
+						</fieldset> -->
 						<div class="form-group row mb-2">
-							<div class="col-sm-2">Профилна снимка</div>
-							<div class="col-sm-10">
+							<div class="col-sm-5">Профилна снимка</div>
+							<div class="col-sm-7">
 								<div class="form-group">
 									<input
 										type="file"
@@ -265,13 +264,14 @@
 							<button
 								type="submit"
 								class="btn btn-primary primary-button"
+								id="saveButton"
 							>
 								Запази
 							</button>
 						</div>
 					</form>
-				</section>
-			</div>
+				</div>
+			</section>
 			<footer class="footer fixed-bottom m-4">
 				<div class="row mx-auto">
 					<div class="col-6 col-md">
@@ -279,7 +279,7 @@
 						<ul class="list-unstyled text-small">
 							<li>
 								<a class="text-muted" href="courses.html"
-									>Твоите курсове</a
+									>Моите курсове</a
 								>
 							</li>
 							<li>
@@ -290,10 +290,10 @@
 						</ul>
 					</div>
 					<div class="col-6 col-md">
-						<h5>Профил</h5>
+						<h5>Моя профил</h5>
 						<ul class="list-unstyled text-small">
 							<li>
-								<a class="text-muted" href="settings.html"
+								<a class="text-muted" href="myProfile.html"
 									>Настройки</a
 								>
 							</li>
