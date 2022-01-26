@@ -21,7 +21,7 @@ public class ScheduledTasks {
             this.microsoftCoursesConnector.syncCoursesFromMicrosoftWithTechSmartCourses();
             System.out.println("Synchronizing of courses with microsoft finished successfully");
         } catch (RuntimeException e) {
-            System.out.println("Error during execution of synchronizeMicrosoft method");
+            System.out.println(ExceptionMessages.ERROR_SYNC);
         }
     }
 }

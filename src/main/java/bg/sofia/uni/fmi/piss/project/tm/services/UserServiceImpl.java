@@ -6,6 +6,7 @@ import bg.sofia.uni.fmi.piss.project.tm.dtos.ImageDto;
 import bg.sofia.uni.fmi.piss.project.tm.dtos.TeachSmartUserDto;
 import bg.sofia.uni.fmi.piss.project.tm.models.TeachSmartUser;
 import bg.sofia.uni.fmi.piss.project.tm.repositories.TeachSmartUserRepository;
+import bg.sofia.uni.fmi.piss.project.tm.utils.ExceptionMessages;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -49,10 +50,10 @@ public class UserServiceImpl implements UserService {
 
             Path path = Paths.get(USER_DIR);
             Files.createDirectories(path);
-            System.out.println("Directory is created!");
+            System.out.println(ExceptionMessages.DIRECTORY_CREATED);
 
         } catch (IOException e) {
-            System.err.println("Failed to create directory!" + e.getMessage());
+            System.err.println(ExceptionMessages.DIRECTORY_FAILED + e.getMessage());
         }
 
         userRepository.save(user);
