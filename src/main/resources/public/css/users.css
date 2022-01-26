@@ -1,0 +1,7 @@
+@import 'style.css';
+
+.card-img-top {
+	object-fit: contain;
+	margin-top: 1rem !important;
+	margin: auto;
+}

@@ -56,7 +56,7 @@ function displayUsers(users) {
 
 		//course - div (container card)
 		let cardBody = document.createElement('div');
-		cardBody.className = 'card-body';
+		cardBody.className = 'card-body text-center';
 		userDiv.appendChild(cardBody);
 
 		let userName = document.createElement('p');
