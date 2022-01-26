@@ -34,7 +34,7 @@ function displayUsers(users) {
 	container.style.setProperty('--grid-rows', rows);
 	container.style.setProperty('--grid-cols', cols);
 
-	for (i = 0; i < (rows * cols) - 1 ; i++) {
+	for (i = 0; i < users.length ; i++) {
 		let userDiv = document.createElement('div');
 		userDiv.className='card border border-white bg-dark text-white';
 		userDiv.id = users[i].userId;

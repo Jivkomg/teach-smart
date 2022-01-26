@@ -1,8 +1,4 @@
 insert into teach_smart_users (id, email, password, role, username) values ('7fcd1b34-8200-4edb-a95a-f14336ea790d', 'zhivko.georgiev@gmail.com', '$2a$10$oU9mp5mK1mbbMBeYb1HrHOwIaDEiQ8IBDFnelS5ctGiyKeWhBbrlO', 'ROLE_USER', 'zhivkomg');
-
-insert into tutors (id, description, name) values ('7276dc72-cde8-451a-9015-35aa3428bd24', 'Nakov', 'JAVA');
-insert into organizers (id, description, name) values ('1e036339-a0b4-40e5-bf02-a1585775322c', 'Microsoft Learn is a free, online training platform that provides interactive learning for Microsoft products and more. Our goal is to help you become proficient on our technologies and learn more skills with fun, guided, hands-on, interactive content that is specific to your role and goals.', 'MicrosoftDocs');
-
 insert into teach_smart_users (id, email, password, role, username) values ('eed1e32b-f9da-4351-ab5d-aa20c6d9655d', 'borislava.borisova@gmail.com', '$2a$10$SaKBmIv3M/98yOwh4rQDCOgg0HyrEpaL1oQ2ykzERka42TKapbJ.u', 'ROLE_USER', 'borislavaborisova');
 insert into teach_smart_users (id, email, password, role, username) values ('847ad631-b219-4993-8e45-d6e8e17834d1', 'gergana.krusteva@gmail.com', '$2a$10$u2V8V1oCFipgNqQ777zbaOt76vFpZ58nzzgecGVHvPOH12MT1uKai', 'ROLE_USER', 'gerganakrusteva');
 insert into teach_smart_users (id, email, password, role, username) values ('cf2c24a1-cdd3-4f0a-828f-db86937aea33', 'dimitur.pavlov@gmail.com', '$2a$10$trjSeVSWWf51ITzuBoQfBuvLyyn3mHVmN2/DVcuEl1S1UnjMFcBY2', 'ROLE_USER', 'dimiturpavlov');
@@ -23,3 +19,6 @@ insert into teach_smart_users (id, email, password, role, username) values ('759
 insert into teach_smart_users (id, email, password, role, username) values ('830d01cc-6aa8-4b2f-af98-c54f509c3aea', 'kostadin.trifonov@gmail.com', '$2a$10$X/dEMjXmcxdY6asGxIs/2.evdPg76qXMy3Y1McCEixCf1xRA7qKWG', 'ROLE_USER', 'kostadintrifonov');
 insert into teach_smart_users (id, email, password, role, username) values ('748416d7-d4c4-4fb2-9534-8e9b6a5a22e2', 'kremena.zhivkova@gmail.com', '$2a$10$zpP0NG5FffTcSXtKDGtsCO0aWQpa6OfdIP32XBNaQRtWA7S6dko9y', 'ROLE_USER', 'kremenazhivkova');
 insert into teach_smart_users (id, email, password, role, username) values ('b7c051cf-4760-4874-99ab-75587ca7dd8d', 'pavel.pavlov@gmail.com', '$2a$10$jXrRQqnDTuqRxF4gBFA0Su0p77ADkBIwOQTBXQJBsp1C/DnEAkk1u', 'ROLE_USER', 'pavelpavlov');
+
+insert into tutors (id, description, name) values ('7276dc72-cde8-451a-9015-35aa3428bd24', 'Nakov', 'JAVA');
+insert into organizers (id, description, name) values ('1e036339-a0b4-40e5-bf02-a1585775322c', 'Microsoft Learn is a free, online training platform that provides interactive learning for Microsoft products and more. Our goal is to help you become proficient on our technologies and learn more skills with fun, guided, hands-on, interactive content that is specific to your role and goals.', 'MicrosoftDocs');
