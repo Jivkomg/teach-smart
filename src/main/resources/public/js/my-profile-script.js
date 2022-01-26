@@ -1,104 +1,61 @@
 $(function () {
-    const username = localStorage.getItem("username").toString() || 'none';
-    const displayError = $("#errorField");
-
     // Display username and email of the current user
-    // @ts-ignore
+    const username = localStorage.getItem("username").toString();
+    const displayErrorMessage = $("#errorField");
+    const displaySuccessMessage = $("#successField");
+
     $("#readonlyUsername").val(username);
     $.ajax({
         type: 'get',
         contentType: 'application/json; charset=utf-8',
         url: `user/current/${username}`,
         success: (data) => { console.log(data); $("#readonlyEmail").val(data.email); },
-        error: (err) => { console.log(err); displayError.text('Възникна грешка!'); }
+        error: (err) => { console.log(err); displayErrorMessage.text('Възникна грешка!'); }
     });
+
+    const input = document.getElementById('upload');;
+    const fileNameField = document.getElementById('file-name-field');
+
+    $('#upload').on('change', function () {
+        readURL(input);
+    });
+
+    const showFileName = (event) => {
+        const input = event.srcElement;
+        const fileName = input.files[0].name;
+        fileNameField.textContent = fileName;
+    };
+
+    input.addEventListener('change', showFileName);
+
+
     // Save newly uploaded profile pic
     $(document).on('click', '#saveButton', (e) => {
+        const formData = new FormData();
+        const file = input.files[0];
+        if (file.length > 0) formData.append('profile_pic', file);
+
+        $.ajax({
+            url: `file/upload/${username}`,
+            type: 'POST',
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: (data) => { console.log(data); displaySuccessMessage.text('Промените са запазени!'); },
+            error: (err) => { console.log(err); displayErrorMessage.text('Възникна грешка!'); }
+        });
     });
 });
 
+const readURL = (input) => {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
 
-// document.addEventListener("DOMContentLoaded", function (event) {
-//     document.getElementById("username").innerText = localStorage.getItem("username");
-//     getCurrentUser();
-// });
-
-// function ShowSaveConfirmation() {
-//     document.getElementById("save-info-message").style.visibility = "visible";
-// }
-
-// function HideSaveConfirmation() {
-//     document.getElementById("save-info-message").style.visibility = "hidden";
-// }
-
-// function getCurrentUser() {
-//     $.ajax({
-//         type: "GET",
-//         contentType: "application/json",
-//         url: "/user/current/" + sessionStorage.getItem('username'),
-//         success: function (user) {
-//             console.log(user);
-//             document.getElementById("username-h2").innerHTML = "<h2>Username: " + user.username + "</h2>";
-//             document.getElementById("email-h2").innerHTML = "<h2>Email: " + user.email + "</h2>";
-
-//         },
-//         error: function (e) {
-//             console.log("ERROR: ", e);
-//         }
-//     });
-// }
-
-// function onFileUploadSubmit() {
-//     document.getElementById("username_form").value = sessionStorage.getItem('username');
-
-//     $('#profile_pic_upload').ajaxForm({
-//         url: "/file/upload",
-//         type: "POST",
-//         success: function (response) {
-//             alert("The server says: " + response);
-//         },
-//         error: function (e) {
-//             console.log("ERROR: ", e);
-//         }
-//     });
-// }
-
-// function formSubmit(e) {
-//     e.preventDefault(); //This will prevent the default click action
-
-//     let formData = new FormData();
-//     let input = document.getElementById("profile_pic");
-//     let file = input.files[0];
-//     formData.append("profile_pic", file);
-
-//     $.ajax({
-//         type: 'POST',
-//         url: "/file/upload/" + sessionStorage.getItem('username'),
-//         data: formData,
-//         processData: false,
-//         contentType: false,
-//         success: function (response) {
-//             alert("The server says: " + response);
-//         },
-//         error: function (e) {
-//             alert("ERROR: ", e);
-//         }
-//     });
-// }
-
-// function readURL(input) {
-//     if (input.files && input.files[0]) {
-//         let reader = new FileReader();
-
-//         reader.onload = function (e) {
-//             $('#pic_preview').attr('src', e.target.result);
-//         };
-
-//         reader.readAsDataURL(input.files[0]); // convert to base64 string
-//     }
-// }
-
-// $("#profile_pic").change(function () {
-//     document.getElementById('uploaded-h2').style.visibility = "visible";
-//     readURL(this);
-// });
+        reader.onload = function (e) {
+            $('#imageResult')
+                .attr('src', e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+};
