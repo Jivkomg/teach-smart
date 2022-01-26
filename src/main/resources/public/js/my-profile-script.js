@@ -4,7 +4,7 @@ $(function () {
     // Display username and email of the current user
     // @ts-ignore
     $("#readonlyUsername").val(username);
-    $.get(`/current/${username}`, (data) => { console.log(data); $("#readonlyEmail").val(data.email); });
+    $.get(`user/current/${username}`, (data) => { console.log(data); $("#readonlyEmail").val(data.email); });
 
     // Save newly uploaded profile pic
     $(document).on('click', '#saveButton', (e) => {

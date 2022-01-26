@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import bg.sofia.uni.fmi.piss.project.tm.models.TeachSmartUser;
 import bg.sofia.uni.fmi.piss.project.tm.repositories.TeachSmartUserRepository;
+import bg.sofia.uni.fmi.piss.project.tm.utils.ExceptionMessages;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -26,7 +27,7 @@ public class DetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<TeachSmartUser> user = this.userRepository.findByUsername(username);
         if (!user.isPresent()) {
-            throw new UsernameNotFoundException(String.format("%s was not found", username));
+            throw new UsernameNotFoundException(String.format(ExceptionMessages.USERNAME_NOT_FOUND, username));
         }
 
         return new org.springframework.security.core.userdetails.User(
