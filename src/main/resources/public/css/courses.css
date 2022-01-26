@@ -1,16 +1,24 @@
 @import 'style.css';
 
-.card{
-			min-width: calc(100%/7) !important;
-			max-width: calc(100%/7) !important;
-		}
+.card {
+	min-width: calc(100% / 7) !important;
+	max-width: calc(100% / 7) !important;
+}
 
-		.card-img-top{
-			width: 60% !important;
-			margin: auto !important;
-			margin-top: 10px !important;
-		}
+.card-img-top {
+	width: 60% !important;
+	margin: auto !important;
+	margin-top: 10px !important;
+}
 
-		.card-group{
-			justify-content: left !important;
-		}
+.card-group {
+	justify-content: left !important;
+}
+
+#courses-section {
+	height: 100%;
+}
+
+body {
+	overflow: hidden;
+}
