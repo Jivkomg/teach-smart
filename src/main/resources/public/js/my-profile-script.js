@@ -3,15 +3,15 @@ $(function () {
     const username = localStorage.getItem("username").toString();
     const displayError = $("#errorField");
 
-    // @ts-ignore
+
     $("#readonlyUsername").val(username);
-    // $.ajax({
-    //     type: 'get',
-    //     contentType: 'application/json; charset=utf-8',
-    //     url: `user/current/${username}`,
-    //     success: (data) => { console.log(data); $("#readonlyEmail").val(data.email); },
-    //     error: (err) => { console.log(err); displayError.text('Възникна грешка!'); }
-    // });
+    $.ajax({
+        type: 'get',
+        contentType: 'application/json; charset=utf-8',
+        url: `user/current/${username}`,
+        success: (data) => { console.log(data); $("#readonlyEmail").val(data.email); },
+        error: (err) => { console.log(err); displayError.text('Възникна грешка!'); }
+    });
 
     const input = document.getElementById('upload');;
     const fileNameField = document.getElementById('file-name-field');
