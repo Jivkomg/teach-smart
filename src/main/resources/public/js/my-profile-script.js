@@ -1,11 +1,17 @@
 $(function () {
     const username = localStorage.getItem("username").toString() || 'none';
+    const displayError = $("#errorField");
 
     // Display username and email of the current user
     // @ts-ignore
     $("#readonlyUsername").val(username);
-    $.get(`user/current/${username}`, (data) => { console.log(data); $("#readonlyEmail").val(data.email); });
-
+    $.ajax({
+        type: 'get',
+        contentType: 'application/json; charset=utf-8',
+        url: `user/current/${username}`,
+        success: (data) => { console.log(data); $("#readonlyEmail").val(data.email); },
+        error: (err) => { console.log(err); displayError.text('Възникна грешка!'); }
+    });
     // Save newly uploaded profile pic
     $(document).on('click', '#saveButton', (e) => {
     });

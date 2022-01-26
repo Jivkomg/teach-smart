@@ -62,6 +62,7 @@ $(function () {
   };
 
   $(document).on('click', '#submitButton', (e) => {
+    // @ts-ignore
     registrationForm.validate({
       ...validationRules,
       submitHandler: submitForm
