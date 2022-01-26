@@ -48,8 +48,6 @@ $(function () {
     });
 });
 
-
-
 const readURL = (input) => {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
@@ -61,26 +59,3 @@ const readURL = (input) => {
         reader.readAsDataURL(input.files[0]);
     }
 };
-
-// function formSubmit(e) {
-//     e.preventDefault(); //This will prevent the default click action
-
-//     let formData = new FormData();
-//     let input = document.getElementById("profile_pic");
-//     let file = input.files[0];
-//     formData.append("profile_pic", file);
-
-//     $.ajax({
-//         type: 'POST',
-//         url: "/file/upload/" + sessionStorage.getItem('username'),
-//         data: formData,
-//         processData: false,
-//         contentType: false,
-//         success: function (response) {
-//             alert("The server says: " + response);
-//         },
-//         error: function (e) {
-//             alert("ERROR: ", e);
-//         }
-//     });
-// }
