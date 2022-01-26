@@ -27,11 +27,6 @@
 	--light-grey: #b0bec5;
 }
 
-html,
-body {
-	height: 100%;
-}
-
 #logo {
 	width: auto;
 	height: 70px;
