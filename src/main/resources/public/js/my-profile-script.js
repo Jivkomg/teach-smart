@@ -3,6 +3,7 @@ $(function () {
     const username = localStorage.getItem("username").toString();
     const displayErrorMessage = $("#errorField");
     const displaySuccessMessage = $("#successField");
+    getCurrentUserProfilePic();
 
     $("#readonlyUsername").val(username);
     $.ajax({
@@ -32,8 +33,12 @@ $(function () {
     // Save newly uploaded profile pic
     $(document).on('click', '#saveButton', (e) => {
         const formData = new FormData();
+        debugger
+        const input = document.getElementById("upload");
         const file = input.files[0];
-        if (file.length > 0) formData.append('profile_pic', file);
+
+//        if (file.length > 0)
+        formData.append("profile_pic", file);
 
         $.ajax({
             url: `file/upload/${username}`,
@@ -47,6 +52,24 @@ $(function () {
         });
     });
 });
+
+function getCurrentUserProfilePic() {
+    $.ajax({
+        type: "GET",
+        contentType: "application/json",
+        url: "/user/current/profile-pic/" + sessionStorage.getItem('username'),
+        success: function (response) {
+            console.log(response);
+            var image = new Image();
+            image.src = 'data:image/jpg;base64,' + response.encodedImage;
+            document.getElementById("user-card").appendChild(image);
+        },
+        error: function (e) {
+            console.log("ERROR: ", e);
+        }
+    });
+}
+
 
 const readURL = (input) => {
     if (input.files && input.files[0]) {

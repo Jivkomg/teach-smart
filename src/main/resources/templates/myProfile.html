@@ -1,82 +1,152 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8" />
+		<link
+			href="css/my-profile-style.css"
+			rel="stylesheet"
+			type="text/css"
+			crossorigin="anonymous"
+		/>
 
-<head>
-    <meta charset="utf-8" />
-    <link href="css/my-profile-style.css" rel="stylesheet" type="text/css" crossorigin="anonymous" />
+		<script defer src="js/my-profile-script.js"></script>
+		<title>My profile</title>
+		<link
+			rel="icon"
+			type="image/icon"
+			sizes="114x114"
+			href="images/logo_icon.ico"
+		/>
+		<!-- Bootstrap CSS v5.1.3 -->
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+			crossorigin="anonymous"
+		/>
+		<!-- jQuery v3.6.0 -->
+		<script
+			src="https://code.jquery.com/jquery-3.6.0.js"
+			integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+			crossorigin="anonymous"
+		></script>
+	</head>
 
-    <script defer src="js/my-profile-script.js"></script>
-    <title>My profile</title>
-    <link rel="icon" type="image/icon" sizes="114x114" href="images/logo_icon.ico" />
-    <!-- Bootstrap CSS v5.1.3 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
-    <!-- jQuery v3.6.0 -->
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-</head>
-
-<body>
-    <div class="wrapper">
-        <header class="header mb-5">
-            <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-                <div class="container-fluid">
-                    <a class="navbar-brand" onclick="location.href='/courses'">
+	<body>
+		<div class="wrapper">
+			<header class="header mb-5">
+				<nav
+					class="navbar navbar-expand-md navbar-dark bg-dark fixed-top"
+				>
+					<div class="container-fluid">
+						<a
+							class="navbar-brand"
+							onclick="location.href='/courses'"
+						>
 							TeachSmart
 						</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+						<button
+							class="navbar-toggler"
+							type="button"
+							data-bs-toggle="collapse"
+							data-bs-target="#navbarCollapse"
+							aria-controls="navbarCollapse"
+							aria-expanded="false"
+							aria-label="Toggle navigation"
+						>
 							<span class="navbar-toggler-icon"></span>
 						</button>
-                    <div id="navbarCollapse" class="collapse navbar-collapse">
-                        <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                            <li class="nav-item dropdown">
-                                <a id="all-courses" class="nav-link" onclick="location.href='/courses'">
+						<div
+							id="navbarCollapse"
+							class="collapse navbar-collapse"
+						>
+							<ul class="navbar-nav me-auto mb-2 mb-md-0">
+								<li class="nav-item dropdown">
+									<a
+										id="all-courses"
+										class="nav-link"
+										onclick="location.href='/courses'"
+									>
 										Всички курсове
 									</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" onclick="location.href='/users'">
+								</li>
+								<li class="nav-item">
+									<a
+										class="nav-link"
+										onclick="location.href='/users'"
+									>
 										Потребители
 									</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" onclick="location.href='/myProfile'">
+								</li>
+								<li class="nav-item">
+									<a
+										class="nav-link"
+										aria-current="page"
+										onclick="location.href='/myProfile'"
+									>
 										Моя профил
 									</a>
-                            </li>
-                        </ul>
-                        <div class="d-flex">
-                            <p id="username" style="color: white; margin-right: 20px;"></p>
-                            <button class="btn primary-button" onclick="location.href='/loginForm'" type="button" id="login-button-header">
+								</li>
+							</ul>
+							<div class="d-flex">
+								<p
+									id="username"
+									style="color: white; margin-right: 20px"
+								></p>
+								<button
+									class="btn primary-button"
+									onclick="location.href='/loginForm'"
+									type="button"
+									id="login-button-header"
+								>
 									Изход
 								</button>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-        </header>
-        <div class="container d-flex h-100 w-50 p-3 pb-5 mb-5 flex-column justify-content-center">
-            <section id="myProfile-section">
-                <h2 class="title row mb-5 text-center mx-auto">
-                    Моя профил
-                </h2>
-                <form id="profileForm">
-                    <div class="form-group row mb-2">
-                        <label for="readonlyUsername" class="col-form-label">Потребителско име
+							</div>
+						</div>
+					</div>
+				</nav>
+			</header>
+			<div
+				class="container d-flex h-100 w-50 p-3 pb-5 mb-5 flex-column justify-content-center"
+			>
+				<section id="myProfile-section">
+					<h2 class="title row mb-5 text-center mx-auto">
+						Моя профил
+					</h2>
+					<div id="user-card">
+						<!-- <img src="img/man.png" alt="User_1"> -->
+					</div>
+					<form id="profileForm">
+						<div class="form-group row mb-2">
+							<label for="readonlyUsername" class="col-form-label"
+								>Потребителско име
 							</label>
-                        <div class="row">
-                            <input readonly id="readonlyUsername" type="email" class="form-control" />
-                        </div>
-                    </div>
+							<div class="row">
+								<input
+									readonly
+									id="readonlyUsername"
+									type="email"
+									class="form-control"
+								/>
+							</div>
+						</div>
 
-                    <div class="form-group row mb-2">
-                        <label for="readonlyEmail" class="col-form-label">Имейл
+						<div class="form-group row mb-2">
+							<label for="readonlyEmail" class="col-form-label"
+								>Имейл
 							</label>
-                        <div class="row">
-                            <input readonly id="readonlyEmail" type="email" class="form-control" />
-                        </div>
-                    </div>
+							<div class="row">
+								<input
+									readonly
+									id="readonlyEmail"
+									type="email"
+									class="form-control"
+								/>
+							</div>
+						</div>
 
-                    <!-- CHANGE PASSWORD FIELDS -->
-                    <!-- <div class="form-group row mb-2">
+						<!-- CHANGE PASSWORD FIELDS -->
+						<!-- <div class="form-group row mb-2">
 							<label
 								for="inputPassword3"
 								class="col-sm-2 col-form-label"
@@ -106,8 +176,8 @@
 								/>
 							</div>
 						</div> -->
-                    <!-- CHOOSE ROLE FIELDS -->
-                    <!-- <fieldset class="form-group mb-2">
+						<!-- CHOOSE ROLE FIELDS -->
+						<!-- <fieldset class="form-group mb-2">
 							<div class="row">
 								<legend class="col-form-label col-sm-2 pt-0">
 									Роля
@@ -163,7 +233,7 @@
 								</div>
 							</div>
 						</fieldset> -->
-                    <!-- <div class="form-group row my-2">
+						<!-- <div class="form-group row my-2">
 							<div class="col-sm-5">Профилна снимка</div>
 							<div class="col-sm-7">
 								<div class="form-group" id="profilePictureUpload">
@@ -172,11 +242,22 @@
 							</div>
 						</div>
 						 -->
-                    <div class="row mx-1">
-                        <!-- Upload image input-->
-                        <div class="input-group my-3 px-2 py-2 rounded-pill shadow-lg choose-file-box">
-                            <input id="upload" type="file" onchange="readURL(this);" class="form-control border-0" />
-                            <label id="file-name-field" for="upload" class="font-weight-light text-muted">File name</label
+						<div class="row mx-1">
+							<!-- Upload image input-->
+							<div
+								class="input-group my-3 px-2 py-2 rounded-pill shadow-lg choose-file-box"
+							>
+								<input
+									id="upload"
+									type="file"
+									onchange="readURL(this);"
+									class="form-control border-0"
+								/>
+								<label
+									id="file-name-field"
+									for="upload"
+									class="font-weight-light text-muted"
+									>File name</label
 								>
 								<div class="input-group-append">
 									<label
@@ -222,59 +303,6 @@
 						</div>
 					</form>
 				</section>
-
-				<footer class="footer fixed-bottom m-4">
-					<div class="row mx-auto">
-						<div class="col-6 col-md">
-							<h5>Курсове</h5>
-							<ul class="list-unstyled text-small">
-								<li>
-									<a class="text-muted" href="courses.html"
-										>Моите курсове</a
-									>
-								</li>
-								<li>
-									<a
-										class="text-muted"
-										href="course-screen.html"
-										>Всички курсове</a
-									>
-								</li>
-							</ul>
-						</div>
-						<div class="col-6 col-md">
-							<h5>Моя профил</h5>
-							<ul class="list-unstyled text-small">
-								<li>
-									<a class="text-muted" href="myProfile.html"
-										>Настройки</a
-									>
-								</li>
-								<li>
-									<a class="text-muted" href="index.html"
-										>Изход</a
-									>
-								</li>
-							</ul>
-						</div>
-						<div class="col-6 col-md">
-							<h5>За нас</h5>
-							<ul class="list-unstyled text-small">
-								<li><a class="text-muted" href="#">Екип</a></li>
-								<li>
-									<a class="text-muted" href="#"
-										>Технологии</a
-									>
-								</li>
-								<li>
-									<a class="text-muted" href="#"
-										>Terms and conditions</a
-									>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</footer>
 			</div>
 			<script
 				src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

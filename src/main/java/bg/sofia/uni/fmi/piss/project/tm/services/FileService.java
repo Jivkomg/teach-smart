@@ -57,14 +57,19 @@ public class FileService {
     }
 
     private boolean checkFileForNudity(String absolutePathToFile) {
-        String key = "UyactQyBMFoFbEfe1l2in6zWCvFuncdg";
+//        String key = "UyactQyBMFoFbEfe1l2in6zWCvFuncdg";
+        String key = "5b6b7bd0-e016-4673-9534-bd0611095ab9";
+
         boolean isOk = true;
         try {
             Hashtable<String, String> requestParams = new Hashtable<>();
 //            requestParams.put("format", "json");
 //            requestParams.put("api_key", key);
-            String url = "www.picpurify.com/analyse/1.1";
-            String path = "/?API_KEY=" + key + "&task=porn_moderation" +  "&file_image=@" + absolutePathToFile;
+//            String url = "www.picpurify.com";
+            String url = "api.deepai.org";
+
+//            String path = "/analyse/1.1/?API_KEY=" + key + "&task=porn_moderation" +  "&file_image=@" + absolutePathToFile;
+            String path = "/api/nsfw-detector/?api_key=" + key + "&file_image=@" + absolutePathToFile;
 
             SocketChannel socketChannel = SocketChannel.open();
             socketChannel.connect(new InetSocketAddress(url, 80));
@@ -91,7 +96,7 @@ public class FileService {
                 byteBuffer.clear();
             }
 
-            if (!output.contains("OK")) {
+            if (output.contains("nudity")) {
                 isOk = false;
             }
             socketChannel.close();
