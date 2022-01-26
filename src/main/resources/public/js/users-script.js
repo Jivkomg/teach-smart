@@ -22,7 +22,6 @@ function getAllUsers() {
 	});
 }
 
-//TODO: USER AVATAR
 const userAvatars = [
 	"https://i.ibb.co/z69VD7h/1.png",
 	"https://i.ibb.co/mhMM7hJ/2.png",
@@ -43,22 +42,23 @@ function displayUsers(users) {
 	container.style.setProperty('--grid-rows', rows.toString());
 	container.style.setProperty('--grid-cols', cols.toString());
 
-	for (let i = 0; i < (rows * cols) - 1; i++) {
+	for (let i = 0; i < users.length; i++) {
 		let userDiv = document.createElement('div');
 		userDiv.className = 'card border border-white bg-dark text-white';
 		userDiv.id = users[i].userId;
 
+        //user - avatar
 		let userImg = document.createElement('img');
-		let randomAvatar = Math.floor(Math.random() * 10); //10 avatars available
+		let randomAvatar = Math.floor(Math.random() * 10);
 		userImg.src = userAvatars[randomAvatar];
-		userImg.className = 'card-img-top';
+		userImg.className = 'card-img-top mt-2';
 		userDiv.appendChild(userImg);
 
-		//course - div (container card)
 		let cardBody = document.createElement('div');
 		cardBody.className = 'card-body text-center';
 		userDiv.appendChild(cardBody);
 
+        //user username
 		let userName = document.createElement('p');
 		let userNameText = users[i].username;
 		let text = document.createTextNode(userNameText);
@@ -66,6 +66,7 @@ function displayUsers(users) {
 		userName.appendChild(text);
 		cardBody.appendChild(userName);
 
+        //user - email
 		let userEmail = document.createElement('p');
 		let userEmailText = users[i].email;
 		let email = document.createTextNode(userEmailText);
