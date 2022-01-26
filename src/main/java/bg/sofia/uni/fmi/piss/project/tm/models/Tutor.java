@@ -29,7 +29,7 @@ public class Tutor extends BaseEntity {
         this.name = name;
     }
 
-    @Column(name = "description")
+    @Column(name = "description", length = 1000)
     public String getDescription() {
         return description;
     }

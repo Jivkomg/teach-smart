@@ -18,6 +18,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static bg.sofia.uni.fmi.piss.project.tm.utils.SecurityConstants.USER_DIR;
@@ -37,12 +38,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseEntity<TeachSmartUserDto> register(TeachSmartUserDto userDto) {
-        TeachSmartUser existingUser = userRepository.findByUsername(userDto.getUsername());
-        if (existingUser != null) {
+        Optional<TeachSmartUser> existingUser = userRepository.findByUsername(userDto.getUsername());
+        if (existingUser.isPresent()) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
 
         TeachSmartUser user = userAssembler.toUser(userDto);
+
         try {
 
             Path path = Paths.get(USER_DIR);
@@ -51,7 +53,6 @@ public class UserServiceImpl implements UserService {
 
         } catch (IOException e) {
             System.err.println("Failed to create directory!" + e.getMessage());
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
         userRepository.save(user);
@@ -60,8 +61,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseEntity login(TeachSmartUserDto userDto) {
-        TeachSmartUser user = userRepository.findByUsername(userDto.getUsername());
-        if (user == null) {
+        Optional<TeachSmartUser> user = userRepository.findByUsername(userDto.getUsername());
+        if (!user.isPresent()) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
 
@@ -70,13 +71,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseEntity<TeachSmartUserDto> getAuthUser(String username) {
-        TeachSmartUser user = userRepository.findByUsername(username);
+        Optional<TeachSmartUser> user = userRepository.findByUsername(username);
 
-        if (user == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        return user.map(teachSmartUser -> new ResponseEntity<>(EntityToDtoMapper.toUserDto(teachSmartUser), HttpStatus.OK))
+            .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
 
-        return new ResponseEntity<>(EntityToDtoMapper.toUserDto(user), HttpStatus.OK);
     }
 
     @Override

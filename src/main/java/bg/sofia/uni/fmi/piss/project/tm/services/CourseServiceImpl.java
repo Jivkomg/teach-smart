@@ -57,19 +57,6 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public ResponseEntity<List<CourseDto>> getTop30Courses() {
-        List<Course> topCourses = courseRepository.findTop30SoldOut();
-        if (topCourses.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
-        return new ResponseEntity<>(topCourses
-            .stream()
-            .map(EntityToDtoMapper::toCourseDto)
-            .collect(Collectors.toList()), HttpStatus.OK);
-    }
-
-    @Override
     public ResponseEntity<CourseDto> getCourseById(String id) {
         Optional<Course> course = courseRepository.findById(id);
 

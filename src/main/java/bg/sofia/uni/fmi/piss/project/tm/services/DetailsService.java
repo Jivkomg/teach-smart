@@ -1,7 +1,10 @@
 package bg.sofia.uni.fmi.piss.project.tm.services;
 
+import java.util.Optional;
+
 import bg.sofia.uni.fmi.piss.project.tm.models.TeachSmartUser;
 import bg.sofia.uni.fmi.piss.project.tm.repositories.TeachSmartUserRepository;
+import bg.sofia.uni.fmi.piss.project.tm.utils.ExceptionMessages;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -22,15 +25,15 @@ public class DetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        TeachSmartUser user = this.userRepository.findByUsername(username);
-        if (user == null) {
-            throw new UsernameNotFoundException(String.format("%s was not found", username));
+        Optional<TeachSmartUser> user = this.userRepository.findByUsername(username);
+        if (!user.isPresent()) {
+            throw new UsernameNotFoundException(String.format(ExceptionMessages.USERNAME_NOT_FOUND, username));
         }
 
         return new org.springframework.security.core.userdetails.User(
-            user.getUsername(),
-            user.getPassword(),
-            AuthorityUtils.createAuthorityList(user.getRole())
+            user.get().getUsername(),
+            user.get().getPassword(),
+            AuthorityUtils.createAuthorityList(user.get().getRole())
         );
     }
 }

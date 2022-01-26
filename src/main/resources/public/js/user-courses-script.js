@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 function getEventPosterById(id, selector) {
     $.ajax({
-        type: "POST",
+        type: "GET",
         contentType: "application/json",
         url: "/events/poster/" + id,
         success: function (response) {
@@ -109,7 +109,7 @@ function removeExistingEvents() {
 
 function getCurrentUserProfilePic() {
     $.ajax({
-        type: "POST",
+        type: "GET",
         contentType: "application/json",
         url: "/user/current/profile-pic/" + sessionStorage.getItem('username'),
         success: function (response) {

@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 function getAllUsers() {
 	$.ajax({
-		type: "POST",
+		type: "GET",
 		contentType: "application/json",
 		url: "/user/all",
 		success: function (allUsers) {

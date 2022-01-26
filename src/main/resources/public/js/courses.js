@@ -51,7 +51,7 @@ $(document).ready(function () {
 function getAllcourses() {
     var deferred = $.Deferred();
     $.ajax({
-        type: "POST",
+        type: "GET",
         contentType: "application/json",
         url: "/courses/all",
         success: function (courses) {
@@ -71,7 +71,7 @@ function getAllcourses() {
 function getTop30courses() {
     var deferred = $.Deferred();
     $.ajax({
-        type: "POST",
+        type: "GET",
         contentType: "application/json",
         url: "/courses/top30",
         success: function (courses) {
@@ -157,7 +157,7 @@ function getCoursesByType(type) {
 function getCourseById(id) {
     console.log(id);
     $.ajax({
-        type: "POST",
+        type: "GET",
         contentType: "application/json",
         url: "/courses/" + id,
         success: function (course) {
@@ -188,7 +188,7 @@ function showCourseScreen(course) {
 
 function getCoursePosterById(id, selector) {
     $.ajax({
-        type: "POST",
+        type: "GET",
         contentType: "application/json",
         url: "/courses/poster/" + id,
         success: function (response) {
@@ -205,7 +205,7 @@ function getCoursePosterById(id, selector) {
 
 function getCourseOrganizers(id) {
     $.ajax({
-        type: "POST",
+        type: "GET",
         contentType: "application/json",
         url: "/courses/organizers/" + id,
         success: function (organizers) {
@@ -228,7 +228,7 @@ function getCourseOrganizers(id) {
 
 function getCoursePerformers(id) {
     var performers = $.ajax({
-        type: "POST",
+        type: "GET",
         contentType: "application/json",
         url: "/courses/tutors/" + id,
         success: function (performers) {
