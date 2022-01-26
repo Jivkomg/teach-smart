@@ -44,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .addFilterAfter(new JWTTokenVerifier(), JWTAuthenticationFilter.class)
             .authorizeRequests()
             .antMatchers("/registrationForm", "/css/**", "/images/**", "/js/**").permitAll()
-            .antMatchers("/index", "/main", "/courses/**", "/settings", "/loginForm").permitAll()
+            .antMatchers("/index", "/main", "/courses/**", "/myProfile", "/loginForm").permitAll()
             .antMatchers("/user/**", "/userCourses", "/users", "/file/**").permitAll()
             .antMatchers("/").permitAll()
             .antMatchers("/h2-console/**").permitAll()

@@ -1,12 +1,15 @@
-// document.getElementById("a-events-top30").addEventListener("click", function (e) {
-//     console.log("clickeddeded 30");
-//     localStorage.setItem("active-events", "top30");
-//     console.log("active tab = ", localStorage.getItem("active-events"));
-// });
-// document.getElementById("a-events-all").addEventListener("click", function (e) {
-//     localStorage.setItem("active-events", "all");
-//     console.log("active tab = ", localStorage.getItem("active-events"));
-// });
+$(function () {
+    const username = localStorage.getItem("username").toString() || 'none';
+
+    // Display username and email of the current user
+    // @ts-ignore
+    $("#readonlyUsername").val(username);
+    $.get(`/current/${username}`, (data) => { console.log(data); $("#readonlyEmail").val(data.email); });
+
+    // Save newly uploaded profile pic
+    $(document).on('click', '#saveButton', (e) => {
+    });
+});
 
 
 // document.addEventListener("DOMContentLoaded", function (event) {
