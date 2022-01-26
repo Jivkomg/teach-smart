@@ -42,17 +42,17 @@ public class UserController {
         return userService.login(userDto);
     }
 
-    @PostMapping("/current/{username}")
+    @GetMapping("/current/{username}")
     public ResponseEntity<TeachSmartUserDto> getCurrentUser(@PathVariable String username) {
         return userService.getAuthUser(username);
     }
 
-    @PostMapping("/current/profile-pic/{username}")
+    @GetMapping("/current/profile-pic/{username}")
     public ResponseEntity getCurrentUserProfilePic(@PathVariable String username) {
         return userService.getAuthUserProfilePic(username);
     }
 
-    @PostMapping("/all")
+    @GetMapping("/all")
     public ResponseEntity getAllUsers() {
         return userService.getAllUsers();
     }

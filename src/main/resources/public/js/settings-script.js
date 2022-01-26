@@ -24,7 +24,7 @@
 
 // function getCurrentUser() {
 //     $.ajax({
-//         type: "POST",
+//         type: "GET",
 //         contentType: "application/json",
 //         url: "/user/current/" + sessionStorage.getItem('username'),
 //         success: function (user) {

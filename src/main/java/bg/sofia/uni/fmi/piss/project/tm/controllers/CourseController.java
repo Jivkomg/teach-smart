@@ -1,14 +1,13 @@
 package bg.sofia.uni.fmi.piss.project.tm.controllers;
 
-import bg.sofia.uni.fmi.piss.project.tm.services.interfaces.CourseService;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import bg.sofia.uni.fmi.piss.project.tm.services.interfaces.CourseService;
 
 @Controller
 @RequestMapping(path = "/courses", produces = "application/json", consumes = "application/json")
@@ -21,27 +20,27 @@ public class CourseController {
         this.courseService = courseService;
     }
 
-    @PostMapping("/all")
+    @GetMapping("/all")
     public ResponseEntity getCourses() {
         return courseService.getAllCourses();
     }
 
-    @PostMapping("/{courseId}")
+    @GetMapping("/{courseId}")
     public ResponseEntity getCourseById(@PathVariable String courseId) {
         return courseService.getCourseById(courseId);
     }
 
-    @PostMapping("/organizers/{courseId}")
+    @GetMapping("/organizers/{courseId}")
     public ResponseEntity getCourseOrganizersById(@PathVariable String courseId) {
         return courseService.getCourseOrganizersById(courseId);
     }
 
-    @PostMapping("/tutors/{courseId}")
+    @GetMapping("/tutors/{courseId}")
     public ResponseEntity geCourseTutorById(@PathVariable String courseId) {
         return courseService.getCourseTutorById(courseId);
     }
 
-    @PostMapping("/poster/{courseId}")
+    @GetMapping("/poster/{courseId}")
     public ResponseEntity getPoster(@PathVariable String courseId) {
         return courseService.getPoster(courseId);
     }
