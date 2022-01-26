@@ -13,14 +13,43 @@
 	justify-content: center;
 }
 
-#myProfile-selection {
+#upload {
+	opacity: 0;
 }
 
-.header {
+#file-name-field {
+	position: absolute;
+	top: 50%;
+	left: 1rem;
+	transform: translateY(-50%);
 }
 
-.footer {
+.image-area {
+	border: 2px dashed var(--secondary);
+	padding: 1rem;
+	position: relative;
 }
 
-.title {
+.image-area::before {
+	content: 'Uploaded image result';
+	color: var(--secondary);
+	font-weight: bold;
+	text-transform: uppercase;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 0.8rem;
+	z-index: 1;
+}
+
+.image-area img {
+	z-index: 2;
+	position: relative;
+	max-width: 15rem !important;
+	max-height: 15rem !important;
+}
+
+.choose-file-box {
+	background-color: var(--light-grey);
 }
