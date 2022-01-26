@@ -19,42 +19,39 @@
 
 	<body>
 		<div class="wrapper">
-			<header class="header">
+			<header class="header mb-5">
 				<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
 					<div class="container-fluid">
-						<a class="navbar-brand" href="index.html">
+						<a class="navbar-brand" onclick="location.href='/courses'">
 							TeachSmart
 						</a>
 						<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-							data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
-							aria-label="Toggle navigation">
+								data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
+								aria-label="Toggle navigation">
 							<span class="navbar-toggler-icon"></span>
 						</button>
 						<div id="navbarCollapse" class="collapse navbar-collapse">
 							<ul class="navbar-nav me-auto mb-2 mb-md-0">
-								<li class="nav-item">
-									<a class="nav-link" aria-current="page" href="index.html">Начало</a>
-								</li>
 								<li class="nav-item dropdown">
-									<a id="navbarDropdown" class="nav-link dropdown-toggle" role="button"
-										data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Курсове
+									<a id="all-courses" class="nav-link" onclick="location.href='/courses'">
+										Всички курсове
 									</a>
-									<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-										<a class="dropdown-item" href="user-courses.html">Моите курсове
-										</a>
-										<a class="dropdown-item" href="courses.html">Всички курсове
-										</a>
-									</div>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" aria-current="page" href="#">
+									<a class="nav-link" onclick="location.href='/users'">
+										Потребители
+									</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" aria-current="page" onclick="location.href='/myProfile'">
 										Моя профил
 									</a>
 								</li>
 							</ul>
 							<div class="d-flex">
+								<p id="username" style="color: white; margin-right: 20px;"></p>
 								<button class="btn primary-button" onclick="location.href='/loginForm'" type="button"
-									id="login-button-header">
+										id="login-button-header">
 									Изход
 								</button>
 							</div>
@@ -74,7 +71,7 @@
 		     -->
 				<section id="myProfile-section"
 					class="container-fluid d-flex flex-column align-items-center  h-100 my-5">
-					<h2 class="title mx-auto mb-5">Моя профил</h2>
+					<h1 class="title mx-auto mb-5">Моя профил</h1>
 					<form id="profileForm">
 						<div class="form-group row mb-2">
 							<label for="readonlyUsername" class="col-sm-5 col-form-label">Потребителско име

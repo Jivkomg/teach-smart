@@ -31,100 +31,112 @@
 			integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 			crossorigin="anonymous"
 		></script>
+
 	<style>
 		.card{
-			min-width: calc(100%/5);
+			min-width: calc(100%/7);
+			max-width: calc(100%/7);
 		}
 
 		.card-img-top{
-			width: 90%;
+			width: 60%;
 			margin: auto;
 			margin-top: 10px;
 		}
 
 		.card-group{
-			gap: 10px;
-		}
-
-		div#typesContainer >* {
-			margin-right:
-			10px;
+			justify-content: left;
 		}
 	</style>
 
 </head>
 <body>
-<header>
-	<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+<header class="header mb-5">
+	<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="#">TeachSmart</a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+			<a class="navbar-brand" onclick="location.href='/courses'">
+				TeachSmart
+			</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+					data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
+					aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div class="collapse navbar-collapse" id="navbarCollapse">
+			<div id="navbarCollapse" class="collapse navbar-collapse">
 				<ul class="navbar-nav me-auto mb-2 mb-md-0">
-					<li class="nav-item">
-						<a id="all-courses" class="nav-link active" href="/courses">Всички курсове</a>
+					<li class="nav-item dropdown">
+						<a id="all-courses" class="nav-link" onclick="location.href='/courses'">
+							Всички курсове
+						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="/userCourses">Моите курсове</a>
+						<a class="nav-link" onclick="location.href='/users'">
+							Потребители
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" aria-current="page" onclick="location.href='/myProfile'">
+							Моя профил
+						</a>
 					</li>
 				</ul>
-				<div class="dropdown">
-					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-						<span id="username">Username</span>
+				<div class="d-flex">
+					<p id="username" style="color: white; margin-right: 20px;"></p>
+					<button class="btn primary-button" onclick="location.href='/loginForm'" type="button"
+							id="login-button-header">
+						Изход
 					</button>
-					<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-						<li><a class="dropdown-item" href="/myProfile">Моя профил</a></li>
-						<li>
-							<hr class="dropdown-divider">
-						</li>
-						<li><a class="dropdown-item" href="/index">Изход</a></li>
-					</ul>
 				</div>
 			</div>
 		</div>
 	</nav>
 </header>
-
-<!-- ???
-<section id="login-section">-->
-<section id="courses-section" class="container pt-5">
+<main>
+<section id="courses-section" class="container py-5">
 	<!-- If there is another option for displaying courses-->
 	<div class="category">
 		<h1 id="h1_name">Всички курсове</h1>
 		<p id="courses-count"></p>
 	</div>
-	<div class="pt-5 pb-5">
-		<h3 class="mb-4">Потърси курс:</h3>
-		<input class="form-control" id="myInput" type="text" placeholder="HTML">
-		<hr>
-		<div id="typesContainer">
-			<span>Категории: </span>
+	<div class="pt-1 pb-5">
+		<div class="row">
+			<div class="col">
+				<div class="dropdown">
+					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuCategories" data-bs-toggle="dropdown" aria-expanded="false">
+						Категории</button>
+					<ul class="dropdown-menu" style="height: 300px; overflow-y: auto; overflow-x: hidden;" aria-labelledby="dropdownMenuCategories" id="typesContainer"></ul>
+				</div>
+			</div>
+			<div class="col">
+				<input class="form-control" id="myInput" type="text" placeholder="Търсачка">
+			</div>
 		</div>
 	</div>
+
 	<!--ADD COURSES HERE!-->
-	<div id="courses-container" class="card-group">
+	<div id="courses-container" class="card-group mb-2" style="max-height: 60%; overflow-y: auto;">
 	</div>
 </section>
-
-<!-- OPEN SELECTED COURSE -->
-<div id="course-screen" class="d-none container col-xl-12 col-xxl-12 px-5 py-5" style="min-height: 500px">
-	<div class="row align-items-left g-lg-4 py-5" style="height: 100%">
-		<div class="col-lg-6 text-left text-lg-start">
-			<p style="text-align: right;"><button onclick="hideCourse()">X</button></p>
-			<h1 class="display-5 lh-1 mb-3" id="popup-course-name"></h1>
-			<p id="popup-course-description" class="col-lg-12 text-start"></p>
-			<ul class="list-group">
-				<li class="list-group-item" id="popup-course-type"></li>
-				<li class="list-group-item" id="popup-course-duration"></li>
-				<li class="list-group-item" id="popup-course-attendants"></li>
-			</ul>
-		</div>
-		<div class="d-flex col-md-10 col-lg-6">
-			<img id="youtube" width="100%" height="50%" src=""></img>
+	<!-- OPEN SELECTED COURSE -->
+	<div id="course-screen" class="d-none container mx-auto col-xl-12 col-xxl-12 py-5" style="height: 60%">
+		<div class="row align-items-left g-lg-4 py-5" >
+			<div class="col-lg-6 text-left text-lg-start">
+				<p style="text-align: right;"><button onclick="hideCourse()">X</button></p>
+				<h1 class="display-5 lh-1 mb-3" id="popup-course-name"></h1>
+				<p id="popup-course-description" class="col-lg-12 text-start"></p>
+				<ul class="list-group">
+					<li class="list-group-item" id="popup-course-type"></li>
+					<li class="list-group-item" id="popup-course-duration"></li>
+					<li class="list-group-item" id="popup-course-attendants"></li>
+				</ul>
+			</div>
+			<div class="d-flex col-md-10 col-lg-6">
+				<img id="courseImg" width="100%" height="50%" src=""/>
+			</div>
 		</div>
 	</div>
+</main>
+
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 	<script src="js/courses.js"></script>

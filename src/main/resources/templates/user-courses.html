@@ -34,70 +34,41 @@
 	</head>
 
 	<body>
-		<div id="content">
-			<header>
-				<nav
-					class="navbar navbar-expand-md navbar-dark bg-dark fixed-top"
-				>
+			<header class="header mb-5">
+				<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
 					<div class="container-fluid">
-						<a class="navbar-brand" href="#">TeachSmart</a>
-						<button
-							class="navbar-toggler"
-							type="button"
-							data-bs-toggle="collapse"
-							data-bs-target="#navbarCollapse"
-							aria-controls="navbarCollapse"
-							aria-expanded="false"
-							aria-label="Toggle navigation"
-						>
+						<a class="navbar-brand" onclick="location.href='/courses'">
+							TeachSmart
+						</a>
+						<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+								data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
+								aria-label="Toggle navigation">
 							<span class="navbar-toggler-icon"></span>
 						</button>
-						<div
-							class="collapse navbar-collapse"
-							id="navbarCollapse"
-						>
+						<div id="navbarCollapse" class="collapse navbar-collapse">
 							<ul class="navbar-nav me-auto mb-2 mb-md-0">
-								<li class="nav-item">
-									<a class="nav-link active" href="/courses"
-										>Курсове</a
-									>
+								<li class="nav-item dropdown">
+									<a id="all-courses" class="nav-link" onclick="location.href='/courses'">
+										Всички курсове
+									</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" href="/userCourses"
-										>Моите курсове</a
-									>
+									<a class="nav-link" onclick="location.href='/users'">
+										Потребители
+									</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" aria-current="page" onclick="location.href='/myProfile'">
+										Моя профил
+									</a>
 								</li>
 							</ul>
-							<div class="dropdown">
-								<button
-									class="btn btn-secondary dropdown-toggle"
-									type="button"
-									id="dropdownMenuButton1"
-									data-bs-toggle="dropdown"
-									aria-expanded="false"
-								>
-									<span id="username">Username</span>
+							<div class="d-flex">
+								<p id="username" style="color: white; margin-right: 20px;"></p>
+								<button class="btn primary-button" onclick="location.href='/loginForm'" type="button"
+										id="login-button-header">
+									Изход
 								</button>
-								<ul
-									class="dropdown-menu"
-									aria-labelledby="dropdownMenuButton1"
-								>
-									<li>
-										<a
-											class="dropdown-item"
-											href="/myProfile"
-											>Моя профил</a
-										>
-									</li>
-									<li>
-										<hr class="dropdown-divider" />
-									</li>
-									<li>
-										<a class="dropdown-item" href="/index"
-											>Изход</a
-										>
-									</li>
-								</ul>
 							</div>
 						</div>
 					</div>
@@ -123,7 +94,6 @@
 					</div>
 				</div>
 			</main>
-		</div>
 		<script
 			src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 			integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
@@ -131,20 +101,3 @@
 		></script>
 	</body>
 </html>
-<!--
-<main>
-	<div class="container">
-		<div id="user-card">
-			 <img src="img/man.png" alt="User_1">
-			<p id="card-username">Name</p>
-		</div>
-		<div id="user-extended-info">
-			<div class="category">
-				<h1>Tickets</h1>
-				<div id="tickets-container" class="category-content"></div>
-				<div id="no-tickets-container"></div>
-			</div>
-		</div>
-	</div>
-</main>
--->
