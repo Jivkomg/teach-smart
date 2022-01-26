@@ -6,4 +6,5 @@ public class ExceptionMessages {
     public static final String DIRECTORY_CREATED = "Directory is created!";
     public static final String DIRECTORY_FAILED = "Failed to create directory!";
     public static final String ERROR_SYNC = "Error during execution of synchronizeMicrosoft method";
+    public static final String ERROR_PIC = "There was an error processing your picture. Please upload it again.";
 }

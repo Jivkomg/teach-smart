@@ -6,14 +6,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
+import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
+import java.nio.channels.SocketChannel;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Hashtable;
 
 import static bg.sofia.uni.fmi.piss.project.tm.utils.SecurityConstants.USER_DIR;
 
-import java.net.Socket;
+import bg.sofia.uni.fmi.piss.project.tm.utils.ExceptionMessages;
 
 @Service
 public class FileService {
@@ -27,13 +31,12 @@ public class FileService {
 
             Files.copy(file.getInputStream(), tempLocation, StandardCopyOption.REPLACE_EXISTING);
 
-            //			if (checkFileForNudity(tempFile.getAbsolutePath())) {
-            //				// delete the nude pic
-            //				tempFile.delete();
-            //
-            //				return new ResponseEntity<>("You sent a picture with inappropriate content!",
-            //						HttpStatus.OK);
-            //			}
+            if (!checkFileForNudity(tempFile.getAbsolutePath())) {
+                tempFile.delete();
+
+                return new ResponseEntity<>("Inappropriate content!",
+                    HttpStatus.OK);
+            }
 
             String uploadDir = USER_DIR + username;
 
@@ -41,12 +44,11 @@ public class FileService {
 
             Files.copy(file.getInputStream(), copyLocation, StandardCopyOption.REPLACE_EXISTING);
 
-            //delete the temporary file since it's already saved in the system
-            tempFile.delete();
+
 
         } catch (IOException e) {
             e.printStackTrace();
-            return new ResponseEntity<>("There was an error processing your picture. Please upload it again.",
+            return new ResponseEntity<>(ExceptionMessages.ERROR_PIC,
                 HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
@@ -55,25 +57,47 @@ public class FileService {
     }
 
     private boolean checkFileForNudity(String absolutePathToFile) {
-
+        String key = "UyactQyBMFoFbEfe1l2in6zWCvFuncdg";
+        boolean isOk = true;
         try {
-            Socket socket = new Socket("localhost", 8082);
-            OutputStream oos = socket.getOutputStream();
-            PrintWriter writer = new PrintWriter(oos, true);
-            writer.println(absolutePathToFile);
+            Hashtable<String, String> requestParams = new Hashtable<>();
+//            requestParams.put("format", "json");
+//            requestParams.put("api_key", key);
+            String url = "www.picpurify.com/analyse/1.1";
+            String path = "/?API_KEY=" + key + "&task=porn_moderation" +  "&file_image=@" + absolutePathToFile;
 
-            InputStream ois = socket.getInputStream();
-            InputStreamReader reader = new InputStreamReader(ois);
-            Integer message = reader.read();
+            SocketChannel socketChannel = SocketChannel.open();
+            socketChannel.connect(new InetSocketAddress(url, 80));
 
-            ois.close();
-            oos.close();
+            ByteBuffer byteBuffer = ByteBuffer.allocate(1000);
+            byteBuffer.clear();
+            String request = "POST" + path + " HTTP/1.1\n" + "Host: " + url + "\n\n";
+            byteBuffer.put(request.getBytes());
+            byteBuffer.flip();
 
-            // ascii code for '1' character is 49
-            return message.equals(49);
-        } catch (Exception e) {
+            while (byteBuffer.hasRemaining()) {
+                socketChannel.write(byteBuffer);
+            }
+
+            byteBuffer.clear();
+
+            String output;
+            while (true) {
+                int cnt = socketChannel.read(byteBuffer);
+                if (cnt > 10) {
+                    output = new String(byteBuffer.array());
+                    break;
+                }
+                byteBuffer.clear();
+            }
+
+            if (!output.contains("OK")) {
+                isOk = false;
+            }
+            socketChannel.close();
+        } catch (IOException e) {
             e.printStackTrace();
-            return true;
         }
+        return isOk;
     }
 }
