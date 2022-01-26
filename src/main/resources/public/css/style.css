@@ -5,7 +5,7 @@
 	--primary-border: #06b189;
 	--secondary-border: #088d8f;
 
-	--success: #198754;
+	--success: #07ac5f;
 	--info: #0dcaf0;
 	--warning: #ffc107;
 	--danger: #dc3545;
@@ -56,4 +56,8 @@ body {
 
 .error {
 	color: var(--danger) !important;
+}
+
+.success {
+	color: var(--success) !important;
 }

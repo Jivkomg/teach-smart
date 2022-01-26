@@ -1,8 +1,8 @@
 $(function () {
     // Display username and email of the current user
     const username = localStorage.getItem("username").toString();
-    const displayError = $("#errorField");
-
+    const displayErrorMessage = $("#errorField");
+    const displaySuccessMessage = $("#successField");
 
     $("#readonlyUsername").val(username);
     $.ajax({
@@ -10,7 +10,7 @@ $(function () {
         contentType: 'application/json; charset=utf-8',
         url: `user/current/${username}`,
         success: (data) => { console.log(data); $("#readonlyEmail").val(data.email); },
-        error: (err) => { console.log(err); displayError.text('Възникна грешка!'); }
+        error: (err) => { console.log(err); displayErrorMessage.text('Възникна грешка!'); }
     });
 
     const input = document.getElementById('upload');;
@@ -42,8 +42,8 @@ $(function () {
             cache: false,
             contentType: false,
             processData: false,
-            success: (data) => { console.log(data); },
-            error: (err) => { console.log(err); displayError.text('Възникна грешка!'); }
+            success: (data) => { console.log(data); displaySuccessMessage.text('Промените са запазени!'); },
+            error: (err) => { console.log(err); displayErrorMessage.text('Възникна грешка!'); }
         });
     });
 });
