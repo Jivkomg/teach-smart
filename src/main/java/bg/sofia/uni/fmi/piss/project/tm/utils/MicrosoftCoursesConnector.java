@@ -40,7 +40,6 @@ public class MicrosoftCoursesConnector {
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
-
         }
     }
 

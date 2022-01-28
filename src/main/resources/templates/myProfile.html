@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<link
-			href="css/my-profile-style.css"
+			href="css/my-profile.css"
 			rel="stylesheet"
 			type="text/css"
 			crossorigin="anonymous"
@@ -91,11 +91,11 @@
 							<div class="d-flex">
 								<p
 									id="username"
-									style="color: white; margin-right: 20px"
+									class="text-white my-2 mx-3"
 								></p>
 								<button
 									class="btn primary-button"
-									onclick="location.href='/loginForm'"
+									onclick="location.href='/login'"
 									type="button"
 									id="login-button-header"
 								>
@@ -109,8 +109,11 @@
 			<div
 				class="container d-flex h-100 w-50 p-3 pb-5 mb-5 flex-column justify-content-center"
 			>
-				<section id="myProfile-section">
-					<h2 class="title row mb-5 text-center mx-auto">
+				<section
+					id="myProfile-section"
+					class="d-flex align-self-center flex-column"
+				>
+					<h2 class="title row my-5 text-center mx-auto">
 						Моя профил
 					</h2>
 					<div id="user-card">
@@ -121,7 +124,7 @@
 							<label for="readonlyUsername" class="col-form-label"
 								>Потребителско име
 							</label>
-							<div class="row">
+							<div class="row mx-auto">
 								<input
 									readonly
 									id="readonlyUsername"
@@ -135,7 +138,7 @@
 							<label for="readonlyEmail" class="col-form-label"
 								>Имейл
 							</label>
-							<div class="row">
+							<div class="row mx-auto">
 								<input
 									readonly
 									id="readonlyEmail"
@@ -145,8 +148,9 @@
 							</div>
 						</div>
 
+
+						<!-- Upload image input-->
 						<div class="row mx-1">
-							<!-- Upload image input-->
 							<div
 								class="input-group my-3 px-2 py-2 rounded-pill shadow-lg choose-file-box"
 							>

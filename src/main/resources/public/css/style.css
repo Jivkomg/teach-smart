@@ -27,11 +27,6 @@
 	--light-grey: #b0bec5;
 }
 
-html,
-body {
-	height: 100%;
-}
-
 #logo {
 	width: auto;
 	height: 70px;
@@ -60,4 +55,42 @@ body {
 
 .success {
 	color: var(--success) !important;
+}
+
+/* user */
+@import 'style.css';
+:root {
+	--dark-grey: #313e50;
+	--grid-rows: 1;
+	--grid-cols: 1;
+}
+#users-container {
+	display: inline-grid;
+	grid-gap: 1em;
+	grid-template-rows: repeat(var(--grid-rows), 1fr);
+	grid-column-gap: 20px;
+	grid-template-columns: repeat(var(--grid-cols), 1fr);
+	padding-bottom: 100px;
+}
+.user-card {
+	width: 250px;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	padding: 25px 0px 25px 0px;
+	background-color: var(--light-grey);
+}
+.user-card p {
+	margin: 10px 0 10px 0;
+	font-size: 24px;
+	word-break: break-all;
+}
+.user-card:hover {
+	box-shadow: 0 0 10px var(--dark-grey);
+}
+#users-container img {
+	width: 64px;
+	height: 64px;
 }

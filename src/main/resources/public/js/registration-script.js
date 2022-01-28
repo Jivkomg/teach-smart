@@ -1,5 +1,5 @@
 $(function () {
-  const registrationForm = $('#registrationForm');
+  const registration = $('#registration');
   const displayError = $("#errorField");
 
   const validationRules = {
@@ -50,12 +50,12 @@ $(function () {
 
     $.ajax({
       type: "POST",
-      url: "/user/registrationForm",
+      url: "/user/registration",
       data: JSON.stringify(userData),
       contentType: "application/json",
 
       success: () => {
-        window.location.href = "/loginForm";
+        window.location.href = "/login";
       },
       error: () => displayError.text("Something went wrong! Please, try again later!")
     });
@@ -63,7 +63,7 @@ $(function () {
 
   $(document).on('click', '#submitButton', (e) => {
     // @ts-ignore
-    registrationForm.validate({
+    registration.validate({
       ...validationRules,
       submitHandler: submitForm
     });

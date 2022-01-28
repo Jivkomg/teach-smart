@@ -1,5 +1,5 @@
 $(function () {
-  const loginForm = $("#loginForm");
+  const login = $("#login");
   const displayError = $("#errorField");
 
   const validationRules = {
@@ -34,7 +34,7 @@ $(function () {
 
     $.ajax({
       type: "POST",
-      url: "/user/loginForm",
+      url: "/user/login",
       data: JSON.stringify(userData),
       contentType: "application/json",
 
@@ -56,6 +56,6 @@ $(function () {
   };
 
   $(document).on("click", "#submitButton", (e) => {
-    loginForm.validate({ ...validationRules, submitHandler: submitForm });
+    login.validate({ ...validationRules, submitHandler: submitForm });
   });
 });

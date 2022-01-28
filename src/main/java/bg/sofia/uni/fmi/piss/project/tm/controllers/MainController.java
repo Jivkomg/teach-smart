@@ -11,14 +11,14 @@ public class MainController {
         return "index";
     }
 
-    @GetMapping("/registrationForm")
-    String registrationForm() {
-        return "registrationForm";
+    @GetMapping("/registration")
+    String registration() {
+        return "registration";
     }
 
-    @GetMapping("/loginForm")
-    String loginForm() {
-        return "loginForm";
+    @GetMapping("/login")
+    String login() {
+        return "login";
     }
 
     @GetMapping("/main")
@@ -29,11 +29,6 @@ public class MainController {
     @GetMapping("/users")
     String users() {
         return "users";
-    }
-
-    @GetMapping("/userCourses")
-    String userCourses() {
-        return "user-courses.html";
     }
 
     @GetMapping("/myProfile")

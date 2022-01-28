@@ -24,7 +24,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/registrationForm")
+    @PostMapping("/registration")
     public ResponseEntity<TeachSmartUserDto> processRegisterUser(@Valid @RequestBody TeachSmartUserDto userDto, BindingResult binding) {
         if (binding.hasErrors()) {
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
@@ -33,7 +33,7 @@ public class UserController {
         return userService.register(userDto);
     }
 
-    @PostMapping("/loginForm")
+    @PostMapping("/login")
     public ResponseEntity processLoginUser(@Valid @RequestBody TeachSmartUserDto userDto, BindingResult binding) {
         if (binding.hasErrors()) {
             return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);

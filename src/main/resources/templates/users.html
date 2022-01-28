@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<link
-			href="/css/users-style.css"
+			href="/css/users.css"
 			rel="stylesheet"
 			type="text/css"
 			crossorigin="anonymous"
@@ -30,12 +30,6 @@
 			integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 			crossorigin="anonymous"
 		></script>
-		<style>
-		.card-img-top{
-		width: 60%;
-		margin: auto;
-		margin-top: 10px;
-		}</style>
 	</head>
 
 	<body>
@@ -45,33 +39,54 @@
 					<a class="navbar-brand" onclick="location.href='/courses'">
 						TeachSmart
 					</a>
-					<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-							data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
-							aria-label="Toggle navigation">
+					<button
+						class="navbar-toggler"
+						type="button"
+						data-bs-toggle="collapse"
+						data-bs-target="#navbarCollapse"
+						aria-controls="navbarCollapse"
+						aria-expanded="false"
+						aria-label="Toggle navigation"
+					>
 						<span class="navbar-toggler-icon"></span>
 					</button>
 					<div id="navbarCollapse" class="collapse navbar-collapse">
 						<ul class="navbar-nav me-auto mb-2 mb-md-0">
 							<li class="nav-item dropdown">
-								<a id="all-courses" class="nav-link" onclick="location.href='/courses'">
+								<a
+									id="all-courses"
+									class="nav-link"
+									onclick="location.href='/courses'"
+								>
 									Всички курсове
 								</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" onclick="location.href='/users'">
+								<a
+									class="nav-link"
+									onclick="location.href='/users'"
+								>
 									Потребители
 								</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" aria-current="page" onclick="location.href='/myProfile'">
+								<a
+									class="nav-link"
+									aria-current="page"
+									onclick="location.href='/myProfile'"
+								>
 									Моя профил
 								</a>
 							</li>
 						</ul>
 						<div class="d-flex">
-							<p id="username" style="color: white; margin-right: 20px;"></p>
-							<button class="btn primary-button" onclick="location.href='/loginForm'" type="button"
-									id="login-button-header">
+							<p id="username" class="text-white my-2 mx-3"></p>
+							<button
+								class="btn primary-button"
+								onclick="location.href='/login'"
+								type="button"
+								id="login-button-header"
+							>
 								Изход
 							</button>
 						</div>
@@ -83,7 +98,7 @@
 			<div id="wrapper">
 				<div class="category">
 					<h1>Потребители</h1>
-					<div id="users-container" class="card-deck py-5" ></div>
+					<div id="users-container" class="card-deck py-5"></div>
 				</div>
 			</div>
 		</section>
